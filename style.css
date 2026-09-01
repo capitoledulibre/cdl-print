@@ -44,7 +44,7 @@ body {
 .page {
     box-sizing: border-box;
     width: 297mm;
-    height: 420mm;
+    min-height: 420mm;
     padding: 18mm 16mm 12mm;
     display: flex;
     flex-direction: column;
