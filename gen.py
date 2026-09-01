@@ -1,6 +1,8 @@
 
+import argparse
 import locale
 import os
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Dict
@@ -9,7 +11,17 @@ from xml.etree import ElementTree
 
 from weasyprint import CSS, HTML
 
-# --- Breaks ----------------------------------------------------------------
+# --- Configuration ---------------------------------------------------------
+#
+# Everything that changes from one edition to the next lives here or on the
+# command line, so that a new year needs a value bumped, not code edited.
+
+DEFAULT_YEAR = 2025
+SCHEDULE_URL_TEMPLATE = (
+    'https://cfp.capitoledulibre.org/cdl-{year}/schedule/export/schedule.xml')
+DEFAULT_OUTPUT = 'conference.pdf'
+DEFAULT_STYLESHEET = 'style.css'
+DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # ISO weekday numbers, as returned by datetime.isoweekday().
 SATURDAY = 6
@@ -351,7 +363,7 @@ def render_room(conference: Conference, day: Day, room: Room) -> str:
     html = f'''
             <div class="room">
                 <header>
-                    <div class="conf_title"><!-- Capitole du Libre 2025 --></div>
+                    <div class="conf_title"><!-- {conference} --></div>
                     <div class="day_title">{day._date:%A %d %B}</div>
                     <div class="room_title">Salle {room}</div>
                 </header>
@@ -392,23 +404,55 @@ def build_html(conference: Conference) -> str:
                    for day in conference._days.values())
 
 
-def main():
-    conference = Conference(
-        url='https://cfp.capitoledulibre.org/cdl-2025/schedule/export/schedule.xml')
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(
+        description='Generate the Capitole du Libre paper schedule as a PDF.')
+    parser.add_argument(
+        '--year', type=int, default=DEFAULT_YEAR,
+        help=f'conference edition to fetch (default: {DEFAULT_YEAR})')
+    parser.add_argument(
+        '--url',
+        help='schedule XML URL, overriding the one derived from --year')
+    parser.add_argument(
+        '--output', default=DEFAULT_OUTPUT,
+        help=f'PDF file to write (default: {DEFAULT_OUTPUT})')
+    parser.add_argument(
+        '--stylesheet', default=DEFAULT_STYLESHEET,
+        help=f'CSS stylesheet to apply (default: {DEFAULT_STYLESHEET})')
+    parser.add_argument(
+        '--locale', default=DEFAULT_LOCALE,
+        help=f'locale used to format dates (default: {DEFAULT_LOCALE})')
+
+    args = parser.parse_args(argv)
+    if args.url is None:
+        args.url = SCHEDULE_URL_TEMPLATE.format(year=args.year)
+    return args
+
+
+def main(argv=None) -> int:
+    args = parse_args(argv)
+
+    conference = Conference(url=args.url)
     conference.parse()
 
-    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
+    try:
+        locale.setlocale(locale.LC_ALL, args.locale)
+    except locale.Error:
+        print(f'warning: locale {args.locale} is unavailable, '
+              'dates will not be localised',
+              file=sys.stderr)
 
     html = HTML(string=build_html(conference))
-    css = CSS(filename='style.css')
-    file_name = 'conference.pdf'
+    css = CSS(filename=args.stylesheet)
+
     try:
-        os.remove(file_name)
+        os.remove(args.output)
     except FileNotFoundError:
         pass
 
-    html.write_pdf(file_name, stylesheets=[css])
+    html.write_pdf(args.output, stylesheets=[css])
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
