@@ -1,5 +1,6 @@
 
 import argparse
+import html
 import io
 import locale
 import os
@@ -343,6 +344,11 @@ def event_classes(event: Event) -> str:
     return f'{family} {slug}' if slug else family
 
 
+def clean(value: str) -> str:
+    """Escape export data: 'Guix & Nix' must not reach the parser as markup."""
+    return html.escape(value or '')
+
+
 def qr_code(url: str) -> str:
     """Inline SVG QR code pointing at a talk page."""
     buffer = io.BytesIO()
@@ -366,7 +372,9 @@ def render_event(event: Event, show_qr: bool = True) -> str:
     clip the title of a 25 minute talk.
     """
     classes = event_classes(event)
-    people = f'<p class="who">{event.persons}</p>' if event.persons else ''
+    title = clean(event.title)
+    speakers = clean(event.persons)
+    people = f'<p class="who">{speakers}</p>' if speakers else ''
 
     url = getattr(event, '_url', None)
     qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
@@ -379,7 +387,7 @@ def render_event(event: Event, show_qr: bool = True) -> str:
                         <i>{event._end_datetime:%Hh%M}</i>
                     </div>
                     <div class="what">
-                        <h2>{event.title}</h2>
+                        <h2>{title}</h2>
                         {people}
                     </div>
                     {qr}
@@ -418,7 +426,7 @@ def render_room(conference: Conference, day: Day, room: Room,
             <header>
                 <div class="brand"></div>
                 <div class="ident">
-                    <h1>{room._name}</h1>
+                    <h1>{clean(room._name)}</h1>
                     <p>{day._date:%A %d %B}</p>
                 </div>
             </header>
@@ -426,8 +434,8 @@ def render_room(conference: Conference, day: Day, room: Room,
                 {slots}
             </div>
             <footer>
-                <span>{conference}</span>
-                <span>Salle {room._name} &middot; {day._date:%A}</span>
+                <span>{clean(str(conference))}</span>
+                <span>Salle {clean(room._name)} &middot; {day._date:%A}</span>
             </footer>
         </section>
     '''
