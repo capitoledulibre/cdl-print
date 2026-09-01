@@ -1,5 +1,6 @@
 
 import argparse
+import functools
 import html
 import io
 import locale
@@ -35,6 +36,12 @@ POSTER_MODE_MAX_EVENTS = 2
 
 # Ink colour of the QR codes linking to each talk page.
 QR_COLOUR = '#111111'
+
+# Type size of a timeline, in px, matching .timeline in the stylesheet. A room
+# too dense for the sheet is rendered again a step smaller until it fits.
+BASE_TIMELINE_SIZE = 16
+MIN_TIMELINE_SIZE = 9
+TIMELINE_SIZE_STEP = 0.5
 
 # ISO weekday numbers, as returned by datetime.isoweekday().
 SATURDAY = 6
@@ -355,6 +362,7 @@ def clean(value: str) -> str:
     return html.escape((value or '').replace('\u202f', '\u00a0'))
 
 
+@functools.lru_cache(maxsize=None)
 def qr_code(url: str) -> str:
     """Inline SVG QR code pointing at a talk page."""
     buffer = io.BytesIO()
@@ -402,7 +410,7 @@ def render_event(event: Event, show_qr: bool = True) -> str:
 
 
 def render_room(conference: Conference, day: Day, room: Room,
-                show_qr: bool = True) -> str:
+                show_qr: bool = True, timeline_size: float = None) -> str:
     talks = room.sorted_events()
     if not talks:
         return ''
@@ -426,6 +434,7 @@ def render_room(conference: Conference, day: Day, room: Room,
     # of small text over a whole A3; the poster variant scales the type up.
     # Breaks do not count: they are what a near-empty room is padded with.
     poster = ' poster' if len(talks) <= POSTER_MODE_MAX_EVENTS else ''
+    sizing = f' style="font-size: {timeline_size}px"' if timeline_size else ''
 
     return f'''
         <section class="page">
@@ -436,7 +445,7 @@ def render_room(conference: Conference, day: Day, room: Room,
                     <p>{day._date:%A %d %B}</p>
                 </div>
             </header>
-            <div class="timeline{poster}">
+            <div class="timeline{poster}"{sizing}>
                 {slots}
             </div>
             <footer>
@@ -447,15 +456,54 @@ def render_room(conference: Conference, day: Day, room: Room,
     '''
 
 
-def render_day(conference: Conference, day: Day, show_qr: bool = True) -> str:
-    return ''.join(render_room(conference, day, room, show_qr=show_qr)
-                   for room in day._rooms.values()
-                   if room._name not in EXCLUDED_ROOMS)
+def printable_rooms(conference: Conference):
+    """Every (day, room) that earns a sheet, in printing order."""
+    for day in conference._days.values():
+        for room in day._rooms.values():
+            if room._name not in EXCLUDED_ROOMS and room.sorted_events():
+                yield day, room
 
 
-def build_html(conference: Conference, show_qr: bool = True) -> str:
-    return ''.join(render_day(conference, day, show_qr=show_qr)
-                   for day in conference._days.values())
+def build_html(conference: Conference, show_qr: bool = True,
+               sizes: dict = None) -> str:
+    sizes = sizes or {}
+    return ''.join(
+        render_room(conference, day, room, show_qr=show_qr,
+                    timeline_size=sizes.get((day._date, room._name)))
+        for day, room in printable_rooms(conference))
+
+
+def fits_one_sheet(markup: str, css: CSS, fonts) -> bool:
+    return len(HTML(string=markup).render(stylesheets=[css],
+                                          font_config=fonts).pages) == 1
+
+
+def fit_rooms(conference: Conference, css: CSS, fonts,
+              show_qr: bool = True) -> tuple[dict, list]:
+    """Pick the largest type size at which each room still fits its sheet.
+
+    A poster is one page by construction, so a room denser than the
+    stylesheet's defaults would otherwise spill onto a second sheet, or worse
+    have its footer clipped away unnoticed. Turn such a room's timeline down a
+    step at a time instead, and report the ones that will not fit at all
+    rather than printing something broken.
+    """
+    sizes = {}
+    too_dense = []
+
+    for day, room in printable_rooms(conference):
+        size = BASE_TIMELINE_SIZE
+        while not fits_one_sheet(
+                render_room(conference, day, room, show_qr, size),
+                css, fonts):
+            size -= TIMELINE_SIZE_STEP
+            if size < MIN_TIMELINE_SIZE:
+                too_dense.append(f'{room} on {day}')
+                break
+        if size != BASE_TIMELINE_SIZE:
+            sizes[(day._date, room._name)] = size
+
+    return sizes, too_dense
 
 
 def parse_args(argv=None):
@@ -529,8 +577,19 @@ def main(argv=None) -> int:
     # stylesheet and the write, WeasyPrint silently ignores @font-face and
     # falls back to whatever the machine happens to have installed.
     fonts = FontConfiguration()
-    document = HTML(string=build_html(conference, show_qr=args.qr))
     css = CSS(filename=args.stylesheet, font_config=fonts)
+
+    sizes, too_dense = fit_rooms(conference, css, fonts, show_qr=args.qr)
+    if too_dense:
+        print('error: these rooms do not fit on one sheet even at the '
+              f'smallest type size ({MIN_TIMELINE_SIZE}px):',
+              file=sys.stderr)
+        for room in too_dense:
+            print(f'  {room}', file=sys.stderr)
+        return 1
+
+    document = HTML(string=build_html(conference, show_qr=args.qr,
+                                      sizes=sizes))
 
     try:
         os.remove(args.output)
