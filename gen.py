@@ -1,14 +1,18 @@
 
 import argparse
+import io
 import locale
 import os
+import re
 import sys
+import unicodedata
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Dict
 from urllib.request import urlopen
 from xml.etree import ElementTree
 
+import segno
 from weasyprint import CSS, HTML
 
 # --- Configuration ---------------------------------------------------------
@@ -22,6 +26,13 @@ SCHEDULE_URL_TEMPLATE = (
 DEFAULT_OUTPUT = 'conference.pdf'
 DEFAULT_STYLESHEET = 'style.css'
 DEFAULT_LOCALE = 'fr_FR.UTF-8'
+
+# Rooms with at most this many slots are laid out as a poster rather than
+# a timeline, so a nearly empty day does not become a nearly empty page.
+POSTER_MODE_MAX_EVENTS = 2
+
+# Ink colour of the QR codes linking to each talk page.
+QR_COLOUR = '#111111'
 
 # ISO weekday numbers, as returned by datetime.isoweekday().
 SATURDAY = 6
@@ -341,33 +352,72 @@ def build_breaks(conference: Conference, room: Room, day: Day, events: list):
     return breaks
 
 
-def render_event(event: Event) -> str:
-    html = f'''
-                        <tr class="event_row {event._type}">
-                            <td class="event_date">
-                                {event._start_datetime:%Hh%M}
-                                à
-                                {event._end_datetime:%Hh%M}
-                            </td>
-                            <td class="event_cell">
-                                <div class="event_title">
-                                    {event.title}
-                                </div>
-    '''
-    if len(event._persons.values()) > 0:
-        html += f'''
-                                    <div class="event_persons">
-                                        {event.persons}
-                                    </div>
-        '''
-    html += '''
-                            </td>
-                        </tr>
-    '''
-    return html
+def event_classes(event: Event) -> str:
+    """CSS classes for an event: its family, then its exact format.
+
+    The schedule export types events as 'Conférence 25min', 'Atelier 2h' and
+    the like, so the raw value cannot go into a class attribute as is: its
+    space would split it into several bogus classes. Emit a slug of it
+    alongside a coarse family, so a format the stylesheet does not know about
+    still picks up the family styling.
+    """
+    if event._type == 'pause':
+        return 'pause'
+
+    slug = unicodedata.normalize('NFKD', event._type or '')
+    slug = slug.encode('ascii', 'ignore').decode('ascii').lower()
+    slug = re.sub(r'[^a-z0-9]+', '-', slug).strip('-')
+
+    family = 'workshop' if slug.startswith('atelier') else 'talk'
+    return f'{family} {slug}' if slug else family
 
 
-def render_room(conference: Conference, day: Day, room: Room) -> str:
+def qr_code(url: str) -> str:
+    """Inline SVG QR code pointing at a talk page."""
+    buffer = io.BytesIO()
+    segno.make(url, error='m').save(buffer, kind='svg', xmldecl=False,
+                                    svgns=True, scale=1, border=0,
+                                    dark=QR_COLOUR)
+    return buffer.getvalue().decode('utf-8')
+
+
+def duration_minutes(event: Event) -> int:
+    delta = event._end_datetime - event._start_datetime
+    return int(delta.total_seconds() // 60)
+
+
+def render_event(event: Event, show_qr: bool = True) -> str:
+    """One slot of the timeline, its height driven by its duration.
+
+    flex-grow is the duration in minutes, so the free space on the page is
+    shared out in proportion to how long each event lasts, while the content
+    still sets each slot's minimum height. A strict proportional grid would
+    clip the title of a 25 minute talk.
+    """
+    classes = event_classes(event)
+    people = f'<p class="who">{event.persons}</p>' if event._persons else ''
+
+    url = getattr(event, '_url', None)
+    qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
+
+    return f'''
+                <div class="slot {classes}"
+                     style="flex-grow: {duration_minutes(event)}">
+                    <div class="when">
+                        <b>{event._start_datetime:%Hh%M}</b>
+                        <i>{event._end_datetime:%Hh%M}</i>
+                    </div>
+                    <div class="what">
+                        <h2>{event.title}</h2>
+                        {people}
+                    </div>
+                    {qr}
+                </div>
+    '''
+
+
+def render_room(conference: Conference, day: Day, room: Room,
+                show_qr: bool = True) -> str:
     events = room.get_sorted_list_by_day(day)
     if not events:
         return ''
@@ -376,47 +426,50 @@ def render_room(conference: Conference, day: Day, room: Room) -> str:
         room._events[pause._id] = pause
     events = room.get_sorted_list_by_day(day)
 
-    html = f'''
-            <div class="room">
-                <header>
-                    <div class="conf_title"><!-- {conference} --></div>
-                    <div class="day_title">{day._date:%A %d %B}</div>
-                    <div class="room_title">Salle {room}</div>
-                </header>
-                <table>
-                    <thead>
-                        <th>Heure</th>
-                        <th>Conférence</th>
-                    </thead>
-                    <tbody>
-    '''
-    for i, event in enumerate(events):
-        if i != 0 and events[i - 1]._end_datetime != event._start_datetime:
-            html += '''
-                        <tr>
-                            <td colspan="2"><!-- Pause --></td>
-                        </tr>
-            '''
-        html += render_event(event)
-    html += '''
-                    </tbody>
-                </table>
+    slots = ''
+    previous_end = None
+    for event in events:
+        if previous_end is not None and event._start_datetime > previous_end:
+            gap = int((event._start_datetime
+                       - previous_end).total_seconds() // 60)
+            slots += f'<div class="hole" style="flex-grow: {gap}"></div>'
+        previous_end = event._end_datetime
+        slots += render_event(event, show_qr=show_qr)
+
+    # A room with one or two talks would otherwise stretch a couple of lines
+    # of small text over a whole A3; the poster variant scales the type up.
+    # Breaks do not count: they are what a near-empty room is padded with.
+    talks = [event for event in events if event._type != 'pause']
+    poster = ' poster' if len(talks) <= POSTER_MODE_MAX_EVENTS else ''
+
+    return f'''
+        <section class="page">
+            <header>
+                <div class="brand"></div>
+                <div class="ident">
+                    <h1>{room}</h1>
+                    <p>{day._date:%A %d %B}</p>
+                </div>
+            </header>
+            <div class="timeline{poster}">
+                {slots}
             </div>
+            <footer>
+                <span>{conference}</span>
+                <span>Salle {room} &middot; {day._date:%A}</span>
+            </footer>
+        </section>
     '''
-    return html
 
 
-def render_day(conference: Conference, day: Day) -> str:
-    html = ''
-    for room in day._rooms.values():
-        if room._name in EXCLUDED_ROOMS:
-            continue
-        html += render_room(conference, day, room)
-    return f'<div class="day">{html}</div>'
+def render_day(conference: Conference, day: Day, show_qr: bool = True) -> str:
+    return ''.join(render_room(conference, day, room, show_qr=show_qr)
+                   for room in day._rooms.values()
+                   if room._name not in EXCLUDED_ROOMS)
 
 
-def build_html(conference: Conference) -> str:
-    return ''.join(render_day(conference, day)
+def build_html(conference: Conference, show_qr: bool = True) -> str:
+    return ''.join(render_day(conference, day, show_qr=show_qr)
                    for day in conference._days.values())
 
 
@@ -436,6 +489,9 @@ def parse_args(argv=None):
     parser.add_argument(
         '--stylesheet', default=DEFAULT_STYLESHEET,
         help=f'CSS stylesheet to apply (default: {DEFAULT_STYLESHEET})')
+    parser.add_argument(
+        '--no-qr', dest='qr', action='store_false',
+        help='leave out the QR code linking to each talk page')
     parser.add_argument(
         '--locale', default=DEFAULT_LOCALE,
         help=f'locale used to format dates (default: {DEFAULT_LOCALE})')
@@ -459,7 +515,7 @@ def main(argv=None) -> int:
               'dates will not be localised',
               file=sys.stderr)
 
-    html = HTML(string=build_html(conference))
+    html = HTML(string=build_html(conference, show_qr=args.qr))
     css = CSS(filename=args.stylesheet)
 
     try:

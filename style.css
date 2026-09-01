@@ -1,91 +1,224 @@
+/* Capitole du Libre paper schedule: one A3 poster per room and per day. */
+
 @page {
     size: a3 portrait;
-    margin-top: 60px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --brand-light: #f0a068;
+    --workshop: #2e6b8a;
+    --ink: #111111;
+    --muted: #666666;
+    --quiet: #999999;
+    --rule: #dddddd;
+    --fill: #f7f6f4;
+    --fill-workshop: #f0f5f8;
 }
 
 body {
-    font-size: 27px;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
-table {
-    display: table;
-    width: 100%;
-    border-collapse: separate;
-    border-width: 1px; 
-    border-style: solid; 
-    border-color: black;
-    border-collapse: collapse;
+.page {
+    box-sizing: border-box;
+    width: 297mm;
+    height: 420mm;
+    padding: 18mm 16mm 12mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
 }
 
-table tr {
-    display: table-row;
-    height: 10px;
+/* --- header ------------------------------------------------------------ */
+
+header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 6mm;
+    margin-bottom: 6mm;
+    border-bottom: 4px solid var(--brand);
 }
 
-table th {
-    text-align: center;
+.brand {
+    width: 52mm;
+    height: 23mm;
+    background: url('cdl.svg') left top / contain no-repeat;
 }
 
-table th, table td {
-    display: table-cell;
-    border-width: 1px;
-    border-style: solid; 
-    border-color: black;
+.ident {
+    text-align: right;
 }
 
-.room {
-    page-break-before: always;
+/* The room name is what someone in the corridor is looking for. */
+.ident h1 {
+    margin: 0;
+    font-size: 92px;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--brand);
 }
 
-.conf_title {
-    display: block;
-    float: left;
-    width: 195px;
-    height: 85px;
-    margin-top: -25px;
-    margin-bottom: 1.7em;
-    background: url('cdl.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.day_title {
-    float: right;
+.ident p {
+    margin: 3mm 0 0;
+    font-size: 34px;
     text-transform: capitalize;
+    color: #444444;
 }
 
-.room_title {
+/* --- timeline ---------------------------------------------------------- */
+
+/* Slots grow in proportion to their duration, so the page fills itself and
+   the length of a talk can be read without reading the times. */
+.timeline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+}
+
+.hole {
+    flex-shrink: 1;
+    min-height: 2mm;
+    border-left: 6px dotted #e2e2e2;
+}
+
+.slot {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 34mm 1fr 18mm;
+    align-items: center;
+    gap: 0 6mm;
+    padding: 3mm 5mm;
+    background: var(--fill);
+    border-left: 6px solid var(--brand);
+}
+
+.slot.conference-25min {
+    border-left-color: var(--brand-light);
+}
+
+.slot.workshop {
+    background: var(--fill-workshop);
+    border-left-color: var(--workshop);
+}
+
+.when {
+    text-align: right;
+    line-height: 1;
+}
+
+.when b {
+    display: block;
+    font-size: 34px;
     font-weight: 700;
-    text-align: center;
-    margin-top: 25px;
+    letter-spacing: -1px;
 }
 
-.event_row.pause {
-    background-color: rgba(186, 194, 218, 0.6);
+.when i {
+    display: block;
+    margin-top: 1.5mm;
+    font-size: 21px;
+    font-style: normal;
+    color: #888888;
 }
 
-.event_date {
-    width: 195px;
-    text-align: center;
-}
-
-.event_cell {
-    width: auto;
-    text-align: center;
-}
-
-.event_title {
-    margin-top: 10px;
-    margin-bottom: 12px;
+/* Left aligned: centring a three-line title strands its last word. */
+.what h2 {
+    margin: 0;
+    font-size: 25px;
     font-weight: 700;
+    line-height: 1.15;
 }
 
-.event_persons {
-    font-style: italic;
-    margin-bottom: 10px;
+.what .who {
+    margin: 1.5mm 0 0;
+    font-size: 19px;
+    color: #555555;
+}
+
+.qr {
+    width: 18mm;
+}
+
+.qr svg {
+    width: 18mm;
+    height: 18mm;
+}
+
+/* --- breaks stay in the background ------------------------------------- */
+
+.slot.pause {
+    background: none;
+    border-left: 6px solid var(--rule);
+}
+
+.slot.pause .when b {
+    font-size: 25px;
+    font-weight: 400;
+    color: var(--quiet);
+}
+
+.slot.pause .when i {
+    display: none;
+}
+
+.slot.pause .what h2 {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--quiet);
+}
+
+/* --- poster variant, for a room with one or two slots ------------------- */
+
+.timeline.poster .slot {
+    /* The scaled-up start time no longer fits the timeline's time column. */
+    grid-template-columns: 54mm 1fr 30mm;
+    gap: 0 10mm;
+    padding: 8mm 10mm;
+}
+
+.timeline.poster .when b {
+    font-size: 62px;
+}
+
+.timeline.poster .when i {
+    font-size: 34px;
+}
+
+.timeline.poster .what h2 {
+    font-size: 52px;
+}
+
+.timeline.poster .what .who {
+    margin-top: 4mm;
+    font-size: 34px;
+}
+
+.timeline.poster .qr,
+.timeline.poster .qr svg {
+    width: 30mm;
+}
+
+.timeline.poster .qr svg {
+    height: 30mm;
+}
+
+/* --- footer ------------------------------------------------------------ */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--rule);
+    font-size: 20px;
+    text-transform: capitalize;
+    color: var(--quiet);
 }
