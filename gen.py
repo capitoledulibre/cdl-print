@@ -13,10 +13,10 @@ from weasyprint import CSS, HTML
 
 # --- Configuration ---------------------------------------------------------
 #
-# Everything that changes from one edition to the next lives here or on the
-# command line, so that a new year needs a value bumped, not code edited.
+# Everything that changes from one edition to the next comes from the
+# environment or the command line, so that a new year needs no code edit.
 
-DEFAULT_YEAR = 2025
+YEAR_ENV_VAR = 'CDL_YEAR'
 SCHEDULE_URL_TEMPLATE = (
     'https://cfp.capitoledulibre.org/cdl-{year}/schedule/export/schedule.xml')
 DEFAULT_OUTPUT = 'conference.pdf'
@@ -52,6 +52,22 @@ BREAKS = (
     Break(title='Pause', start='16:00', duration='00:30',
           weekdays=frozenset({SATURDAY})),
 )
+
+
+def default_year() -> int:
+    """Conference edition to build unless --year says otherwise.
+
+    The current year, or $CDL_YEAR when set.
+    """
+    override = os.environ.get(YEAR_ENV_VAR)
+    if override:
+        try:
+            return int(override)
+        except ValueError:
+            print(f'warning: {YEAR_ENV_VAR}={override!r} is not a year, '
+                  'using the current one instead',
+                  file=sys.stderr)
+    return datetime.now().year
 
 
 def _hours_minutes(value: str) -> tuple[int, int]:
@@ -408,8 +424,9 @@ def parse_args(argv=None):
     parser = argparse.ArgumentParser(
         description='Generate the Capitole du Libre paper schedule as a PDF.')
     parser.add_argument(
-        '--year', type=int, default=DEFAULT_YEAR,
-        help=f'conference edition to fetch (default: {DEFAULT_YEAR})')
+        '--year', type=int, default=default_year(),
+        help=f'conference edition to fetch '
+             f'(default: ${YEAR_ENV_VAR}, else the current year)')
     parser.add_argument(
         '--url',
         help='schedule XML URL, overriding the one derived from --year')

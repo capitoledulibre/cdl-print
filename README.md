@@ -21,8 +21,12 @@ uv sync
 uv run python gen.py
 ```
 
-This fetches the schedule for the edition set as `DEFAULT_YEAR` in `gen.py`
-and writes `conference.pdf`.
+This fetches the schedule for the current year and writes `conference.pdf`.
+Set `CDL_YEAR` to build another edition:
+
+```shell
+CDL_YEAR=2025 uv run python gen.py
+```
 
 ### Options
 
@@ -32,7 +36,7 @@ uv run python gen.py --year 2026 --output programme.pdf
 
 | Option | Default | Description |
 | --- | --- | --- |
-| `--year` | `DEFAULT_YEAR` in `gen.py` | Conference edition to fetch |
+| `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--output` | `conference.pdf` | PDF file to write |
 | `--stylesheet` | `style.css` | CSS stylesheet to apply |
