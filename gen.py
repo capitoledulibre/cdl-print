@@ -15,6 +15,7 @@ from urllib.request import urlopen
 
 import segno
 from weasyprint import CSS, HTML
+from weasyprint.text.fonts import FontConfiguration
 
 # --- Configuration ---------------------------------------------------------
 #
@@ -345,8 +346,13 @@ def event_classes(event: Event) -> str:
 
 
 def clean(value: str) -> str:
-    """Escape export data: 'Guix & Nix' must not reach the parser as markup."""
-    return html.escape(value or '')
+    """Prepare export data for the page.
+
+    Escapes it, since titles such as 'Guix & Nix' must not reach the parser as
+    markup, and swaps the narrow no-break space Pretalx puts before French
+    punctuation for the ordinary one, which the embedded font actually has.
+    """
+    return html.escape((value or '').replace('\u202f', '\u00a0'))
 
 
 def qr_code(url: str) -> str:
@@ -519,15 +525,20 @@ def main(argv=None) -> int:
               'dates will not be localised',
               file=sys.stderr)
 
+    # Without an explicit font configuration threaded through both the
+    # stylesheet and the write, WeasyPrint silently ignores @font-face and
+    # falls back to whatever the machine happens to have installed.
+    fonts = FontConfiguration()
     document = HTML(string=build_html(conference, show_qr=args.qr))
-    css = CSS(filename=args.stylesheet)
+    css = CSS(filename=args.stylesheet, font_config=fonts)
 
     try:
         os.remove(args.output)
     except FileNotFoundError:
         pass
 
-    document.write_pdf(args.output, stylesheets=[css])
+    document.write_pdf(args.output, stylesheets=[css],
+                       font_config=fonts)
     return 0
 
 

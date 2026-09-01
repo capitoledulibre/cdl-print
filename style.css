@@ -1,5 +1,22 @@
 /* Capitole du Libre paper schedule: one A3 poster per room and per day. */
 
+/* Embedded so that the PDF renders the same at the print shop as it does
+   here; see fonts/LICENSE.txt. Fira Sans has no glyph for the emoji a few
+   talk titles carry, which is what the fallback stack below is for. */
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
 @page {
     size: a3 portrait;
     margin: 0;
@@ -20,7 +37,8 @@
 body {
     margin: 0;
     color: var(--ink);
-    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Helvetica', 'Arial',
+                 sans-serif;
 }
 
 .page {
