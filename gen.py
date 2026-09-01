@@ -215,10 +215,10 @@ class Person(UniqueByConference):
 
 if __name__ == "__main__":
     conference = Conference(
-        url='https://cfp.capitoledulibre.org/cdl-2023/schedule/export/schedule.xml')
+        url='https://cfp.capitoledulibre.org/cdl-2025/schedule/export/schedule.xml')
     conference.parse()
 
-    #locale.setlocale(locale.LC_ALL, 'fr_FR.utf8')
+    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
     html_string = ''
     for day in conference._days.values():
@@ -254,7 +254,7 @@ if __name__ == "__main__":
             room_html = f'''
             <div class="room">
                 <header>
-                    <div class="conf_title"><!-- Capitole du Libre 2019 --></div>
+                    <div class="conf_title"><!-- Capitole du Libre 2025 --></div>
                     <div class="day_title">{day._date:%A %d %B}</div>
                     <div class="room_title">Salle {room}</div>
                 </header>
