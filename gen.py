@@ -8,9 +8,9 @@ import sys
 import unicodedata
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Dict
-from urllib.request import urlopen
 from xml.etree import ElementTree
+
+from urllib.request import urlopen
 
 import segno
 from weasyprint import CSS, HTML
@@ -36,7 +36,10 @@ QR_COLOUR = '#111111'
 
 # ISO weekday numbers, as returned by datetime.isoweekday().
 SATURDAY = 6
-SUNDAY = 7
+
+# <conference> children worth keeping; the rest of the export is ignored.
+CONFERENCE_DETAILS = frozenset({'title', 'venue', 'city',
+                               'start_date', 'end_date', 'days_count'})
 
 # Rooms left out of the printed programme entirely, by name.
 EXCLUDED_ROOMS: frozenset[str] = frozenset()
@@ -107,145 +110,122 @@ def _overlaps(first_start: datetime, first_end: datetime,
     return first_start < second_end and second_start < first_end
 
 
-class UniqueByConference(object):
-    def __new__(cls, conference, attr, *args, **kwargs):
-        if getattr(cls,
-                   '_instances',
-                   None) is None:
-            cls._instances = {}
-        instance_id = (conference, attr)
-        if cls._instances.get(instance_id, None) is None:
-            cls._instances[instance_id] = super().__new__(cls)
-            if hasattr(cls._instances[instance_id], 'init'):
-                cls._instances[instance_id].init()
-        return cls._instances[instance_id]
-
-    def __init__(self, conference, attr):
-        self._conference = conference
-
-
 class Conference(object):
-    def __init__(self, url):
-        self._url = url
-        self._days: Dict[datetime, Day] = {}
+    """A whole edition: its days, and the rooms and events they hold."""
+
+    def __init__(self, source):
+        self._source = source
+        self._days: dict[datetime, Day] = {}
 
     def __str__(self):
         return self._title
 
     @property
-    def _rooms(self):
+    def _rooms(self) -> dict[str, 'Room']:
+        """Every room of the edition, keyed by name.
+
+        A room used on both days appears once, as its second day: rooms are
+        built per day, so use Day._rooms to reach a particular one.
+        """
         rooms = {}
         for day in self._days.values():
-            rooms.update(day._rooms.items())
+            rooms.update(day._rooms)
         return rooms
 
     @property
-    def _events(self):
+    def _events(self) -> dict[str, 'Event']:
         events = {}
         for day in self._days.values():
-            events.update(day._events.items())
+            events.update(day._events)
         return events
 
     @property
-    def _persons(self):
+    def _persons(self) -> dict[str, 'Person']:
         persons = {}
         for day in self._days.values():
-            persons.update(day._persons.items())
+            persons.update(day._persons)
         return persons
 
     def parse(self):
-        remote = urlopen(self._url)
-        tree = ElementTree.parse(remote)
-        root_element = tree.getroot()
-        for element in list(root_element):
+        tree = ElementTree.parse(self._source)
+        for element in tree.getroot():
             if element.tag == 'conference':
-                for element_details in list(element):
-                    if element_details.tag in ['title', 'venue', 'city', 'start_date', 'end_date', 'days_count']:
-                        setattr(self,
-                                f'_{element_details.tag}',
-                                element_details.text)
+                for detail in element:
+                    if detail.tag in CONFERENCE_DETAILS:
+                        setattr(self, f'_{detail.tag}', detail.text)
             elif element.tag == 'day':
                 date = datetime.strptime(element.get('date'), '%Y-%m-%d')
-                self._days[date] = Day(self, date)
+                self._days[date] = Day(date)
                 self._days[date].parse(element)
-            else:
-                print('unknown element type')
 
 
-class Day(UniqueByConference):
-    def __init__(self, conference: Conference, date: datetime):
-        super().__init__(conference, date)
+class Day(object):
+    """One day of the conference, holding that day's rooms."""
+
+    def __init__(self, date: datetime):
         self._date = date
+        self._rooms: dict[str, Room] = {}
 
-    def init(self):
-        self._rooms: Dict[str, Room] = {}
+    def __str__(self):
+        return f'{self._date:%A %d %B}'
 
     @property
-    def _persons(self):
-        persons = {}
+    def _events(self) -> dict[str, 'Event']:
+        events = {}
         for room in self._rooms.values():
-            for event in room._events.values():
-                persons.update(event._persons.items())
+            events.update(room._events)
+        return events
+
+    @property
+    def _persons(self) -> dict[str, 'Person']:
+        persons = {}
+        for event in self._events.values():
+            persons.update(event._persons)
         return persons
 
     def parse(self, day_element):
-        for element in list(day_element):
+        for element in day_element:
             if element.tag == 'room':
-                room_name = element.get('name')
-                self._rooms[room_name] = Room(
-                    self._conference,
-                    room_name,
-                    self)
-                self._rooms[room_name].parse(element, self)
+                name = element.get('name')
+                self._rooms[name] = Room(name, self)
+                self._rooms[name].parse(element)
 
 
-class Room(UniqueByConference):
-    def __init__(self, conference: Conference, name: str, day: Day):
-        super().__init__(conference, name)
+class Room(object):
+    """A room on a given day.
+
+    A room used on both days of the conference is two Room objects, one per
+    day, each holding only that day's events.
+    """
+
+    def __init__(self, name: str, day: Day):
         self._name = name
-        self._days[day._date] = day
-
-    def init(self):
-        self._days: Dict[datetime, Day] = {}
-        self._events: Dict[str, Event] = {}
+        self._day = day
+        self._events: dict[str, Event] = {}
 
     def __str__(self):
         return self._name
 
-    def get_events_by_day(self, day):
-        events = {}
-        for event in self._events.values():
-            if event._day is day:
-                events[event._id] = event
+    def sorted_events(self) -> list['Event']:
+        return sorted(self._events.values(), key=lambda e: e._start_datetime)
 
-        return events
-
-    def get_sorted_list_by_day(self, day):
-        events = list(self.get_events_by_day(day).values())
-        events.sort(key=lambda e: e._start_datetime)
-        return events
-
-    def parse(self, room_element, day: Day):
-        for element in list(room_element):
+    def parse(self, room_element):
+        for element in room_element:
             if element.tag == 'event':
                 event_id = element.get('id')
-                self._events[event_id] = Event(
-                    self._conference,
-                    event_id,
-                    day)
+                self._events[event_id] = Event(event_id, self._day)
                 self._events[event_id].parse(element)
 
 
-class Event(UniqueByConference):
-    def __init__(self, conference, event_id, day: Day):
-        super().__init__(conference, event_id)
+class Event(object):
+    """One slot of the programme: a talk, a workshop or a break."""
+
+    def __init__(self, event_id, day: Day):
         self._id = event_id
-        self._day: Day = day
+        self._day = day
+        self._persons: dict[str, Person] = {}
 
-    def init(self):
-        self._persons: Dict[str, Person] = {}
-
-    def _str__(self):
+    def __str__(self):
         return self._title
 
     @property
@@ -263,39 +243,32 @@ class Event(UniqueByConference):
                                                 minutes=minutes)
 
     @property
-    def persons(self):
+    def persons(self) -> str:
+        """The speakers, as a French enumeration; empty when there are none."""
         names = [person._name for person in self._persons.values()]
-        if len(names) >= 3:
-            return '{} et {}'.format(', '.join(names[:-1]), names[-1])
-        elif len(names) == 2:
-            return '{} et {}'.format(*names)
-        return names[0]
+        if not names:
+            return ''
+        if len(names) == 1:
+            return names[0]
+        return '{} et {}'.format(', '.join(names[:-1]), names[-1])
 
     def parse(self, event_element):
-        for element in list(event_element):
+        for element in event_element:
             if element.tag == 'persons':
-                for person_element in list(element):
+                for person_element in element:
                     person_id = person_element.get('id')
-                    self._persons[person_id] = Person(
-                        self._conference,
-                        person_id,
-                        self)
+                    self._persons[person_id] = Person(person_id)
                     self._persons[person_id].parse(person_element)
             else:
-                setattr(self,
-                        f'_{element.tag}',
-                        element.text)
+                setattr(self, f'_{element.tag}', element.text)
 
 
-class Person(UniqueByConference):
-    def __init__(self, conference: Conference, person_id, event: Event):
-        super().__init__(conference, person_id)
+class Person(object):
+    """Someone giving a talk or running a workshop."""
+
+    def __init__(self, person_id):
         self._id = person_id
-        if getattr(self,
-                   '_events',
-                   None) is None:
-            self._events = {}
-        self._events[event._id] = event
+        self._name = ''
 
     def __str__(self):
         return self._name
@@ -304,7 +277,7 @@ class Person(UniqueByConference):
         self._name = person_element.text
 
 
-def build_breaks(conference: Conference, room: Room, day: Day, events: list):
+def build_breaks(room: Room, day: Day, events: list) -> list['Event']:
     """Build the breaks that belong in this room's programme for that day.
 
     A break is only added when it fits inside the room's programme span --
@@ -338,10 +311,8 @@ def build_breaks(conference: Conference, room: Room, day: Day, events: list):
         # A unique id per room and per day: the singleton cache in
         # UniqueByConference would otherwise hand out one shared break object
         # for the whole conference.
-        event = Event(
-            conference,
-            f'break-{day._date:%Y%m%d}-{room._name}-{index}',
-            day)
+        event = Event(f'break-{day._date:%Y%m%d}-{room._name}-{index}',
+                      day)
         event._title = pause.title
         event._start = pause.start
         event._duration = pause.duration
@@ -395,7 +366,7 @@ def render_event(event: Event, show_qr: bool = True) -> str:
     clip the title of a 25 minute talk.
     """
     classes = event_classes(event)
-    people = f'<p class="who">{event.persons}</p>' if event._persons else ''
+    people = f'<p class="who">{event.persons}</p>' if event.persons else ''
 
     url = getattr(event, '_url', None)
     qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
@@ -418,13 +389,13 @@ def render_event(event: Event, show_qr: bool = True) -> str:
 
 def render_room(conference: Conference, day: Day, room: Room,
                 show_qr: bool = True) -> str:
-    events = room.get_sorted_list_by_day(day)
+    events = room.sorted_events()
     if not events:
         return ''
 
-    for pause in build_breaks(conference, room, day, events):
+    for pause in build_breaks(room, day, events):
         room._events[pause._id] = pause
-    events = room.get_sorted_list_by_day(day)
+    events = room.sorted_events()
 
     slots = ''
     previous_end = None
@@ -447,7 +418,7 @@ def render_room(conference: Conference, day: Day, room: Room,
             <header>
                 <div class="brand"></div>
                 <div class="ident">
-                    <h1>{room}</h1>
+                    <h1>{room._name}</h1>
                     <p>{day._date:%A %d %B}</p>
                 </div>
             </header>
@@ -456,7 +427,7 @@ def render_room(conference: Conference, day: Day, room: Room,
             </div>
             <footer>
                 <span>{conference}</span>
-                <span>Salle {room} &middot; {day._date:%A}</span>
+                <span>Salle {room._name} &middot; {day._date:%A}</span>
             </footer>
         </section>
     '''
@@ -505,7 +476,7 @@ def parse_args(argv=None):
 def main(argv=None) -> int:
     args = parse_args(argv)
 
-    conference = Conference(url=args.url)
+    conference = Conference(urlopen(args.url))
     conference.parse()
 
     try:
@@ -515,7 +486,7 @@ def main(argv=None) -> int:
               'dates will not be localised',
               file=sys.stderr)
 
-    html = HTML(string=build_html(conference, show_qr=args.qr))
+    document = HTML(string=build_html(conference, show_qr=args.qr))
     css = CSS(filename=args.stylesheet)
 
     try:
@@ -523,7 +494,7 @@ def main(argv=None) -> int:
     except FileNotFoundError:
         pass
 
-    html.write_pdf(args.output, stylesheets=[css])
+    document.write_pdf(args.output, stylesheets=[css])
     return 0
 
 
