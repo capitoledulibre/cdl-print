@@ -2,12 +2,27 @@
 import locale
 import os
 from datetime import datetime, timedelta
-from pprint import pprint
 from typing import Dict
 from urllib.request import urlopen
 from xml.etree import ElementTree
 
 from weasyprint import CSS, HTML
+
+
+def _hours_minutes(value: str) -> tuple[int, int]:
+    """Split an 'HH:MM' string into an (hours, minutes) pair."""
+    hours, minutes = str(value).split(':')
+    return int(hours), int(minutes)
+
+
+def _datetime_at(date: datetime, hhmm: str) -> datetime:
+    """Combine a day with an 'HH:MM' wall-clock time."""
+    hours, minutes = _hours_minutes(hhmm)
+    return datetime(year=date.year,
+                    month=date.month,
+                    day=date.day,
+                    hour=hours,
+                    minute=minutes)
 
 
 class UniqueByConference(object):
@@ -157,19 +172,13 @@ class Event(UniqueByConference):
 
     @property
     def _start_datetime(self):
-        date = self._day._date
-        hours, minutes = str(self._start).split(':')
-        return datetime(year=date.year,
-                        month=date.month,
-                        day=date.day,
-                        hour=int(hours),
-                        minute=int(minutes))
+        return _datetime_at(self._day._date, self._start)
 
     @property
     def _end_datetime(self):
-        hours, minutes = str(self._duration).split(':')
-        return self._start_datetime + timedelta(hours=int(hours),
-                                                minutes=int(minutes))
+        hours, minutes = _hours_minutes(self._duration)
+        return self._start_datetime + timedelta(hours=hours,
+                                                minutes=minutes)
 
     @property
     def persons(self):
@@ -213,45 +222,61 @@ class Person(UniqueByConference):
         self._name = person_element.text
 
 
-if __name__ == "__main__":
-    conference = Conference(
-        url='https://cfp.capitoledulibre.org/cdl-2025/schedule/export/schedule.xml')
-    conference.parse()
+def render_event(event: Event) -> str:
+    html = f'''
+                        <tr class="event_row {event._type}">
+                            <td class="event_date">
+                                {event._start_datetime:%Hh%M}
+                                à
+                                {event._end_datetime:%Hh%M}
+                            </td>
+                            <td class="event_cell">
+                                <div class="event_title">
+                                    {event.title}
+                                </div>
+    '''
+    if len(event._persons.values()) > 0:
+        html += f'''
+                                    <div class="event_persons">
+                                        {event.persons}
+                                    </div>
+        '''
+    html += '''
+                            </td>
+                        </tr>
+    '''
+    return html
 
-    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
-    html_string = ''
-    for day in conference._days.values():
-        day_html = ''
-        for room in day._rooms.values():
-            events = room.get_sorted_list_by_day(day)
-            if len(events) == 0:
-                continue
-            # Pauses
-            if room._name == 'Foyer des Étudiants':
-                continue
+def render_room(conference: Conference, day: Day, room: Room) -> str:
+    events = room.get_sorted_list_by_day(day)
+    if len(events) == 0:
+        return ''
+    # Pauses
+    if room._name == 'Foyer des Étudiants':
+        return ''
 
-            p1 = Event(conference, 9000, day)
-            p1._room = Room(conference, room._name, day)
-            p1._title = 'Pause déjeuner'
-            p1._start = '12:30'
-            p1._duration = '01:30'
-            p1._persons = {}
-            p1._type = 'pause'
-            room._events[p1._id] = p1
-            if day._date.isoweekday() != 7:
-                p2 = Event(conference, 9001, day)
-                p2._room = Room(conference, room._name, day)
-                p2._title = 'Pause'
-                p2._start = '16:00'
-                p2._duration = '00:30'
-                p2._persons = {}
-                p2._type = 'pause'
-                room._events[p2._id] = p2
+    p1 = Event(conference, 9000, day)
+    p1._room = Room(conference, room._name, day)
+    p1._title = 'Pause déjeuner'
+    p1._start = '12:30'
+    p1._duration = '01:30'
+    p1._persons = {}
+    p1._type = 'pause'
+    room._events[p1._id] = p1
+    if day._date.isoweekday() != 7:
+        p2 = Event(conference, 9001, day)
+        p2._room = Room(conference, room._name, day)
+        p2._title = 'Pause'
+        p2._start = '16:00'
+        p2._duration = '00:30'
+        p2._persons = {}
+        p2._type = 'pause'
+        room._events[p2._id] = p2
 
-            # Refresh list
-            events = room.get_sorted_list_by_day(day)
-            room_html = f'''
+    # Refresh list
+    events = room.get_sorted_list_by_day(day)
+    html = f'''
             <div class="room">
                 <header>
                     <div class="conf_title"><!-- Capitole du Libre 2025 --></div>
@@ -264,46 +289,43 @@ if __name__ == "__main__":
                         <th>Conférence</th>
                     </thead>
                     <tbody>
-            '''
-            for i, event in enumerate(events):
-                if i != 0 and \
-                       events[i-1]._end_datetime != event._start_datetime:
-                    room_html += f'''
+    '''
+    for i, event in enumerate(events):
+        if i != 0 and events[i - 1]._end_datetime != event._start_datetime:
+            html += '''
                         <tr>
                             <td colspan="2"><!-- Pause --></td>
                         </tr>
-                    '''
-                room_html += f'''
-                        <tr class="event_row {event._type}">
-                            <td class="event_date">
-                                {event._start_datetime:%Hh%M}
-                                à
-                                {event._end_datetime:%Hh%M}
-                            </td>
-                            <td class="event_cell">
-                                <div class="event_title">
-                                    {event.title}
-                                </div>
-                '''
-                if len(event._persons.values()) > 0:
-                    room_html += f'''
-                                    <div class="event_persons">
-                                        {event.persons}
-                                    </div>
-                    '''
-                room_html += f'''
-                            </td>
-                        </tr>
-                '''
-            room_html += f'''
+            '''
+        html += render_event(event)
+    html += '''
                     </tbody>
                 </table>
             </div>
-            '''
-            day_html += room_html
-        html_string += f'<div class="day">{day_html}</div>'
+    '''
+    return html
 
-    html = HTML(string=html_string)
+
+def render_day(conference: Conference, day: Day) -> str:
+    html = ''
+    for room in day._rooms.values():
+        html += render_room(conference, day, room)
+    return f'<div class="day">{html}</div>'
+
+
+def build_html(conference: Conference) -> str:
+    return ''.join(render_day(conference, day)
+                   for day in conference._days.values())
+
+
+def main():
+    conference = Conference(
+        url='https://cfp.capitoledulibre.org/cdl-2025/schedule/export/schedule.xml')
+    conference.parse()
+
+    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
+
+    html = HTML(string=build_html(conference))
     css = CSS(filename='style.css')
     file_name = 'conference.pdf'
     try:
@@ -312,3 +334,7 @@ if __name__ == "__main__":
         pass
 
     html.write_pdf(file_name, stylesheets=[css])
+
+
+if __name__ == "__main__":
+    main()
