@@ -403,13 +403,14 @@ def render_event(event: Event, show_qr: bool = True) -> str:
 
 def render_room(conference: Conference, day: Day, room: Room,
                 show_qr: bool = True) -> str:
-    events = room.sorted_events()
-    if not events:
+    talks = room.sorted_events()
+    if not talks:
         return ''
 
-    for pause in build_breaks(room, day, events):
-        room._events[pause._id] = pause
-    events = room.sorted_events()
+    # Built into a local list rather than written back into the room: the
+    # breaks belong to this page, not to the parsed schedule.
+    events = sorted(talks + build_breaks(room, day, talks),
+                    key=lambda event: event._start_datetime)
 
     slots = ''
     previous_end = None
@@ -424,7 +425,6 @@ def render_room(conference: Conference, day: Day, room: Room,
     # A room with one or two talks would otherwise stretch a couple of lines
     # of small text over a whole A3; the poster variant scales the type up.
     # Breaks do not count: they are what a near-empty room is padded with.
-    talks = [event for event in events if event._type != 'pause']
     poster = ' poster' if len(talks) <= POSTER_MODE_MAX_EVENTS else ''
 
     return f'''
