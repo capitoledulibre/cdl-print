@@ -7,6 +7,7 @@ assertions are what turns that into a build failure.
 """
 
 import os
+import re
 from datetime import datetime
 
 import pytest
@@ -52,13 +53,25 @@ def room_days(conference) -> list:
             if room.sorted_events()]
 
 
-@pytest.fixture(scope='module')
-def pages(conference) -> list:
+def lay_out(conference) -> tuple[list, dict, list]:
+    """Run the real pipeline: size every room to its sheet, then render."""
     fonts = FontConfiguration()
-    document = HTML(string=gen.build_html(conference, show_qr=False)).render(
-        stylesheets=[CSS(filename=STYLESHEET, font_config=fonts)],
-        font_config=fonts)
-    return [page_text(page) for page in document.pages]
+    css = CSS(filename=STYLESHEET, font_config=fonts)
+    sizes, too_dense = gen.fit_rooms(conference, css, fonts, show_qr=False)
+    document = HTML(string=gen.build_html(conference, show_qr=False,
+                                          sizes=sizes)).render(
+        stylesheets=[css], font_config=fonts)
+    return [page_text(page) for page in document.pages], sizes, too_dense
+
+
+@pytest.fixture(scope='module')
+def laid_out(conference) -> tuple:
+    return lay_out(conference)
+
+
+@pytest.fixture(scope='module')
+def pages(laid_out) -> list:
+    return laid_out[0]
 
 
 # --- the layout must not overflow ------------------------------------------
@@ -74,14 +87,21 @@ def test_every_page_carries_its_footer(pages):
     assert without == []
 
 
+def squashed(text: str) -> str:
+    """Drop everything a line break can fall on, so wrapping does not matter.
+
+    A title breaking after a hyphen or an apostrophe is good typography, not a
+    missing word.
+    """
+    return re.sub(r"[\s'\u2019-]+", '', text).replace('\u202f', '\u00a0')
+
+
 def test_no_talk_is_lost(pages, conference):
-    laid_out = ' '.join(pages)
+    laid_out = squashed(' '.join(pages))
     for event in conference._events.values():
-        for word in event.title.split():
-            if len(word) > 3:
-                assert word in laid_out, f'{word!r} of {event.title!r}'
+        assert squashed(event.title) in laid_out, event.title
         for person in event._persons.values():
-            assert person._name in laid_out
+            assert squashed(person._name) in laid_out, person._name
 
 
 # --- breaks ----------------------------------------------------------------
@@ -257,32 +277,48 @@ def test_the_fixture_is_the_shape_we_think_it_is():
     assert {'B00', 'B105', 'Hall C', 'B205', 'A304', 'A303'} <= rooms
 
 
-# --- known defect ----------------------------------------------------------
+# --- dense rooms are scaled to fit ------------------------------------------
 
 DENSE_FIXTURE = os.path.join(os.path.dirname(__file__), 'fixtures',
                              'schedule-2024-dense.xml')
 
 
-@pytest.mark.xfail(
-    reason='A room denser than the 2025 programme overflows its fixed height '
-           'A3 page: the spill either takes a stray page or the footer is '
-           'clipped away. The layout needs to fail loudly or scale its type '
-           'down; until then this reproduces it on the real 2024 export.',
-    strict=True)
-def test_a_dense_room_still_fits_one_page():
+@pytest.fixture(scope='module')
+def dense() -> gen.Conference:
     parsed = gen.Conference(DENSE_FIXTURE)
     parsed.parse()
+    return parsed
 
-    expected = [(day, room)
-                for day in parsed._days.values()
-                for room in day._rooms.values()
-                if room.sorted_events()]
 
-    fonts = FontConfiguration()
-    document = HTML(string=gen.build_html(parsed, show_qr=False)).render(
-        stylesheets=[CSS(filename=STYLESHEET, font_config=fonts)],
-        font_config=fonts)
-    rendered = [page_text(page) for page in document.pages]
+def test_a_dense_room_still_fits_one_sheet(dense):
+    """The 2024 export used to spill B00's footer and clip A001's away."""
+    rendered, _sizes, too_dense = lay_out(dense)
+    expected = list(gen.printable_rooms(dense))
 
+    assert too_dense == []
     assert len(rendered) == len(expected)
     assert all('Salle' in text for text in rendered)
+
+
+def test_a_dense_room_is_the_one_scaled_down(dense):
+    _pages, sizes, _too_dense = lay_out(dense)
+    assert sizes, 'the 2024 rooms should need turning down'
+    assert all(size < gen.BASE_TIMELINE_SIZE for size in sizes.values())
+    assert all(size >= gen.MIN_TIMELINE_SIZE for size in sizes.values())
+
+
+def test_a_room_that_fits_is_left_alone(laid_out):
+    """Nothing in the 2025 programme needs shrinking, so nothing is shrunk."""
+    _pages, sizes, too_dense = laid_out
+    assert sizes == {}
+    assert too_dense == []
+
+
+def test_a_room_that_cannot_fit_is_reported(monkeypatch, capsys, tmp_path):
+    """With no room to shrink into, the run must refuse rather than print."""
+    monkeypatch.setattr(gen, 'MIN_TIMELINE_SIZE', gen.BASE_TIMELINE_SIZE + 1)
+    output = tmp_path / 'out.pdf'
+    assert gen.main(['--schedule-file', DENSE_FIXTURE,
+                     '--output', str(output), '--no-qr']) == 1
+    assert 'do not fit on one sheet' in capsys.readouterr().err
+    assert not output.exists()
