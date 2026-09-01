@@ -463,6 +463,10 @@ def parse_args(argv=None):
         '--url',
         help='schedule XML URL, overriding the one derived from --year')
     parser.add_argument(
+        '--schedule-file',
+        help='read the schedule from a local XML export instead of the '
+             'network, ignoring --year and --url')
+    parser.add_argument(
         '--output', default=DEFAULT_OUTPUT,
         help=f'PDF file to write (default: {DEFAULT_OUTPUT})')
     parser.add_argument(
@@ -481,11 +485,32 @@ def parse_args(argv=None):
     return args
 
 
+def load_conference(args) -> Conference:
+    """Parse the schedule named by the command line.
+
+    Raises OSError if it cannot be reached and ElementTree.ParseError if what
+    comes back is not the export we expect.
+    """
+    source = args.schedule_file if args.schedule_file else urlopen(args.url)
+    conference = Conference(source)
+    conference.parse()
+    return conference
+
+
 def main(argv=None) -> int:
     args = parse_args(argv)
 
-    conference = Conference(urlopen(args.url))
-    conference.parse()
+    try:
+        conference = load_conference(args)
+    except OSError as error:
+        target = args.schedule_file or args.url
+        print(f'error: cannot read the schedule at {target}: {error}',
+              file=sys.stderr)
+        return 1
+    except ElementTree.ParseError as error:
+        print(f'error: the schedule is not valid XML: {error}',
+              file=sys.stderr)
+        return 1
 
     try:
         locale.setlocale(locale.LC_ALL, args.locale)
