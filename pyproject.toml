@@ -1,16 +1,14 @@
-[tool.poetry]
+[project]
 name = "cdl-paper-generator"
 version = "0.1.0"
 description = "Capitole du Libre Paper Schedule Generator"
-authors = ["Capitole du Libre <contact@capitoledulibre.org>"]
-license = "Apache 2"
+authors = [{ name = "Capitole du Libre", email = "contact@capitoledulibre.org" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["weasyprint"]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-weasyprint = "*"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+# gen.py is a standalone script, not an installable package.
+package = false
