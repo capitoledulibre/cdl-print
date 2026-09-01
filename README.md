@@ -39,6 +39,7 @@ uv run python gen.py --year 2026 --output programme.pdf
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--output` | `conference.pdf` | PDF file to write |
+| `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
 | `--no-qr` | QR codes shown | Leave out the QR code linking to each talk page |
 | `--stylesheet` | `style.css` | CSS stylesheet to apply |
 | `--locale` | `fr_FR.UTF-8` | Locale used to format dates |
@@ -67,3 +68,19 @@ single workshop does not print two lines of small text on an empty A3.
 
 Every talk carries a QR code to its page on the CFP site, where the abstract
 and the feedback form live. Pass `--no-qr` to drop them.
+
+Fira Sans is embedded from `fonts/`, so the PDF renders the same at the print
+shop as it does here. It has no glyph for the handful of emoji that reach a
+talk title; those still fall back to whatever the generating machine has, so
+check them before a print run.
+
+## Tests
+
+```shell
+uv run pytest
+```
+
+The suite renders the trimmed schedule exports under `tests/fixtures/` -- no
+network needed -- and checks that every room gets exactly one page, that no
+page loses its footer to clipping, and that no talk or speaker disappears
+from the layout. `--schedule-file` is what makes those fixtures usable.
