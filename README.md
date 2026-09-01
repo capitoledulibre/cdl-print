@@ -69,6 +69,13 @@ single workshop does not print two lines of small text on an empty A3.
 Every talk carries a QR code to its page on the CFP site, where the abstract
 and the feedback form live. Pass `--no-qr` to drop them.
 
+A room too dense for its sheet has its timeline set a step smaller until it
+fits, so a page is never split in two or quietly clipped. Nothing in the 2025
+programme needs it; the 2024 one turns two rooms down by a few per cent. A
+room that will not fit even at `MIN_TIMELINE_SIZE` aborts the run with a
+message naming it, rather than printing something broken. Sizing every room
+this way is what makes a run take a few seconds rather than one.
+
 Fira Sans is embedded from `fonts/`, so the PDF renders the same at the print
 shop as it does here. It has no glyph for the handful of emoji that reach a
 talk title; those still fall back to whatever the generating machine has, so
@@ -82,5 +89,5 @@ uv run pytest
 
 The suite renders the trimmed schedule exports under `tests/fixtures/` -- no
 network needed -- and checks that every room gets exactly one page, that no
-page loses its footer to clipping, and that no talk or speaker disappears
-from the layout. `--schedule-file` is what makes those fixtures usable.
+page loses its footer to clipping, that dense rooms are scaled rather than
+split, and that no talk or speaker disappears from the layout. `--schedule-file` is what makes those fixtures usable.
