@@ -1,12 +1,45 @@
 
 import locale
 import os
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Dict
 from urllib.request import urlopen
 from xml.etree import ElementTree
 
 from weasyprint import CSS, HTML
+
+# --- Breaks ----------------------------------------------------------------
+
+# ISO weekday numbers, as returned by datetime.isoweekday().
+SATURDAY = 6
+SUNDAY = 7
+
+# Rooms left out of the printed programme entirely, by name.
+EXCLUDED_ROOMS: frozenset[str] = frozenset()
+
+
+@dataclass(frozen=True)
+class Break:
+    """A pause to weave into a room's programme.
+
+    The schedule export does not carry the breaks, so they are added here.
+    `weekdays` restricts the break to those ISO weekdays; None means every
+    day of the conference.
+    """
+
+    title: str
+    start: str
+    duration: str
+    weekdays: frozenset[int] | None = None
+
+
+BREAKS = (
+    Break(title='Pause déjeuner', start='12:30', duration='01:30'),
+    # Sunday ends early enough not to need an afternoon break.
+    Break(title='Pause', start='16:00', duration='00:30',
+          weekdays=frozenset({SATURDAY})),
+)
 
 
 def _hours_minutes(value: str) -> tuple[int, int]:
@@ -23,6 +56,16 @@ def _datetime_at(date: datetime, hhmm: str) -> datetime:
                     day=date.day,
                     hour=hours,
                     minute=minutes)
+
+
+def _overlaps(first_start: datetime, first_end: datetime,
+              second_start: datetime, second_end: datetime) -> bool:
+    """Whether two half-open time ranges intersect.
+
+    Ranges that merely touch (one ends exactly when the other starts) do not
+    overlap, so a break may be slotted flush against a talk.
+    """
+    return first_start < second_end and second_start < first_end
 
 
 class UniqueByConference(object):
@@ -222,6 +265,54 @@ class Person(UniqueByConference):
         self._name = person_element.text
 
 
+def build_breaks(conference: Conference, room: Room, day: Day, events: list):
+    """Build the breaks that belong in this room's programme for that day.
+
+    A break is only added when it fits inside the room's programme span --
+    from the first event's start to the last event's end -- and overlaps no
+    event. All-day workshops, devroom blocks and evening-only slots are
+    therefore left untouched instead of being cut in two, and a room that is
+    only used in the evening gets no lunch break at all.
+    """
+    if not events:
+        return []
+
+    programme_start = events[0]._start_datetime
+    programme_end = events[-1]._end_datetime
+
+    breaks = []
+    for index, pause in enumerate(BREAKS):
+        if pause.weekdays is not None \
+                and day._date.isoweekday() not in pause.weekdays:
+            continue
+
+        start = _datetime_at(day._date, pause.start)
+        hours, minutes = _hours_minutes(pause.duration)
+        end = start + timedelta(hours=hours, minutes=minutes)
+
+        if start < programme_start or end > programme_end:
+            continue
+        if any(_overlaps(start, end, e._start_datetime, e._end_datetime)
+               for e in events):
+            continue
+
+        # A unique id per room and per day: the singleton cache in
+        # UniqueByConference would otherwise hand out one shared break object
+        # for the whole conference.
+        event = Event(
+            conference,
+            f'break-{day._date:%Y%m%d}-{room._name}-{index}',
+            day)
+        event._title = pause.title
+        event._start = pause.start
+        event._duration = pause.duration
+        event._persons = {}
+        event._type = 'pause'
+        breaks.append(event)
+
+    return breaks
+
+
 def render_event(event: Event) -> str:
     html = f'''
                         <tr class="event_row {event._type}">
@@ -250,32 +341,13 @@ def render_event(event: Event) -> str:
 
 def render_room(conference: Conference, day: Day, room: Room) -> str:
     events = room.get_sorted_list_by_day(day)
-    if len(events) == 0:
-        return ''
-    # Pauses
-    if room._name == 'Foyer des Étudiants':
+    if not events:
         return ''
 
-    p1 = Event(conference, 9000, day)
-    p1._room = Room(conference, room._name, day)
-    p1._title = 'Pause déjeuner'
-    p1._start = '12:30'
-    p1._duration = '01:30'
-    p1._persons = {}
-    p1._type = 'pause'
-    room._events[p1._id] = p1
-    if day._date.isoweekday() != 7:
-        p2 = Event(conference, 9001, day)
-        p2._room = Room(conference, room._name, day)
-        p2._title = 'Pause'
-        p2._start = '16:00'
-        p2._duration = '00:30'
-        p2._persons = {}
-        p2._type = 'pause'
-        room._events[p2._id] = p2
-
-    # Refresh list
+    for pause in build_breaks(conference, room, day, events):
+        room._events[pause._id] = pause
     events = room.get_sorted_list_by_day(day)
+
     html = f'''
             <div class="room">
                 <header>
@@ -309,6 +381,8 @@ def render_room(conference: Conference, day: Day, room: Room) -> str:
 def render_day(conference: Conference, day: Day) -> str:
     html = ''
     for room in day._rooms.values():
+        if room._name in EXCLUDED_ROOMS:
+            continue
         html += render_room(conference, day, room)
     return f'<div class="day">{html}</div>'
 
