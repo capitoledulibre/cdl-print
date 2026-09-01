@@ -1,0 +1,888 @@
+<?xml version='1.0' encoding='utf-8'?>
+<schedule>
+  <generator name="pretalx" version="2026.1.2" />
+  <version>0.23</version>
+  <conference>
+    <title>Capitole du Libre 2025</title>
+    <acronym>cdl-2025</acronym>
+    <start>2025-11-15</start>
+    <end>2025-11-16</end>
+    <days>2</days>
+    <timeslot_duration>00:05</timeslot_duration>
+    <base_url>https://cfp.capitoledulibre.org</base_url>
+    <time_zone_name>Europe/Paris</time_zone_name>
+  </conference>
+  <day index="1" date="2025-11-15" start="2025-11-15T04:00:00+01:00" end="2025-11-16T03:59:00+01:00">
+    <room name="B00" guid="20b564c6-ea93-53f2-abd9-036d107d7a1d">
+      <event guid="1bf32d38-1bd2-5f0b-9b09-d131a80f5765" id="780" code="DSLPFZ">
+        <room>B00</room>
+        <title>Bienvenue au Capitole du Libre 2025</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T10:00:00+01:00</date>
+        <start>10:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-780-bienvenue-au-capitole-du-libre-2025</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Accueil du public au Capitole du Libre 2025. Informations sur l'organisation de l'événement, informations pratiques.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/DSLPFZ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/DSLPFZ/feedback/</feedback_url>
+      </event>
+      <event guid="f226b686-0544-5f92-87a3-252e33ddd51a" id="784" code="M8ATTB">
+        <room>B00</room>
+        <title>5 ans de migrations de Confluence vers XWiki : ce que nous avons appris</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-784-5-ans-de-migrations-de-confluence-vers-xwiki-ce-que-nous-avons-appris</slug>
+        <track />
+        <persons>
+          <person id="672">Ludovic Dubost</person>
+          <person id="673">Anca Luca</person>
+        </persons>
+        <language>fr</language>
+        <description>En Octobre 2020, Atlassian annonce la fin de sa gamme "Confluence Server", l'offre la plus bon-marché de son logiciel de gestion de connaissances. Les utilisateurs sont forcés à migrer vers un hébergement sur le cloud d'Atlassian (hébergé chez AWS), ou bien à passer à l'offre "Confluence Datacenter" pour continuer à héberger Confluence localement. Dans les deux cas, l'addition est salée, et les plus petits utilisateurs se voient infligé une augmentation de coûts, et le plus souvent un passage forcé au cloud.
+
+Depuis cette date, et avec le support de plusieurs clients, XWiki a développé au fil des ans une suite d'outils de migration de Confluence vers XWiki, en Open Source, permettant à tout un chacun de reprendre le contrôle de ses données.
+
+Cette présentation reviendra sur les principales migrations réalisées au cours des 5 dernières années auprès de larges organisations, telles que l'Université de Lorraine (80k utilisateurs), BMC (150k utilisateurs), ou bien le Parlement Européen (15k utilisateurs). Nous détaillerons notre approche sur ces cas d'usage de migrations complexes, qui demandent à la fois une approche technique poussée, ainsi qu'un accompagnement au changement des utilisateurs finaux.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/M8ATTB/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/M8ATTB/feedback/</feedback_url>
+      </event>
+      <event guid="4d9bbfa4-01be-56d1-8428-2b55ed953d2d" id="749" code="RVBVET">
+        <room>B00</room>
+        <title>Maîtriser l'informatique grâce aux logiciels libres</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-749-maitriser-l-informatique-grace-aux-logiciels-libres</slug>
+        <track />
+        <persons>
+          <person id="665">Matthieu Hazon</person>
+        </persons>
+        <language>fr</language>
+        <description>Envie de vous sentir plus à l’aise devant un écran ? Envie d’aider votre entourage à surmonter la fracture numérique ?
+
+Vous êtes au bon endroit !
+
+Ensemble, partons à l’aventure pour explorer l’univers de l’informatique. Aidés par les logiciels libres, nous découvrirons comment seller notre monture numérique, comment naviguer sur un web déchaîné, comment transformer nos idées en données, comment communiquer sans entraves ou même comment trouver des magiciens de la technique !
+
+Je ne vous mentirai pas, notre chemin sera semé d’embûches. Mais grâce au monde du logiciel libre et de ses communautés sans peurs et sans frontières, les montagnes deviendront des cailloux, les monstres des boules de poils et les bugs des tickets pour le manège enchanté !
+
+Alors embarquez avec moi pour cette fabuleuse odyssée.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/RVBVET/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/RVBVET/feedback/</feedback_url>
+      </event>
+      <event guid="162ea287-8405-51e9-989e-a36d9283eb05" id="587" code="7KFHWZ">
+        <room>B00</room>
+        <title>Comment nous avons transformé les Restos du Coeur en Cloud Provider</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-587-comment-nous-avons-transforme-les-restos-du-coeur-en-cloud-provider</slug>
+        <track />
+        <persons>
+          <person id="523">Julien Briault</person>
+        </persons>
+        <language>fr</language>
+        <description>Dans un context où 1 euro = 1 repas, venez découvrir comment un groupe de bénévoles s'est mis en tête de créer un cloud dans le but de "faire plus avec moins".
+
+Ainsi, nous explorerons les motivations derrière ce projet, discutant des défis spécifiques rencontrés lors de la mise en place d'une infrastructure ouverte à un environnement associatif.
+
+Vous découvrirez pourquoi et comment Kubernetes et OpenStack ont apportés l’évolutivité et la résilience nécessaires pour soutenir les Restos du Cœur dans leur mission.
+
+De l'installation d'une baie dans les WC jusqu'à la mise en place d'une infrastructure robuste et scalable, nous vous invitons à découvrir les dessous techniques du projet : architecture, choix de configuration et stratégies déployées pour assurer une flexibilité maximale. Entre anecdotes, leçons apprises et innovations, nous montrerons comment cette infrastructure a transformé le SI de l'association.
+
+Pour terminer, rejoignez-nous pour découvrir comment cette aventure technologique hors norme a permis de faire économiser des millions de repas (par an) à l'association.
+
+Qui sait, peut-être que vous aussi, après cette université, vous souhaiterez nous rejoindre ?</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/7KFHWZ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/7KFHWZ/feedback/</feedback_url>
+      </event>
+      <event guid="6467a7fe-e7eb-538f-b653-6907c4913efa" id="637" code="KJR8EY">
+        <room>B00</room>
+        <title>Passer au libre, c'est changer de monde !</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-637-passer-au-libre-c-est-changer-de-monde</slug>
+        <track />
+        <persons>
+          <person id="559">Nicolas Vivant</person>
+        </persons>
+        <language>fr</language>
+        <description>Passer au libre, ce n'est pas simplement remplacer des logiciels propriétaires par des logiciels open source !
+
+Depuis 5 ans, Échirolles s'est engagé dans une transition résolue vers un numérique plus vertueux. Pour une collectivité comme pour une entreprise, le passage aux logiciels libres implique une adaptation, parfois importante, de l'organisation. Préparation budgétaire, reporting, commandes, contrats de maintenance, recrutement, stratégies de migration, c'est un nouveau monde qui s'ouvre, et un fonctionnement à revoir en profondeur.
+
+Aucune école ne vous forme à cela, et il a fallu être créatif pour répondre concrètement aux enjeux que nos élus et notre direction générale ont souhaité, depuis 2021, adresser. Nous nous y sommes attelé, et ce sont ces outils et méthodologies nouvelles que nous nous proposons de vous présenter.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments>
+          <attachment href="https://cfp.capitoledulibre.org/media/cdl-2025/submissions/KJR8EY/resources/20251115_-_Presentation_Nicolas_Vivant_8bPLxqZ.pdf">Présentation de Nicolas Vivant</attachment>
+        </attachments>
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/KJR8EY/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/KJR8EY/feedback/</feedback_url>
+      </event>
+      <event guid="d0380e45-2833-5070-8946-f2c3f282f806" id="648" code="B8N7NE">
+        <room>B00</room>
+        <title>Se réapproprier les techno-logies : un point de vue libroféministe</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-648-se-reapproprier-les-techno-logies-un-point-de-vue-librofeministe</slug>
+        <track />
+        <persons>
+          <person id="536">Khrys</person>
+        </persons>
+        <language>fr</language>
+        <description>Qu'est-ce que le féminisme peut apporter au discours sur les techniques et comment l'articuler avec le Libre ?
+Ou comment se réapproprier les techno-logies à l'époque des techbros fachos.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/B8N7NE/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/B8N7NE/feedback/</feedback_url>
+      </event>
+      <event guid="f2c3fd2f-2747-550c-a93b-9b83b5013e58" id="740" code="DV7MTK">
+        <room>B00</room>
+        <title>Grist, un outil no-code au service des agents publics</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T17:30:00+01:00</date>
+        <start>17:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-740-grist-un-outil-no-code-au-service-des-agents-publics</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/DV7MTK/grist_illustration_3vHhX7p.png</logo>
+        <persons>
+          <person id="633">Aude</person>
+        </persons>
+        <language>fr</language>
+        <description>À mi-chemin entre un tableur et une base de données, Grist est un outil libre et collaboratif qui permet de créer facilement des applications métiers. Grâce à une interface intuitive et une large palette de widgets (tableaux, formulaires, calendriers, cartes…), il s’adapte à de nombreux usages pour les agents publics, en particulier au sein des collectivités : suivi de projets, de budgets, de congés…ou même gestion de clés et de bois d’affouage ! Accessible aux novices en informatique, Grist séduit aussi les utilisateur·ice·s avancé·e·s : formules Python directement dans les tables, création de widgets personnalisés, API ouverte et bien conçue… Les possibilités de création sont infinies.
+
+👉 Venez découvrir la puissance et la flexibilité de Grist à travers des cas d’usage concrets et inspirants !</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/DV7MTK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/DV7MTK/feedback/</feedback_url>
+      </event>
+      <event guid="069bb3b5-a142-5515-a2a4-7a3ca636c95e" id="801" code="QGN9VX">
+        <room>B00</room>
+        <title>Souveraineté numérique : pourquoi le logiciel libre est stratégique</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T18:30:00+01:00</date>
+        <start>18:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-801-souverainete-numerique-pourquoi-le-logiciel-libre-est-strategique</slug>
+        <track />
+        <persons>
+          <person id="541">Stéphane Bortzmeyer</person>
+          <person id="672">Ludovic Dubost</person>
+          <person id="687">Aline Paponaud</person>
+          <person id="559">Nicolas Vivant</person>
+        </persons>
+        <language>fr</language>
+        <description>Pour conclure cette première journée du Capitole du Libre, la traditionnelle table ronde de fin de journée reviendra cette année sur la place des Logiciels Libre dans la question de la souveraineté numérique.
+
+Nous aurons autour de la table ronde:
+
+• Ludovic Dubost, Créateur de XWiki et CEO de XWiki SAS, éditeur de logiciels Open Source
+• Nivolas Vivant, directeur de la stratégie et de la culture numériques de la Ville d’Échirolles
+• Stéphane Bortzmeyer, ingénieur à l'Afnic
+
+
+La table ronde sera animée par Aline Paponaud, DSI chez Inovie Sud-Ouest et co-organisatrice du DevFest Toulouse.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/QGN9VX/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/QGN9VX/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A303" guid="af696857-18cc-5ecc-b7d2-c4a47e5d9a9a">
+      <event guid="643bd2fa-3cfe-5610-aac7-7d19487803a9" id="677" code="ZXQVCR">
+        <room>A303</room>
+        <title>Modéliser pour mieux comprendre : comment cartographier un SI sans perdre le Nord</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-677-modeliser-pour-mieux-comprendre-comment-cartographier-un-si-sans-perdre-le-nord</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/ZXQVCR/modelisation_cover_Fhd7KCI.png</logo>
+        <persons>
+          <person id="587">Yann Mougenel</person>
+        </persons>
+        <language>fr</language>
+        <description>Vous vous êtes déjà retrouvé·e face à une doc obsolète ou à une jungle de microservices sans boussole ? 
+Grâce à des standards ouverts et à des formats libres de modélisation, il est pourtant possible de transmettre, partager et documenter n’importe quelle architecture, de manière pérenne et interopérable.
+
+**Mais quel schéma adopter ❓ Pour qui ❓ Pour représenter quoi ❓🤔**
+
+Ce talk propose une **prise de recul sur les approches de modélisation** : du code à l’architecture, en passant par les processus. Il s’appuie sur une application d’exemple pour comparer plusieurs types de diagrammes et montrer leurs apports respectifs selon les contextes.
+
+L’objectif est de donner à chacun·e les clés pour se lancer, en illustrant les forces et limites de chaque modèle.
+**💡 Au programme :**
+* Pourquoi (et quand) modéliser son système ?
+* Tour d’horizon des principaux types de diagrammes (C4, BPMN, diagrammes de séquence…)
+* Cas concret d’usage pour chaque niveau : organisationnel, applicatif, métier, technique.
+* Conseils pratiques pour se lancer et faire vivre ses modèles !
+* Comparatif d’outils libres pour produire et versionner ces diagrammes</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/ZXQVCR/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/ZXQVCR/feedback/</feedback_url>
+      </event>
+      <event guid="d9bb04d8-300a-5e50-a850-c007e0ee726a" id="716" code="RSF7TK">
+        <room>A303</room>
+        <title>Intégration de bibliothèque C en python</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-716-integration-de-bibliotheque-c-en-python</slug>
+        <track />
+        <persons>
+          <person id="618">Ayowel</person>
+        </persons>
+        <language>fr</language>
+        <description>Intégration d'un SDK en C dans le moteur de jeu Ren'Py à travers le cas pratique du SDK EOS.
+Stratégie pour la génération de bindings afin de couvrir des APIs étendues et en minimiser la charge de maintenance.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/RSF7TK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/RSF7TK/feedback/</feedback_url>
+      </event>
+      <event guid="75025740-eeab-54e8-a251-b24dc7534216" id="638" code="ARJRXC">
+        <room>A303</room>
+        <title>Méta-Programmation en Rust</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-638-meta-programmation-en-rust</slug>
+        <track />
+        <persons>
+          <person id="560">Didier Plaindoux</person>
+        </persons>
+        <language>fr</language>
+        <description>Etant un grand fan des parsers combinateurs, je voulais simplifier l'expression des parsers pour Rust.
+Oui mais voila, plusieurs options étaient envisageables. La première, évidente, repose sur un langage
+externe qui est ensuite lu et traduit en Rust. Rien de révolutionnaire au demeurant.
+
+Une seconde option repose sur l'utilisation des Procedural Macros qui permet en fait d'avoir la même
+approche que la première option mais cette fois ci en embarquant directement le langage dans Rust.
+
+Durant cette présentation, je vous propose donc d'explorer les Macros Rust en général, de voir comment
+cela fonctionne et finalement ce que l'on peut en faire et notamment comment j'ai abordé mon problème
+initial de parser combinateur.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/ARJRXC/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/ARJRXC/feedback/</feedback_url>
+      </event>
+      <event guid="5a27a50b-c179-5501-9b94-625a3157bf3e" id="607" code="HQ3CJN">
+        <room>A303</room>
+        <title>Design patterns en Rust: un bestiaire</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-607-design-patterns-en-rust-un-bestiaire</slug>
+        <track />
+        <persons>
+          <person id="537">Kevin Ottens</person>
+        </persons>
+        <language>fr</language>
+        <description>Le concept des designs patterns a eu son moment de gloire dans le logiciel il y a près de trente ans. Après le livre du "Gang of Four", d'autres patterns ont été découverts et publiés dans le domaine des langage objet.
+
+Aujourd'hui, le concept est tombé un peu en désuétude... et pourtant il est bien vivant. Sans les nommer, des astuces partagées entre développeurs n'ayant pas connu cette période sont des (re)découvertes de design patterns.
+
+Il se trouve que l'on peut en identifier un certain nombre dans le code Rust idiomatique écrit aujourd'hui. Comme hier, savoir les identifier et les nommer aide à avoir des discussions de conception plus riches et productives.
+
+Dans cette présentation, nous ferons un retour historique sur les design patterns et leur usage. Nous verrons ensuite un sous-ensemble des patterns possibles et utilisés dans du code Rust. Pour chacun, nous expliquerons à quoi il sert, comment le mettre en place, et ses limites d'usage.
+
+Enfin, nous verrons aussi comment certains de ces patterns ont une très longue histoire, tandis que d'autres sont des inventions plus modernes.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/HQ3CJN/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/HQ3CJN/feedback/</feedback_url>
+      </event>
+      <event guid="975482e4-6bf0-5c23-a5fb-6d820f3e47de" id="601" code="N3PGHQ">
+        <room>A303</room>
+        <title>Restoring fun at every level of web programming</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T18:00:00+01:00</date>
+        <start>18:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-601-restoring-fun-at-every-level-of-web-programming</slug>
+        <track />
+        <persons>
+          <person id="533">Xavier Van de Woestyne</person>
+        </persons>
+        <language>fr</language>
+        <description>Web programming is genuinely exciting. It offers fast feedback loops and an almost infinite range of possibilities, combining algorithms, UI, and UX.
+Unfortunately—or fortunately—the complexity of the web has exploded, diversifying the range of professions, piling on layers of technology and heterogeneous tools, and sometimes giving gray hairs to those of us who love static verification!
+In this presentation, I’ll introduce you to Ocsigen—a free software stack born from ambitious research, resulting in a fascinating industrial framework that, at the dawn of the modern web, addressed problems that would only become widespread years later.
+It features pervasive typing, compilation to JavaScript (and later to WebAssembly), client/server slicing for flexible real-time interactions, typed RPC, sophisticated session management by scope, and more. Ocsigen is a futuristic UFO of a framework, and I’m delighted to introduce it to you!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/N3PGHQ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/N3PGHQ/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A304" guid="ee8d5788-49e5-52dd-9dd0-9be2762f4097">
+      <event guid="a992170d-ea5c-50fb-95df-e7eedce7366a" id="798" code="JPHKYE">
+        <room>A304</room>
+        <title>devroom Guix &amp; Nix</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>01:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-798-devroom-guix-nix</slug>
+        <track />
+        <persons>
+          <person id="653">Guilhem Saurel</person>
+        </persons>
+        <language>fr</language>
+        <description>Explorez l’univers des gestionnaires de paquets fonctionnels ! Venez découvrir comment Guix et Nix révolutionnent le déploiement, la reproductibilité et l’autonomie numérique. 
+Discussions, démos et retours d’expérience au Capitole du Libre.
+Rejoignez-nous pour hacker le futur du libre !</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/JPHKYE/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/JPHKYE/feedback/</feedback_url>
+      </event>
+      <event guid="626e2fb1-5569-5312-815e-9f3a775a3998" id="799" code="AP7RFP">
+        <room>A304</room>
+        <title>devroom Guix &amp; Nix</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>04:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-799-devroom-guix-nix</slug>
+        <track />
+        <persons>
+          <person id="653">Guilhem Saurel</person>
+        </persons>
+        <language>fr</language>
+        <description>Explorez l’univers des gestionnaires de paquets fonctionnels ! Venez découvrir comment Guix et Nix révolutionnent le déploiement, la reproductibilité et l’autonomie numérique. 
+Discussions, démos et retours d’expérience au Capitole du Libre.
+Rejoignez-nous pour hacker le futur du libre !
+
+Lien vers le planning: https://pad.lassul.us/s/VfcgRWsJv#</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/AP7RFP/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/AP7RFP/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="B105" guid="5e865226-3df4-5be6-a257-8be0ab967402">
+      <event guid="2b0ccd56-44ed-5660-9324-50ae7e5a3a3e" id="803" code="PGYNDV">
+        <room>B105</room>
+        <title>Atelier installation &amp; dépannage Linux &amp; système d'exploitation libre</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>07:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-803-atelier-installation-depannage-linux-systeme-d-exploitation-libre</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Venez vous faire aider pour installer Linux ou un autre système d'exploitation libre sur votre ordinateur ou votre téléphone.
+
+L'atelier est proposé en collaboration avec net7, le club informatique de l'ENSEEIHT.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/PGYNDV/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/PGYNDV/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="B205" guid="962e5e0a-44c0-5933-985d-7944db8d9098">
+      <event guid="db3b231b-c13f-5cb3-962f-e3a8b0fb2c01" id="796" code="ANYTCS">
+        <room>B205</room>
+        <title>Atelier Initiation à la programmation</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>01:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-796-atelier-initiation-a-la-programmation</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Atelier découverte de la programmation.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/ANYTCS/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/ANYTCS/feedback/</feedback_url>
+      </event>
+      <event guid="c3f947af-7e5d-548a-a2e3-a8e1e842bd4a" id="797" code="ZVPTAQ">
+        <room>B205</room>
+        <title>Atelier Initiation à la programmation</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>04:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-797-atelier-initiation-a-la-programmation</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Atelier Initiation à la programmation</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/ZVPTAQ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/ZVPTAQ/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="Hall C" guid="eaf8219e-c129-5c4c-a288-a8fa8098939a">
+      <event guid="c37e9f3a-a615-5645-a52a-15d0cd563384" id="802" code="CZSJW3">
+        <room>Hall C</room>
+        <title>Buffet convivial</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-15T19:30:00+01:00</date>
+        <start>19:30</start>
+        <duration>02:00</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-802-buffet-convivial</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Buffet convivial réunissant intervenants, organisateurs, bénévoles et le public.
+Le buffet est offert par l'association Toulibre.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/CZSJW3/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/CZSJW3/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+  <day index="2" date="2025-11-16" start="2025-11-16T04:00:00+01:00" end="2025-11-17T03:59:00+01:00">
+    <room name="B00" guid="20b564c6-ea93-53f2-abd9-036d107d7a1d">
+      <event guid="8ba5424a-23d6-5059-861f-57e527204b79" id="692" code="SSJ9WX">
+        <room>B00</room>
+        <title>Diffusez des vidéos avec PeerTube, une solution libre et efficace pour votre organisation !</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-692-diffusez-des-videos-avec-peertube-une-solution-libre-et-efficace-pour-votre-organisation</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/SSJ9WX/2022-11-25_Peertube-v5_by-David-Revoy_pwIvhxx.jpg</logo>
+        <persons>
+          <person id="599">Booteille</person>
+        </persons>
+        <language>fr</language>
+        <description>Après plus de sept années à développer le logiciel PeerTube, le constat est là : le logiciel est fonctionnellement mature.
+
+Si pour le grand public nous avons encore du pain sur la planche, ce n'est pas si vrai quand on s'adresse aux organisations (et en particulier les institutions) !
+
+Découvrons ensemble en quoi PeerTube peut répondre aux besoins de votre organisation et faisons un point sur les dernières nouveautés.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments>
+          <attachment href="https://cfp.capitoledulibre.org/media/cdl-2025/submissions/SSJ9WX/resources/2025-11-16-PeerTube-Institutions-novem_HWMdTau.odp">Présentation - PeerTube pour les organisations</attachment>
+        </attachments>
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/SSJ9WX/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/SSJ9WX/feedback/</feedback_url>
+      </event>
+      <event guid="ac2c591b-492b-5f10-bff8-ea86b0d6033a" id="611" code="NHZT9F">
+        <room>B00</room>
+        <title>Le livre et le Libre</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-611-le-livre-et-le-libre</slug>
+        <track />
+        <persons>
+          <person id="570">Gee</person>
+          <person id="638">David Revoy</person>
+          <person id="539">Bookynette</person>
+        </persons>
+        <language>fr</language>
+        <description>Table ronde avec plusieurs interlocuteurs et interlocutrices du monde du livre, qui y défendent les valeurs  du Libre. Libraire, auteur, illustrateur et éditeur</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/NHZT9F/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/NHZT9F/feedback/</feedback_url>
+      </event>
+      <event guid="a32a88e9-826f-599b-88ba-35a903e0c91c" id="613" code="JRNESS">
+        <room>B00</room>
+        <title>Les types de média, c'est quoi, et à quoi sert l'haptique ?</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-16T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-613-les-types-de-media-c-est-quoi-et-a-quoi-sert-l-haptique</slug>
+        <track />
+        <persons>
+          <person id="541">Stéphane Bortzmeyer</person>
+        </persons>
+        <language>fr</language>
+        <description>Explications sur l'étiquetage des ressources Web avec un type de média comme image/png ou text/plain.
+
+Toute ressource sur le Web est étiquetée avec un type de média (autrefois appelé type MIME) comme image/png ou text/plain. Ce type est renvoyé par le serveur HTTP à son client, pour qu'il sache quoi faire du contenu (mais il y a plein d'autres usages). Comment décoder ces types ? Comment sont-ils structurés ? Qui les attribue ? Que faire si j'en veux un nouveau ? 
+
+Illustration avec le dernier type de premier niveau, "haptics", enregistré pour les formats utilisés par les interfaces haptiques (celles qu'on touche et qui vous touchent).</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments>
+          <attachment href="https://cfp.capitoledulibre.org/media/cdl-2025/submissions/JRNESS/resources/types-media-bortzmeyer-cdl_MOjCf5K.pdf">Supports de l'exposé</attachment>
+        </attachments>
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/JRNESS/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/JRNESS/feedback/</feedback_url>
+      </event>
+      <event guid="94490a84-fd1e-5ce2-8d46-415875008bad" id="609" code="XUN79Q">
+        <room>B00</room>
+        <title>Libérer - Délivrer, un escape game pour découvrir les logiciels libres</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-16T14:30:00+01:00</date>
+        <start>14:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-609-liberer-delivrer-un-escape-game-pour-decouvrir-les-logiciels-libres</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/XUN79Q/photo_du_jeu_nBZv8gR.jpg</logo>
+        <persons>
+          <person id="539">Bookynette</person>
+        </persons>
+        <language>fr</language>
+        <description>Aller à la rencontre du grand public pour lui présenter les logiciels libres n'est pas toujours aisé. J'ai cherché une méthode ludique pour intéresser celui des geekfaeries et j'en ai conclu qu'un jeu de logique pouvait être une bonne idée. Venez découvrir comment mon cerveau a élaboré ce jeu, comment je l'ai fait tester, quels outils j'ai utilisés et le résultat final: https://www.april.org/liberer-delivrer-un-escape-game-pour-faire-decouvrir-les-logiciels-libres-au-grand-public</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/XUN79Q/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/XUN79Q/feedback/</feedback_url>
+      </event>
+      <event guid="2e52de2d-3e6a-596c-b1f6-470aa67a5e90" id="710" code="B3AF89">
+        <room>B00</room>
+        <title>Le logiciel libre est un projet politique</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>01:00</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-710-le-logiciel-libre-est-un-projet-politique</slug>
+        <track />
+        <persons>
+          <person id="615">Association Skeptikon</person>
+        </persons>
+        <language>fr</language>
+        <description>Dans un contexte mondial tendu, nous nous rendons compte que les logiciels privateurs et centralisateurs sont un enjeux de pouvoir démentiel.
+Le mouvement des logiciels libres est issu de la volonté de vouloir redonner le contrôle à l'individu sur son utilisation du numérique.
+Nous verrons dans cette conférence en quoi ils peuvent être un outil de résistance et de lutte contre les courants fascistes et leur propagande, et quelles sont les pistes d'actions que vous pouvez amorcer.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/B3AF89/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/B3AF89/feedback/</feedback_url>
+      </event>
+      <event guid="b33cca3e-e728-5dab-818d-74b18ea1ac8e" id="781" code="HGQLQA">
+        <room>B00</room>
+        <title>Conférence de clôture</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-16T16:00:00+01:00</date>
+        <start>16:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-781-conference-de-cloture</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Les chiffres clés de cette édition. Conclusion!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/HGQLQA/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/HGQLQA/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A303" guid="af696857-18cc-5ecc-b7d2-c4a47e5d9a9a">
+      <event guid="f6afc2ad-b220-5b02-8e8d-4475a6c49408" id="752" code="NUREHM">
+        <room>A303</room>
+        <title>Dessiner avec Inkscape</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-752-dessiner-avec-inkscape</slug>
+        <track />
+        <persons>
+          <person id="665">Matthieu Hazon</person>
+        </persons>
+        <language>fr</language>
+        <description>Vous souhaitez réaliser des illustrations, des affiches, des logos ou bien des maquettes pour votre site internet ?
+
+Inkscape est vraiment fait pour vous !
+
+Dans cet atelier, nous verrons comment se servir de cet outil à la fois simple et puissant. Nous verrons notamment les tracés, le coloriage, le positionnement, les calques, les filtres et bien plus encore. L'objectif sera de savoir composer des réalisations avec la palette d'outils disponibles.
+
+Rassurez-vous, aucune compétence en dessin n'est requise !</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/NUREHM/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/NUREHM/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A304" guid="ee8d5788-49e5-52dd-9dd0-9be2762f4097">
+      <event guid="9fdba993-d76a-5223-bdcc-080882c9aaad" id="646" code="SSGQTZ">
+        <room>A304</room>
+        <title>Découverte de CloudNativePG - démarrer avec PostgreSQL dans Kubernetes</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-646-decouverte-de-cloudnativepg-demarrer-avec-postgresql-dans-kubernetes</slug>
+        <track />
+        <persons>
+          <person id="564">Julian Vanden Broeck</person>
+        </persons>
+        <language>fr</language>
+        <description>Dans cet atelier, nous vous proposons de découvrir CloudNativePG, une solution OpenSource permettant de déployer, gérer et opérer des instances PostgreSQL de manière native dans un cluster Kubernetes.
+
+Pendant ces deux heures, nous explorerons ensemble :
+- les principes de base de CloudNativePG et son architecture ;
+- le déploiement d'un cluster PostgreSQL dans Kubernetes ;
+- Gérer le cycle de vie d'une base : sauvegarde, accès, maintenance au fil de l'eau
+
+Que vous soyez DBA, développeur, ou devops / SRE, cet atelier vous donnera quelques clés pour démarrer avec PostgreSQL dans un environnement Kubernetes grâce à l'opérateur CloudNativePG. Si nous avons le temps nous discuterons aussi des différences majeures avec une utilisation + classique (VM ou baremetal) de PostgreSQL.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/SSGQTZ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/SSGQTZ/feedback/</feedback_url>
+      </event>
+      <event guid="18727c54-6050-5509-b15f-85c4bae6cf70" id="731" code="PHQ93U">
+        <room>A304</room>
+        <title>LaserMagic: Apprenez la gravure et la découpe laser opensource</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-16T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-731-lasermagic-apprenez-la-gravure-et-la-decoupe-laser-opensource</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/PHQ93U/logo_byujTwQ.png</logo>
+        <persons>
+          <person id="629">MadSquirrel</person>
+        </persons>
+        <language>fr</language>
+        <description>Présentation de Lasermagic et Inkscape pour faire de la découpe et de la gravure laser.
+Ensuite j'animerai un atelier de dessin pour les participants sur Inkscape pour réaliser un projet simple tels-que un medaillon ou une petite boite (via boxes.py) afin de expérimenter Lasermagic par eux-même.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/PHQ93U/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/PHQ93U/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="B105" guid="5e865226-3df4-5be6-a257-8be0ab967402">
+      <event guid="0f8c7a12-ce50-5f60-a596-bf0a31938828" id="804" code="UPLW8E">
+        <room>B105</room>
+        <title>Atelier installation &amp; dépannage Linux &amp; système d'exploitation libre</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2025-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>05:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-804-atelier-installation-depannage-linux-systeme-d-exploitation-libre</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Venez vous faire aider pour installer Linux ou un autre système d'exploitation libre sur votre ordinateur ou votre téléphone.
+
+L'atelier est proposé en collaboration avec net7, le club informatique de l'ENSEEIHT.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/UPLW8E/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/UPLW8E/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+</schedule>

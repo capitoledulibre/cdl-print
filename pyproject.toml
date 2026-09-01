@@ -15,3 +15,12 @@ dependencies = [
 [tool.uv]
 # gen.py is a standalone script, not an installable package.
 package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

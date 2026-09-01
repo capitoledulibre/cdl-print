@@ -1,0 +1,990 @@
+<?xml version='1.0' encoding='utf-8'?>
+<schedule>
+  <generator name="pretalx" version="2026.1.2" />
+  <version>0.25</version>
+  <conference>
+    <title>Capitole du Libre 2024</title>
+    <acronym>cdl-2024</acronym>
+    <start>2024-11-16</start>
+    <end>2024-11-17</end>
+    <days>2</days>
+    <timeslot_duration>00:05</timeslot_duration>
+    <base_url>https://cfp.capitoledulibre.org</base_url>
+    <time_zone_name>Europe/Paris</time_zone_name>
+  </conference>
+  <day index="1" date="2024-11-16" start="2024-11-16T04:00:00+01:00" end="2024-11-17T03:59:00+01:00">
+    <room name="B00" guid="06eb2403-a91a-5672-90d0-4d90fdb2b464">
+      <event guid="378c584a-c3c1-54e1-9395-0d49a8756bac" id="552" code="RNZY88">
+        <room>B00</room>
+        <title>Bienvenue au Capitole du Libre 2024</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T10:00:00+01:00</date>
+        <start>10:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-552-bienvenue-au-capitole-du-libre-2024</slug>
+        <track />
+        <persons>
+          <person id="478">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Accueil du public au Capitole du Libre 2024. Informations sur l'organisation de l'événement, informations pratiques.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/RNZY88/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/RNZY88/feedback/</feedback_url>
+      </event>
+      <event guid="62289688-1978-50b4-ba53-6af37a9c5567" id="505" code="CNDQFX">
+        <room>B00</room>
+        <title>Être mainteneur dans le noyau Linux</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-505-etre-mainteneur-dans-le-noyau-linux</slug>
+        <track />
+        <persons>
+          <person id="441">Miquèl Raynal</person>
+        </persons>
+        <language>fr</language>
+        <description>Le kernel Linux, tout le monde sait ce que c'est. C'est la base des OS GNU/Linux, il occuppe une place centrale dans le monde du serveur, des super-calculateurs, des systèmes embarqués et quand on aime, on l'installe aussi sur son propre ordinateur. Derrière ce logiciel libre se cache d'un côté un créateur et mainteneur principal, Linus Torvalds, et de l'autre côté des (dizaines de) milliers de contributeurs. Comment se passe le processus de revue par les pairs ? Comment sont testés les patchs ? Qui les applique et quand ?
+
+Mainteneur d'un sous-système dans le kernel depuis 2019 et auteur d'une 50aine de pull-requests pour Linus, ayant eu d'ailleurs plusieurs opportunités de se "chamailler" publiquement avec lui, Miquèl vous propose de démystifier ensemble le rôle de mainteneur dans le kernel, les étapes pour le devenir, d'aborder les us et coutûmes en matière de maintenance, la partie technique et bien sûr, la gestion des échanges humains pouvant se situer partout sur l'échelle de "agréable" à "rugueux".</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/CNDQFX/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/CNDQFX/feedback/</feedback_url>
+      </event>
+      <event guid="4da55673-258b-57fe-9c2c-c1de03f68934" id="471" code="SPDMYX">
+        <room>B00</room>
+        <title>L'April est en campagne</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-471-l-april-est-en-campagne</slug>
+        <track />
+        <logo>/media/cdl-2024/submissions/SPDMYX/lama_april_C2xQMrB.png</logo>
+        <persons>
+          <person id="397">Gee</person>
+          <person id="409">Deleted User</person>
+        </persons>
+        <language>fr</language>
+        <description>Cela fait un moment que l'April n'a pas consacré de temps pour lancer une campagne de don ou d'adhésion. Or en 2024, cela devient indispensable. Un petit groupe d'irréductible a décidé de se réunir afin de mettre un site en place et de lancer le mouvement. Comment, pour qui, avec quoi. Petit retour d'expériences, de brainstorming et d'évitement de réunionites aigües!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/SPDMYX/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/SPDMYX/feedback/</feedback_url>
+      </event>
+      <event guid="d41454a9-a0e7-5243-bcaa-6f59a750bb35" id="556" code="9ZKFYN">
+        <room>B00</room>
+        <title>Libre, Open source: de VLC à l'IA, et et futur...</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-556-libre-open-source-de-vlc-a-l-ia-et-et-futur</slug>
+        <track />
+        <persons>
+          <person id="485">Jean-Baptiste Kempf</person>
+        </persons>
+        <language>fr</language>
+        <description>Cette conférence porte sur les réflexions sur les évolutions du logiciel libre, du courant open source, et de ce qui arrive pour le futur, notamment sur les sujets IA.
+
+La conférence commencera sur l'évolution du projet VLC, de sa création à son passage en open source, et sa maturation, parlera du courant open source, de ses récents changements, et surtout de ce qui arrive avec l'AI et son impact important sur la perception de l'open source par le grand public.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/9ZKFYN/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/9ZKFYN/feedback/</feedback_url>
+      </event>
+      <event guid="c5808ab4-34fe-5914-ac0a-a5af6e8e7187" id="400" code="NGQAFE">
+        <room>B00</room>
+        <title>Comment Orange a finalement été condamnée pour violation de licence libre</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-400-comment-orange-a-finalement-ete-condamnee-pour-violation-de-licence-libre</slug>
+        <track />
+        <persons>
+          <person id="352">Valentin Deniaud</person>
+        </persons>
+        <language>fr</language>
+        <description>Avril 2011 : un éditeur de logiciel libre, Entr'ouvert (346 100 d’euros de chiffre d’affaires), assigne en justice la multinationale Orange (45,5 milliards d’euros de chiffre d’affaires), pour violation de licence libre.
+Février 2024 : Orange est reconnue coupable !
+
+Mais sur quoi est fondée cette décision, quelle est sa portée ? Pourquoi 13 ans de procédure ? Quel est le point commun entre un logiciel et des baskets ?
+
+Quelque soit votre degré de familiarité avec la chose juridique, venez découvrir le récit riche en rebondissements de cette épopée victorieuse !</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/NGQAFE/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/NGQAFE/feedback/</feedback_url>
+      </event>
+      <event guid="63db6094-1190-5bbd-a9fe-a8e45bb7c9fd" id="550" code="CFPUA8">
+        <room>B00</room>
+        <title>Bien gérer son projet libre : que faire au-delà du code ?</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-550-bien-gerer-son-projet-libre-que-faire-au-dela-du-code</slug>
+        <track />
+        <persons>
+          <person id="469">Sébastien Dinot</person>
+        </persons>
+        <language>fr</language>
+        <description>Un projet libre, c'est loin de n'être que du code source ou un binaire prêt à l'emploi. Il ne suffit pas de publier ces deux artéfacts sur Internet pour donner envie aux gens de découvrir un logiciel, de l'adopter et de s'impliquer dans son développement.
+
+Pour que votre projet ait une chance de séduire de potentiels utilisateurs et contributeurs, vous devez répondre à leurs attentes, qu'elles soient d'ordre technique, juridique ou social.
+
+Je vous propose de passer en revue quelques fondamentaux dans ces domaines, qui sont bien trop souvent négligés.
+
+Vous pouvez télécharger le [support de ma conférence](https://apr1.org/audela).</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/CFPUA8/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/CFPUA8/feedback/</feedback_url>
+      </event>
+      <event guid="f7035853-e301-523c-afb5-83c06189a207" id="408" code="7BDY8Y">
+        <room>B00</room>
+        <title>Les aventures de KDE Plasma sur Ubuntu Core</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T17:30:00+01:00</date>
+        <start>17:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-408-les-aventures-de-kde-plasma-sur-ubuntu-core</slug>
+        <track />
+        <persons>
+          <person id="358">Kevin Ottens</person>
+        </persons>
+        <language>fr</language>
+        <description>Depuis quelques années, une nouvelle variante d'Ubuntu a été introduite. Elle s'appelle Ubuntu Core et a été initialement pensée pour des utilisations IoT. Elle est entièrement composée de paquets snap.
+
+L'an dernier, Canonical a présenté une initiative pour aller au delà d'appareils sans interaction directe avec l'utilisateur afin d'avoir une session de bureau complète. Le résultat est Ubuntu Core Desktop qui présente un environnement basé sur GNOME Shell. KDE Plasma étant très populaire, nous avons été contactés pour le porter sur Ubuntu Core, le système résultant est appelé "KDE Neon Core".
+
+Dans cette présentation, nous montrerons comment KDE Neon Core est structuré, ce qu'il offre et ses limites. Pour cela, nous couvrirons les bases du fonctionnement du confinement snap.
+
+Nous expliquerons également les problèmes que nous avons rencontrés. Le fait d'avoir un autre bureau fonctionnant sur Ubuntu Core a révélé des ajustement nécessaires dans snapd, le processus responsable de l'orchestration des snaps sur le système.
+
+De plus, nous avons rencontré des difficultés particulières autour du lancement de la session elle même. Nous expliquerons donc comment après de nombreux écrans noirs nous avons enfin obtenu un système utilisable.
+
+Enfin, ce sera l'occasion de réfléchir aux défis que représente le débogage d'un système en lecture seule et fortement confiné. Toute cette présentation sera émaillée d'astuces utilisables dans d'autres contextes pour déboguer un système Linux moderne (strace, systemd-analyze…).
+
+Cette présentation devrait fournir des informations intéressantes aux personnes curieuses de savoir comment les processus d'un environnement de bureau s'intègrent, ou de connaître les interactions entre snapd et les applications.
+
+Si vous voulez un retour d'expérience sur la construction de ce type de systèmes et apprendre ce que nous avons découvert en cours de route, cette conférence sera pour vous.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/7BDY8Y/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/7BDY8Y/feedback/</feedback_url>
+      </event>
+      <event guid="d93939ad-10d0-546f-9349-51854e77f485" id="555" code="LKWS3P">
+        <room>B00</room>
+        <title>Table ronde "Les modèles de gouvernance des projets libres"</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T18:30:00+01:00</date>
+        <start>18:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-555-table-ronde-les-modeles-de-gouvernance-des-projets-libres</slug>
+        <track />
+        <persons>
+          <person id="384">Khrys</person>
+          <person id="365">Damien MATHIEU</person>
+          <person id="485">Jean-Baptiste Kempf</person>
+          <person id="486">Aline Paponaud</person>
+        </persons>
+        <language>fr</language>
+        <description>Pour conclure cette première journée du Capitole du Libre, la traditionnelle table ronde de fin de journée reviendra cette année sur les modèles de gouvernance des projets libres. 
+Nous aurons trois intervenants sur la table ronde:
+
+- Damien Mathieu, Ingénieur chez Elastic sur OpenTelemetry (projet hébergé par la CNCF)
+- Khrys, présidente de FDN
+- Jean-Baptiste Kempf, président de VideoLAN et lead-developer VLC
+
+La table ronde sera animée par Aline Paponaud, DSI chez Inovie Sud-Ouest et co-organisatrice du DevFest Toulouse.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/LKWS3P/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/LKWS3P/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A001" guid="2d5e6f03-3ef2-5d93-bce8-1416c51a552f">
+      <event guid="ae28c708-f98c-5b58-9bc8-739ebbe59bdd" id="561" code="N8V7WG">
+        <room>A001</room>
+        <title>[MiniDebConf] Opening</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:10</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-561-minidebconf-opening</slug>
+        <track />
+        <persons>
+          <person id="488">Jérémy Lecour</person>
+          <person id="494">David Prévot</person>
+          <person id="495">Pierre-Elliott Bécue</person>
+          <person id="496">Grégory Colpart</person>
+        </persons>
+        <language>fr</language>
+        <description>Opening talk</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/N8V7WG/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/N8V7WG/feedback/</feedback_url>
+      </event>
+      <event guid="bd47c79f-2a50-5c53-9cf0-4014725b38f9" id="562" code="WRGMLC">
+        <room>A001</room>
+        <title>[MiniDebConf] Reproducible Builds - rebuilding what is distributed from ftp.debian.org</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T10:45:00+01:00</date>
+        <start>10:45</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-562-minidebconf-reproducible-builds-rebuilding-what-is-distributed-from-ftp-debian-org</slug>
+        <track />
+        <persons>
+          <person id="497">Holger Levsen</person>
+        </persons>
+        <language>fr</language>
+        <description>For more than ten years the Reproducible Builds project has worked towards reproducible builds of many projects and for ten years now we have build Debian packages twice, with maximal variations applied, to see if they can be build reproducible still.
+
+Since about a month we’ve also been rebuilding trying to exactly match the builds being distributed via ftp.d.o - this talk will describe the setup and the lessons learned so far, and why the results currently are what they are (spoiler: less &lt;30% reproducible) and what we can do to fix that.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/WRGMLC/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/WRGMLC/feedback/</feedback_url>
+      </event>
+      <event guid="89d682a0-90e9-5827-9cec-3162a58f88cf" id="563" code="VFFCEP">
+        <room>A001</room>
+        <title>[MiniDebConf] Discussion on my research work on sustainability of Debian OS</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T11:35:00+01:00</date>
+        <start>11:35</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-563-minidebconf-discussion-on-my-research-work-on-sustainability-of-debian-os</slug>
+        <track />
+        <persons>
+          <person id="498">Eda</person>
+        </persons>
+        <language>fr</language>
+        <description>In my PhD on digital obsolescence, I am trying to see how we can make sustainable systems, and because I love Debian, I chose it as an example. I know my choice is biased from the beginning, but I have good reasons :).
+
+My guess is that Debian is a sustainable socio-technical system, and that the community is making a lot of efforts to keep it this way.
+
+What I mean by sustainable in the case of Debian is :
+
+    Debian is working on a lot of various architectures (it is maybe the OS that works on the greatest number of architectures today);
+    Debian is stable and this stability is important to the world, and to the numerous distributions that rely on Debian;
+    Debian has a big community, with values and ethics, that keep the community solid through the time (more than 30 years old OS and community).
+
+If it helps I can also give examples of unsustainable systems.
+
+I want to discuss the sustainability aspects of Debian, try to find new ones that I have not yet identified, and try to deepen my understanding of how technically and socially Debian tries to achieve this. For example is this inherent to the way a package is born and maintained through time ? What I call the lifetime cycle of a Debian package? I tried in a previous miniDebCamp to understand how a package maintenance process works, and I can try to discuss with you what I identified as important in maintenance efforts of a package through its lifetime.
+
+But also maybe, how is the release of the next stable Debian influencing sustainability and package maintenance? How does LTS help?
+
+This will not be a horizontal talk, more of a discussion on this topic.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/VFFCEP/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/VFFCEP/feedback/</feedback_url>
+      </event>
+      <event guid="3ccb7145-b6b7-5d8d-819a-e1a676aad025" id="564" code="LXYBUW">
+        <room>A001</room>
+        <title>[MiniDebConf] What's new in the Linux kernel (and what's missing in Debian)</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-564-minidebconf-what-s-new-in-the-linux-kernel-and-what-s-missing-in-debian</slug>
+        <track />
+        <persons>
+          <person id="499">Ben Hutchings</person>
+        </persons>
+        <language>fr</language>
+        <description>I will talk about some of the interesting changes to Linux since last year, and work that still needs to be done to integrate or take advantage of new features in Debian.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/LXYBUW/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/LXYBUW/feedback/</feedback_url>
+      </event>
+      <event guid="9cf2c406-a159-5188-9f1d-33452d073fdc" id="565" code="XVQ7RQ">
+        <room>A001</room>
+        <title>[MiniDebConf] Linux live patching in Debian</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T14:45:00+01:00</date>
+        <start>14:45</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-565-minidebconf-linux-live-patching-in-debian</slug>
+        <track />
+        <persons>
+          <person id="500">Santiago Ruano Rincón</person>
+        </persons>
+        <language>fr</language>
+        <description>Emmanuel and Santiago filed [ITP #1070494](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1070494) in May 2024 about adding live patching support for linux in Debian. More that an ITP, our project is an Intend to Design, Implement and Maintain livepatching for the kernel.
+
+The goal of this talk is to present our current plans, including the design of a first approach, and all the questions and concerns that come with this project. Questions include but are not limited to how to triage the security issues, how to maintain the patches, how to match the kernel image Debian lifecycle and how to distribute the patches. The presentation includes a live demo of a simple livepatch.
+
+The work-in-progress prototyping can be found in the Salsa [linux-livepatching repo](https://salsa.debian.org/debian/linux-livepatching).
+
+This talk would be the opportunity to discuss live what would be the best way to support linux livepatching in Debian.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/XVQ7RQ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/XVQ7RQ/feedback/</feedback_url>
+      </event>
+      <event guid="a071b823-73c1-59d7-9513-73a9eef1b32a" id="566" code="YSAX77">
+        <room>A001</room>
+        <title>[MiniDebConf] Trixie on mobile: are we there yet?</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T15:30:00+01:00</date>
+        <start>15:30</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-566-minidebconf-trixie-on-mobile-are-we-there-yet</slug>
+        <track />
+        <persons>
+          <person id="501">Arnaud Ferraris</person>
+        </persons>
+        <language>fr</language>
+        <description>Over the past few years, both Linux-first mobile devices and a growing number of mainline-supported Android smartphones have triggered the interest of many Linux developers and users.
+
+The resulting ecosystem is growing rapidly, with the DebianOnMobile team ensuring mobile-friendly software made their way into Debian.
+
+The Trixie release approaching, this talk will detail the state of mobile support in Bookworm, how things evolved since then and the remaining hurdles to get full support of those devices in Debian.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/YSAX77/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/YSAX77/feedback/</feedback_url>
+      </event>
+      <event guid="334245d0-9213-5669-912f-5b51f6d0913b" id="567" code="DYABGD">
+        <room>A001</room>
+        <title>[MiniDebConf] PostgreSQL container groups, aka cgroups down the road.</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T16:20:00+01:00</date>
+        <start>16:20</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-567-minidebconf-postgresql-container-groups-aka-cgroups-down-the-road</slug>
+        <track />
+        <persons>
+          <person id="502">Cédric Villemain</person>
+        </persons>
+        <language>fr</language>
+        <description>Postgres has a very very very basic systemd support, and 0 support or integration of linux cgroups.
+
+That’s where we are, in a systemd and K8S world, where containers are just here, always.
+
+Using PostgreSQL-cgroups development branch, we will explore the cgroup (v2) API of choice for PostgreSQL: how to organize groups while providing support in usual package manager installation as well as in a docker like setup.
+
+[only if time allows: Combined with linux PSI (Pressure Stalled Information), can we improve overall PostgreSQL performance ? Reduce the number of parameters to tune, giving more room to autotuning ? Can we get ride of the Out-Of-Memory blast ? Alternatively we may explore current systemd support in PostgreSQL and expected updates in this area]
+
+We won’t focus on C code but on integration of cgroups [and PSI], their benefits and drawbacks in the PostgreSQL context.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/DYABGD/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/DYABGD/feedback/</feedback_url>
+      </event>
+      <event guid="262cab9a-5907-55b9-b0b3-586f488a17dd" id="568" code="FVWKTS">
+        <room>A001</room>
+        <title>[MiniDebConf] Upgrading a thousand Debian hosts in less than an hour</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-16T17:05:00+01:00</date>
+        <start>17:05</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-568-minidebconf-upgrading-a-thousand-debian-hosts-in-less-than-an-hour</slug>
+        <track />
+        <persons>
+          <person id="488">Jérémy Lecour</person>
+          <person id="496">Grégory Colpart</person>
+        </persons>
+        <language>fr</language>
+        <description>mass upgrade</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/FVWKTS/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/FVWKTS/feedback/</feedback_url>
+      </event>
+      <event guid="9da3bbd7-b3a4-50db-958f-92264fc85cf0" id="569" code="RDWEBY">
+        <room>A001</room>
+        <title>[MiniDebConf] Using debusine to automate your QA</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-16T17:40:00+01:00</date>
+        <start>17:40</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-569-minidebconf-using-debusine-to-automate-your-qa</slug>
+        <track />
+        <persons>
+          <person id="503">Stefano Rivera</person>
+          <person id="504">Colin Watson</person>
+          <person id="505">Enrico Zini</person>
+          <person id="506">Carles Pina i Estany</person>
+        </persons>
+        <language>fr</language>
+        <description>Learn how you can use debusine to automate Debian software development QA.
+
+This talk is aimed at a broad audience of Debian contributors. We’ll tell you what debusine is, if you haven’t heard about it. For those who have, we’ll show you some of the features we’ve implemented in the last year, and how you can use them to do QA work in Debian right now.
+
+Debusine is a general-purpose software factory tailored to the needs of a Debian-based distribution. It manages the scheduling and distribution of tasks to distributed worker machines. It’s free software, implemented in Python, and packaged in the Debian archive.
+
+The talk will jump right in with practical demos, using them to explain the project’s architecture.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/RDWEBY/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/RDWEBY/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+  <day index="2" date="2024-11-17" start="2024-11-17T04:00:00+01:00" end="2024-11-18T03:59:00+01:00">
+    <room name="B00" guid="06eb2403-a91a-5672-90d0-4d90fdb2b464">
+      <event guid="fcadc49a-8fe4-5170-bef7-070e3ae00005" id="424" code="Y93WWC">
+        <room>B00</room>
+        <title>Quels enjeux politiques pour le Logiciel Libre et le Scepticisme ?</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-17T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-424-quels-enjeux-politiques-pour-le-logiciel-libre-et-le-scepticisme</slug>
+        <track />
+        <persons>
+          <person id="371">Association Skeptikon</person>
+        </persons>
+        <language>fr</language>
+        <description>Le librisme est un mouvement prônant l'autonomie des utilisateur·rices pour adapter les logiciels à leurs besoins et leurs usages. Il prend aussi en compte les spécificités des utilisateur·rices (par exemple en situation de handicap), et la nécessaire transparence pour être en mesure de savoir ce qu'on utilise.
+
+Le scepticisme est une démarche adogmatique, et s'appuyant fortement sur les sciences et la philosophie, où les preuves sont analysée avant de croire à une affirmation. Par elle, des idées reçues ont été cassées, ouvrant à des avancées politiques majeures pour un monde plus égalitaire.
+
+Sous cet angle, on peut voir que le librisme adopte une démarche sceptique dans le domaine logiciel. Les deux sont possibles dans une société égalitaire et où les libertés fondamentales sont respectées. Dans un contexte politique mondial tendu, il convient d'occuper le terrain politique pour défendre nos acquis sociaux et démocratiques, ce qui nécessite de s'engager à notre échelle au-delà du logiciel.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/Y93WWC/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/Y93WWC/feedback/</feedback_url>
+      </event>
+      <event guid="c1df9d69-4190-5445-bc36-3e5470bb5e1c" id="485" code="GTXGPY">
+        <room>B00</room>
+        <title>Mieux inclure la diversité de genre pour mieux agir, le cheminement de l'April</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-17T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-485-mieux-inclure-la-diversite-de-genre-pour-mieux-agir-le-cheminement-de-l-april</slug>
+        <track />
+        <logo>/media/cdl-2024/submissions/GTXGPY/april_logo_carre_zSvKdtP.svg</logo>
+        <persons>
+          <person id="423">Isabella Vanni</person>
+        </persons>
+        <language>fr</language>
+        <description>Comme ailleurs, la domination masculine est un problème dans le monde informatique et dans les communautés libristes. Pour ne pas entretenir ce statu quo et permettre aux femmes et minorités de genre de s'y sentir à leur aise, il faut prendre ses responsabilités et agir.
+L'April, l'association de promotion et de défense du logiciel libre, se propose de présenter et de discuter des actions qu'elle mène depuis quelques années sur la diversité de genre et l'inclusion au sein de l'association et dans ses activités.
+Un focus sera notamment fait sur l'organisation de l'émission de radio Libre à vous ! qui a une politique explicite visant à favoriser l'intervention donc la valorisation des femmes et des minorités de genre présentes dans le monde du Libre.
+Il sera également question de langage inclusif, de formation, de l'auto-formation des personnes, de l'organisation d'événements, etc.
+Cette présentation aborde la diversité de genre, même si, bien sûr, la diversité doit être abordée et traitée dans son ensemble.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/GTXGPY/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/GTXGPY/feedback/</feedback_url>
+      </event>
+      <event guid="45549ce6-d367-54d4-a790-af906042bcf5" id="441" code="GQLFV3">
+        <room>B00</room>
+        <title>Librisme, luddisme, féminisme (et l'IA, dans tout ça ?)</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-17T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-441-librisme-luddisme-feminisme-et-l-ia-dans-tout-ca</slug>
+        <track />
+        <persons>
+          <person id="384">Khrys</person>
+        </persons>
+        <language>fr</language>
+        <description>Le librisme et sa philosophie revisitées sous le prisme de l'(éco)féminisme et du luddisme. On oscillera entre les années 1780-1840 en Angleterre avec le début de la révolution industrielle et les écrits de Mary Wollstonecraft, Mary Shelley, Ada Lovelace et les années 1980-20xx avec le mouvement du libre et les enjeux (politiques, techniques, sociétaux) liés à la "révolution numérique" avec, en filigrane, la question de l'"intelligence artificielle".</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/GQLFV3/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/GQLFV3/feedback/</feedback_url>
+      </event>
+      <event guid="7934da97-ea10-565c-9f6f-1c0e8fafd5a1" id="467" code="YVPNN7">
+        <room>B00</room>
+        <title>NixOS embarqué dans la stratosphère</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-467-nixos-embarque-dans-la-stratosphere</slug>
+        <track />
+        <logo>/media/cdl-2024/submissions/YVPNN7/Stratofly_wm_YCjJot1.png</logo>
+        <persons>
+          <person id="407">Axel Tripier</person>
+        </persons>
+        <language>fr</language>
+        <description>L'association [StratoFly](https://stratofly.org/) réalise des vols de ballon stratosphérique afin d'offrir un accès à la stratosphère à tous. Montant à 30 Kilomètres d'altitude, la nacelle scientifique contenant les expériences est accompagnée d'une nacelle opérationnelle assurant le suivi du ballon et la communication avec le sol au travers d'un Raspberry Pi et d'un lien radio LoRa.
+
+Originellement sous Raspbian, nous sommes en train de migrer ces Raspberry Pi sous NixOS. Nous explorerons dans cette conférence les avantages et les inconvénients qui nous ont mené à ce choix ainsi que notre processus de développement et nos conseils d'implémentation pour l'utilisation de Nix et NixOS dans le monde de l'embarqué.
+
+---
+
+Liens utiles :
+1- https://github.com/MatthewCroughan/raspberrypi-nixos-example
+2- https://wiki.nixos.org/wiki/NixOS_on_ARM/Building_Images#Compiling_through_binfmt_QEMU
+3- https://sidhion.com/blog/posts/nixos_server_issues/
+4- https://github.com/cleverca22/not-os</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/YVPNN7/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/YVPNN7/feedback/</feedback_url>
+      </event>
+      <event guid="38465e00-a1b4-524c-abf2-fe9a9bc46ef5" id="468" code="MEKTMH">
+        <room>B00</room>
+        <title>Cryptographie post-quantique: revoyons les bases.</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T15:30:00+01:00</date>
+        <start>15:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-468-cryptographie-post-quantique-revoyons-les-bases</slug>
+        <track />
+        <persons>
+          <person id="345">Benoit Lemarchand</person>
+        </persons>
+        <language>fr</language>
+        <description>Le 13 août 2024 le NIST a standardisé 3 nouveaux algorithmes cryptographiques post-quantiques, ouvrant la voie à leur adoption mondiale. Mais qu'est-ce que la cryptographie post-quantique (PQC) ? À quoi vient elle succéder et à quoi vient-elle répondre ? Qui doit s'en soucier et quand ?
+
+Durant cette présentation, nous reverrons les bases de la cryptographie moderne, ses défauts, ses faiblesses et verrons ce que la PQC apporte comme réponse et ses limites.
+
+Cette présentation a pour but de vulgariser ce sujet complexe, parfois sujets à fantasmes et hyperboles mais sans rentrer dans les détails. Il ne sera question ni de code ni de maths.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/MEKTMH/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/MEKTMH/feedback/</feedback_url>
+      </event>
+      <event guid="0e9d3c97-a0c8-52b0-a7d6-f47d4df49762" id="553" code="ZDJSHW">
+        <room>B00</room>
+        <title>Conférence de clôture</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T16:00:00+01:00</date>
+        <start>16:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-553-conference-de-cloture</slug>
+        <track />
+        <persons>
+          <person id="478">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Les chiffres clés de cette édition. Conclusion!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/ZDJSHW/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/ZDJSHW/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A001" guid="2d5e6f03-3ef2-5d93-bce8-1416c51a552f">
+      <event guid="a55969aa-2c60-5d9d-863a-df61777ff59a" id="570" code="GCZECV">
+        <room>A001</room>
+        <title>[MiniDebConf] DebConf 25</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T10:00:00+01:00</date>
+        <start>10:00</start>
+        <duration>00:20</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-570-minidebconf-debconf-25</slug>
+        <track />
+        <persons>
+          <person id="507">Benjamin Somers</person>
+        </persons>
+        <language>fr</language>
+        <description>DebConf 25, the annual Debian Conference, will happen in Brest, **from July 14 to July 20, 2025**. This talk presents the event, where we’re at, and kindly asks you to go and ask your boss for money :)</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/GCZECV/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/GCZECV/feedback/</feedback_url>
+      </event>
+      <event guid="63e0bc98-de09-55d4-a0a1-a6bc8eb44102" id="571" code="GU7WDW">
+        <room>A001</room>
+        <title>[MiniDebConf] How LTS goes beyond LTS</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2024-11-17T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:40</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-571-minidebconf-how-lts-goes-beyond-lts</slug>
+        <track />
+        <persons>
+          <person id="500">Santiago Ruano Rincón</person>
+          <person id="508">Roberto C. Sánchez</person>
+        </persons>
+        <language>fr</language>
+        <description>The goal of this talk is to provide a review of ways the Debian LTS Team aims at contributing beyond what we generally think of as “LTS”. The talk will bring some recognition to the hard work of the team members and also give examples that we hope will spark additional contributions from and collaborations with our fellow Debian Developers.
+
+This talk will include brief discussions of LTS history and background, the sorts of activities performed, a bit about the specific focus area of the LTS Team, and then a review of some contributions made by the LTS Team, starting at the individual package level, moving out to the Debian project as a whole, and then looking at contributions to the broader free software community.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/GU7WDW/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/GU7WDW/feedback/</feedback_url>
+      </event>
+      <event guid="b4f36ff7-ed51-513f-83b7-5e21eff3a801" id="572" code="EGQEMH">
+        <room>A001</room>
+        <title>[MiniDebConf] Cross building</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T11:20:00+01:00</date>
+        <start>11:20</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-572-minidebconf-cross-building</slug>
+        <track />
+        <persons>
+          <person id="509">Helmut Grohne</person>
+        </persons>
+        <language>fr</language>
+        <description>Cross building is the act of performing the build of a software on one machine and then using the result on another machine of different processor architecture. After a quick introduction answering questions such as how it applies to Debian, when it is useful and how it is done, we spend a look at common pitfalls and what can be done when it doesn’t just work. Then we move from the lecture format to an interactive BoF session. Please do bring questions, wishes and packages you would like to be cross buildable.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/EGQEMH/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/EGQEMH/feedback/</feedback_url>
+      </event>
+      <event guid="b44d5588-90ba-5dd2-a998-eadf336bf02a" id="573" code="MRGE9D">
+        <room>A001</room>
+        <title>[MiniDebConf] State of the javascript</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T11:55:00+01:00</date>
+        <start>11:55</start>
+        <duration>00:20</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-573-minidebconf-state-of-the-javascript</slug>
+        <track />
+        <persons>
+          <person id="510">Bastien Roucariès</person>
+        </persons>
+        <language>fr</language>
+        <description>In this talk we will give a status of the javascript packaging and how we are improving the way of packaging javascript for debian.
+
+We will present best pratice for javascript packaging and how we are improving the state of javascript packaging.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/MRGE9D/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/MRGE9D/feedback/</feedback_url>
+      </event>
+      <event guid="783699ce-8c10-5b78-97e4-10f0088fd9fd" id="574" code="3TF8TG">
+        <room>A001</room>
+        <title>[MiniDebConf] Chameleon - the easy way to try out Sequoia - OpenPGP written in Rust</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:07</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-574-minidebconf-chameleon-the-easy-way-to-try-out-sequoia-openpgp-written-in-rust</slug>
+        <track />
+        <persons>
+          <person id="497">Holger Levsen</person>
+        </persons>
+        <language>fr</language>
+        <description>This talk will explain briefly what Sequoia-PGP is, why it is awesome and how you can easily try it out today using the Chameleon or the Octopus!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/3TF8TG/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/3TF8TG/feedback/</feedback_url>
+      </event>
+      <event guid="593e86e7-9ca6-505a-bae4-2b848f1d4e54" id="575" code="MGCE8U">
+        <room>A001</room>
+        <title>[MiniDebConf] po-debconf-manager: managing translations of debconf templates</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T14:09:00+01:00</date>
+        <start>14:09</start>
+        <duration>00:07</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-575-minidebconf-po-debconf-manager-managing-translations-of-debconf-templates</slug>
+        <track />
+        <persons>
+          <person id="506">Carles Pina i Estany</person>
+        </persons>
+        <language>fr</language>
+        <description>There are at least 440 packages with debconf templates that can be translated. Many have very few strings. For example, only 1625 out of the 5866 strings have been translated into Catalan. po-debconf-manager is a working experiment to help a translation team to coordinate translating, reviewing and pushing the changes to the packages.
+
+Principal ideas: - low maintenance: no new infrastructure needed (no database, no new server, etc.) - command line interface (possibility to output a website in the future). No email coordination (but could send email notifications) - translators, reviewers and managers do 100% asynchronous work - interact with the Debian packages via automated merge requests in Salsa
+
+Main goals: fun, easy to use, agile, modern system. Hopefully, it will bring more translators to Debian who could eventually contribute to the wider ecosystem.
+
+I’ll show how it works and how we have been using it for some Catalan translations with the debian-l10n-catalan team. I am open for feedback. I want to explore leveraging git to coordinate workflows in other areas.
+
+Salsa URL: [https://salsa.debian.org/carlespina/po-debconf-manager](https://salsa.debian.org/carlespina/po-debconf-manager)</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/MGCE8U/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/MGCE8U/feedback/</feedback_url>
+      </event>
+      <event guid="8d20e8f3-a489-5200-9625-617b2f7efc49" id="576" code="HNSBSR">
+        <room>A001</room>
+        <title>[MiniDebConf] Electrical safety and computer science</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T14:18:00+01:00</date>
+        <start>14:18</start>
+        <duration>00:07</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-576-minidebconf-electrical-safety-and-computer-science</slug>
+        <track />
+        <persons>
+          <person id="510">Bastien Roucariès</person>
+        </persons>
+        <language>fr</language>
+        <description>Pioneers of ENIAC time known was electricity was lethal and were well aware of safety procedures.
+
+Personal computer was accepted as a pretty safe device at least from an electrical safety point of view, and safety first, and good pratices were forgotten.
+
+In this time of energetic emergencies, power hungry data center, DIY stuff from youtube or github, ubiquitous batteries a refresher is needed.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/HNSBSR/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/HNSBSR/feedback/</feedback_url>
+      </event>
+      <event guid="9e1c4131-ffed-5752-905f-c4d312b24580" id="577" code="ULTNLB">
+        <room>A001</room>
+        <title>[MiniDebConf] PyPI Security: Past, Present &amp; Future</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T14:35:00+01:00</date>
+        <start>14:35</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-577-minidebconf-pypi-security-past-present-future</slug>
+        <track />
+        <persons>
+          <person id="512">Salvo "LtWorf" Tomaselli</person>
+        </persons>
+        <language>fr</language>
+        <description>The talk is about how authentication for developers works on pypi.
+
+It shows how the authentication evolved over time and ends with predictions/ conspiracy theories on what will happen in the future.
+
+I presented it at OWASP Göteborg last spring, but it will cover what happened afterwards as well now.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/ULTNLB/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/ULTNLB/feedback/</feedback_url>
+      </event>
+      <event guid="9854bc31-f44f-54ab-877b-7eb39621b3a0" id="578" code="G8TQAY">
+        <room>A001</room>
+        <title>[MiniDebConf] Bits from DPL</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T15:15:00+01:00</date>
+        <start>15:15</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-578-minidebconf-bits-from-dpl</slug>
+        <track />
+        <persons>
+          <person id="511">Andreas Tille</person>
+        </persons>
+        <language>fr</language>
+        <description>Mini DebConf means an opportunity to do an interactive version of Bits from DPL!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/G8TQAY/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/G8TQAY/feedback/</feedback_url>
+      </event>
+      <event guid="c0bfce35-86d5-55ee-b5c5-74c96ce496a4" id="579" code="BMLP3M">
+        <room>A001</room>
+        <title>[MiniDebConf] Closing</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2024-11-17T15:50:00+01:00</date>
+        <start>15:50</start>
+        <duration>00:10</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2024-579-minidebconf-closing</slug>
+        <track />
+        <persons>
+          <person id="488">Jérémy Lecour</person>
+          <person id="494">David Prévot</person>
+          <person id="495">Pierre-Elliott Bécue</person>
+          <person id="496">Grégory Colpart</person>
+        </persons>
+        <language>fr</language>
+        <description>Closing talk</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2024/talk/BMLP3M/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2024/talk/BMLP3M/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+</schedule>
