@@ -96,7 +96,10 @@ header {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2mm;
+    /* gen.py overrides this per page to make a dense room fit; every length
+       below is in em so that the whole slot shrinks with it. */
+    font-size: 16px;
+    gap: 0.47em;
 }
 
 .hole {
@@ -108,10 +111,10 @@ header {
 .slot {
     flex-shrink: 0;
     display: grid;
-    grid-template-columns: 34mm 1fr 18mm;
+    grid-template-columns: 8.03em 1fr 18mm;
     align-items: center;
-    gap: 0 6mm;
-    padding: 3mm 5mm;
+    gap: 0 1.42em;
+    padding: 0.71em 1.18em;
     background: var(--fill);
     border-left: 6px solid var(--brand);
 }
@@ -132,15 +135,15 @@ header {
 
 .when b {
     display: block;
-    font-size: 34px;
+    font-size: 2.125em;
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: -0.03em;
 }
 
 .when i {
     display: block;
-    margin-top: 1.5mm;
-    font-size: 21px;
+    margin-top: 0.35em;
+    font-size: 1.3125em;
     font-style: normal;
     color: #888888;
 }
@@ -148,14 +151,14 @@ header {
 /* Left aligned: centring a three-line title strands its last word. */
 .what h2 {
     margin: 0;
-    font-size: 25px;
+    font-size: 1.5625em;
     font-weight: 700;
     line-height: 1.15;
 }
 
 .what .who {
-    margin: 1.5mm 0 0;
-    font-size: 19px;
+    margin: 0.35em 0 0;
+    font-size: 1.1875em;
     color: #555555;
 }
 
@@ -176,7 +179,7 @@ header {
 }
 
 .slot.pause .when b {
-    font-size: 25px;
+    font-size: 1.5625em;
     font-weight: 400;
     color: var(--quiet);
 }
@@ -186,9 +189,9 @@ header {
 }
 
 .slot.pause .what h2 {
-    font-size: 22px;
+    font-size: 1.375em;
     font-weight: 400;
-    letter-spacing: 3px;
+    letter-spacing: 0.19em;
     text-transform: uppercase;
     color: var(--quiet);
 }
@@ -197,26 +200,26 @@ header {
 
 .timeline.poster .slot {
     /* The scaled-up start time no longer fits the timeline's time column. */
-    grid-template-columns: 54mm 1fr 30mm;
-    gap: 0 10mm;
-    padding: 8mm 10mm;
+    grid-template-columns: 12.76em 1fr 30mm;
+    gap: 0 2.36em;
+    padding: 1.89em 2.36em;
 }
 
 .timeline.poster .when b {
-    font-size: 62px;
+    font-size: 3.875em;
 }
 
 .timeline.poster .when i {
-    font-size: 34px;
+    font-size: 2.125em;
 }
 
 .timeline.poster .what h2 {
-    font-size: 52px;
+    font-size: 3.25em;
 }
 
 .timeline.poster .what .who {
-    margin-top: 4mm;
-    font-size: 34px;
+    margin-top: 0.95em;
+    font-size: 2.125em;
 }
 
 .timeline.poster .qr,
