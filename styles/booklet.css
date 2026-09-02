@@ -1,0 +1,659 @@
+/* The pocket booklet: A5, 2026 identity on the covers and annexes. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: a5 portrait;
+    /* Margins hold the running head and the folio. */
+    margin: 8mm 0 9mm;
+
+    /* A time band only appears once, but its cards run over several pages, so
+       the hour has to follow the reader. */
+    @top-left {
+        content: string(day);
+        margin-left: 13mm;
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 7pt;
+        color: #9a9a9a;
+    }
+
+    @top-right {
+        content: string(slot);
+        margin-right: 13mm;
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 7pt;
+        font-weight: 700;
+        color: #d03d00;
+    }
+
+    @bottom-center {
+        content: counter(page);
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 7.5pt;
+        color: #9a9a9a;
+    }
+}
+
+/* A cover carries no folio, and neither does the back. */
+@page bare {
+    margin: 0;
+
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-center { content: none; }
+}
+
+/* The folio has to sit on the same ground as the page it belongs to, so a
+   dark page paints the sheet itself, margin included. */
+@page night {
+    background: #211a3c;
+
+    @top-left { color: rgba(242, 231, 207, 0.45); }
+    @top-right { color: #f0a068; }
+    @bottom-center { color: rgba(242, 231, 207, 0.5); }
+}
+
+:root {
+    --brand: #d03d00;
+    --brand-light: #f0a068;
+    --workshop: #2e6b8a;
+    --night: #2b1f45;
+    --night-deep: #1d1733;
+    --cream: #f2e7cf;
+    --quiet: #8a8a8a;
+    --rule: #dddddd;
+    --fill: #f7f6f4;
+    --fill-workshop: #f0f5f8;
+}
+
+body {
+    margin: 0;
+    color: #1a1a1a;
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.4;
+}
+
+.page {
+    box-sizing: border-box;
+    width: 148mm;
+    min-height: 201mm;
+    padding: 14mm 13mm 6mm;
+    page-break-after: always;
+}
+
+h1 {
+    margin: 0 0 6mm;
+    font-size: 22pt;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    color: var(--brand);
+}
+
+h2 {
+    margin: 6mm 0 2mm;
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--quiet);
+}
+
+p {
+    margin: 0 0 3.5mm;
+}
+
+/* --- the 2026 identity, for the covers and the annexes ------------------ */
+
+/* Flat rather than a gradient: the sheet's own background has to match, and
+   @page cannot follow a gradient across the folio margin. */
+.page.dark {
+    page: night;
+    background: #211a3c;
+    color: var(--cream);
+}
+
+.page.dark h1 {
+    color: var(--brand-light);
+}
+
+.page.dark h2 {
+    color: var(--cream);
+    opacity: 0.65;
+}
+
+.signature {
+    margin-top: 8mm;
+    font-weight: 700;
+    color: var(--brand-light);
+}
+
+.callout {
+    margin-top: 8mm;
+    padding: 3mm 5mm;
+    display: inline-block;
+    background: var(--brand);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13pt;
+    border-radius: 12mm;
+}
+
+ul.plain,
+ul.contents {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.plain li {
+    margin-bottom: 4mm;
+    padding-left: 6mm;
+    position: relative;
+}
+
+ul.contents li {
+    padding: 2.4mm 0;
+    border-bottom: 1px solid rgba(242, 231, 207, 0.22);
+}
+
+/* --- cover and back ------------------------------------------------------ */
+
+.page.cover {
+    page: bare;
+    padding: 0;
+    min-height: 210mm;
+    background: var(--night-deep);
+}
+
+.cover-art {
+    height: 210mm;
+    background: url('../assets/affiche-2026.jpg') center / cover no-repeat;
+}
+
+.page.title {
+    text-align: center;
+    padding-top: 52mm;
+}
+
+.page.title .kicker {
+    margin: 0;
+    font-size: 13pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.7;
+}
+
+.page.title h1 {
+    margin: 4mm 0 0;
+    font-size: 30pt;
+    line-height: 1.05;
+    color: var(--brand-light);
+}
+
+.page.title .dates {
+    margin: 8mm 0 0;
+    font-size: 14pt;
+    font-weight: 700;
+}
+
+.page.title .venue {
+    margin: 1mm 0 0;
+    opacity: 0.75;
+}
+
+.page.title .site {
+    margin: 12mm auto 0;
+    padding: 2.5mm 6mm;
+    display: inline-block;
+    background: var(--brand);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 10mm;
+}
+
+.page.back {
+    page: bare;
+    min-height: 210mm;
+    background: #211a3c;
+    color: var(--cream);
+    text-align: center;
+    padding-top: 60mm;
+}
+
+.page.back .brand {
+    height: 30mm;
+    margin-bottom: 12mm;
+    background: url('../cdl.svg') center / contain no-repeat;
+}
+
+.page.back .site {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--brand-light);
+}
+
+.page.back .org,
+.page.back .edition {
+    font-size: 9pt;
+    opacity: 0.7;
+}
+
+/* --- annex furniture ----------------------------------------------------- */
+
+.intro {
+    font-size: 10.5pt;
+    color: #444444;
+}
+
+dl.stands,
+dl.floors {
+    margin: 0;
+}
+
+dl.stands dt,
+dl.floors dt {
+    margin-top: 3.5mm;
+    font-weight: 700;
+    color: var(--brand);
+}
+
+dl.stands dd,
+dl.floors dd {
+    margin: 0.6mm 0 0;
+}
+
+ul.logos {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm;
+}
+
+ul.logos li {
+    padding: 2.5mm 3.5mm;
+    border: 1px solid var(--rule);
+    border-radius: 1.5mm;
+    background: var(--fill);
+    font-size: 8.5pt;
+    color: #555555;
+}
+
+.placeholder {
+    margin: 6mm 0 0;
+    padding: 18mm 6mm;
+    border: 2px dashed var(--rule);
+    border-radius: 2mm;
+    text-align: center;
+    color: var(--quiet);
+    font-size: 8.5pt;
+}
+
+.placeholder p {
+    margin: 0;
+}
+
+.page.notes .lines {
+    height: 150mm;
+    background: repeating-linear-gradient(
+        to bottom, transparent, transparent 7.5mm,
+        var(--rule) 7.5mm, var(--rule) 7.6mm);
+}
+
+/* --- the day opener ------------------------------------------------------ */
+
+.day-opener {
+    padding-top: 40mm;
+}
+
+.day-opener .kicker {
+    margin: 0;
+    font-size: 11pt;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.day-opener h1 {
+    string-set: day content(), slot '';
+    margin: 3mm 0 5mm;
+    font-size: 28pt;
+    text-transform: capitalize;
+}
+
+.day-opener .lede {
+    font-size: 11pt;
+    opacity: 0.85;
+}
+
+.day-opener ul.hours {
+    margin: 10mm 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm;
+}
+
+.day-opener ul.hours li {
+    padding: 2mm 3mm;
+    border: 1px solid rgba(242, 231, 207, 0.3);
+    border-radius: 1.5mm;
+    font-size: 8.5pt;
+    opacity: 0.85;
+}
+
+.day-opener ul.hours b {
+    color: var(--brand-light);
+}
+
+/* --- the time bands ------------------------------------------------------ */
+
+/* The hour is the way into the programme, so it gets a full width band that
+   the eye can find while flicking through. */
+.slot-band {
+    break-after: avoid;
+    break-inside: avoid;
+    margin: 5mm 0 3mm;
+    padding: 1.8mm 3mm;
+    background: var(--brand);
+    color: #ffffff;
+    border-radius: 1mm;
+}
+
+.slot-band .from {
+    string-set: slot content();
+    font-size: 15pt;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.slot-band .to {
+    margin-left: 2mm;
+    font-size: 8.5pt;
+    opacity: 0.85;
+}
+
+.slot-band .count {
+    float: right;
+    font-size: 8pt;
+    padding-top: 2mm;
+    opacity: 0.85;
+}
+
+/* One column, full width. Two columns look tidier in theory, but WeasyPrint
+   balances a column block then breaks the page, which left two fifths of
+   every programme page empty. Full width cards also give the abstract a
+   readable measure. */
+.slot-cards {
+    display: block;
+}
+
+/* --- the talk cards ------------------------------------------------------ */
+
+.card {
+    break-inside: avoid;
+    overflow: hidden;
+    margin-bottom: 2.5mm;
+    padding: 2.5mm 3.2mm;
+    background: var(--fill);
+    border-left: 2.5px solid var(--brand);
+    border-radius: 1mm;
+}
+
+.card.conference-25min {
+    border-left-color: var(--brand-light);
+}
+
+.card.workshop {
+    background: var(--fill-workshop);
+    border-left-color: var(--workshop);
+}
+
+.card .head {
+    margin: 0 0 1.5mm;
+}
+
+.card .room {
+    display: inline-block;
+    padding: 0.5mm 1.8mm;
+    background: var(--brand);
+    color: #ffffff;
+    font-size: 7.5pt;
+    font-weight: 700;
+    border-radius: 0.8mm;
+}
+
+.card .length {
+    margin-left: 1.5mm;
+    font-size: 7pt;
+    color: var(--quiet);
+}
+
+.card.workshop .room {
+    background: var(--workshop);
+}
+
+.card h3 {
+    margin: 0 0 1mm;
+    font-size: 10pt;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.card .who {
+    margin: 0 0 1.2mm;
+    font-size: 8pt;
+    color: #555555;
+}
+
+.card .abstract {
+    margin: 0;
+    font-size: 8pt;
+    line-height: 1.32;
+    color: #333333;
+}
+
+/* Floated out of the text: the card is for reading, the code is for the phone
+   of whoever wants the full abstract. */
+.card .qr {
+    float: right;
+    width: 11mm;
+    margin: 0 0 1mm 3mm;
+    opacity: 0.85;
+}
+
+.card .qr svg {
+    width: 11mm;
+    height: 11mm;
+}
+
+/* --- salle par salle ----------------------------------------------------- */
+
+.page.index h2 {
+    margin: 6mm 0 2mm;
+    font-size: 13pt;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    color: var(--brand);
+}
+
+.room-index {
+    column-count: 2;
+    column-gap: 5mm;
+}
+
+.room-block {
+    break-inside: avoid;
+    margin-bottom: 3.5mm;
+}
+
+.room-block h3 {
+    margin: 0 0 1mm;
+    padding: 0.8mm 2mm;
+    display: inline-block;
+    background: #222222;
+    color: #ffffff;
+    font-size: 8pt;
+    border-radius: 0.8mm;
+}
+
+.room-block ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* No hanging indent: a negative text-indent overflows its column box and the
+   two columns end up printed on top of each other. */
+.room-block li {
+    margin-bottom: 0.4mm;
+    font-size: 7.5pt;
+    line-height: 1.25;
+}
+
+.room-block b {
+    margin-right: 1.2mm;
+    color: var(--brand);
+}
+
+/* Leaving the programme clears both running strings. The day opener is
+   excluded: it is what sets them. */
+.page:not(.programme):not(.day-opener) > h1 {
+    string-set: day '', slot '';
+}
+
+/* --- premier Capitole du Libre ------------------------------------------- */
+
+.first-time .tip {
+    break-inside: avoid;
+    margin-bottom: 3.5mm;
+    padding-left: 4mm;
+    border-left: 2.5px solid var(--brand);
+}
+
+.first-time .tip h3 {
+    margin: 0 0 0.8mm;
+    font-size: 10pt;
+    color: var(--brand);
+}
+
+.first-time .tip p {
+    margin: 0;
+    font-size: 8.5pt;
+    line-height: 1.35;
+}
+
+.first-time h2 {
+    margin-top: 6mm;
+}
+
+ul.daily {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.daily li {
+    padding: 1.2mm 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 8.5pt;
+}
+
+ul.daily b {
+    display: inline-block;
+    width: 14mm;
+    color: var(--brand);
+}
+
+/* --- à ne pas manquer ---------------------------------------------------- */
+
+.highlights .lede {
+    font-size: 10.5pt;
+    opacity: 0.85;
+}
+
+.highlight {
+    margin-top: 6mm;
+    padding-top: 4mm;
+    border-top: 1px solid rgba(242, 231, 207, 0.25);
+}
+
+.highlight .when {
+    margin: 0 0 1mm;
+    font-size: 8.5pt;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--brand-light);
+}
+
+.highlight .when .room {
+    margin-left: 1.5mm;
+    padding: 0.4mm 1.8mm;
+    border: 1px solid rgba(242, 231, 207, 0.45);
+    border-radius: 0.8mm;
+    font-size: 7.5pt;
+    text-transform: none;
+    color: var(--cream);
+}
+
+.highlight h3 {
+    margin: 0 0 1.5mm;
+    font-size: 12.5pt;
+    line-height: 1.15;
+}
+
+.highlight .why {
+    margin: 0;
+    font-size: 9pt;
+    opacity: 0.8;
+}
+
+/* --- les intervenants ---------------------------------------------------- */
+
+.speaker-index {
+    column-count: 2;
+    column-gap: 5mm;
+}
+
+.speaker-index .letter {
+    break-after: avoid;
+    margin: 3mm 0 1mm;
+    padding-bottom: 0.5mm;
+    border-bottom: 1.5px solid var(--brand);
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--brand);
+}
+
+.speaker {
+    break-inside: avoid;
+    margin-bottom: 1.4mm;
+    font-size: 7.5pt;
+    line-height: 1.25;
+}
+
+.speaker b {
+    display: block;
+}
+
+.speaker .talk {
+    display: block;
+    padding-left: 3mm;
+    color: #666666;
+    font-size: 7pt;
+}
