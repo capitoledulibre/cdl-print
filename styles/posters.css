@@ -7,14 +7,14 @@
     font-family: 'Fira Sans';
     font-style: normal;
     font-weight: 400;
-    src: url('fonts/FiraSans-Regular.woff2') format('woff2');
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Fira Sans';
     font-style: normal;
     font-weight: 700;
-    src: url('fonts/FiraSans-Bold.woff2') format('woff2');
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
 }
 
 @page {
@@ -65,7 +65,7 @@ header {
 .brand {
     width: 52mm;
     height: 23mm;
-    background: url('cdl.svg') left top / contain no-repeat;
+    background: url('../cdl.svg') left top / contain no-repeat;
 }
 
 .ident {
@@ -119,12 +119,18 @@ header {
     border-left: 6px solid var(--brand);
 }
 
-.slot.conference-25min {
-    border-left-color: var(--brand-light);
-}
-
+/* Printed in black and white, so a workshop is told apart by its hatch and
+   its doubled rule, not by a colour that greys down to the same value. The
+   length of a talk is already carried by the height of its block, which is
+   why the short and long formats no longer differ here. */
 .slot.workshop {
-    background: var(--fill-workshop);
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(46, 107, 138, 0.10) 0, rgba(46, 107, 138, 0.10) 1mm,
+            transparent 1mm, transparent 3mm),
+        var(--fill-workshop);
+    border-left-style: double;
+    border-left-width: 7px;
     border-left-color: var(--workshop);
 }
 

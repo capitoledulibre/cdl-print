@@ -415,12 +415,17 @@ ul.logos li {
     border-radius: 1mm;
 }
 
-.card.conference-25min {
-    border-left-color: var(--brand-light);
-}
-
+/* Black and white printing: a workshop is marked by a hatch, a doubled rule
+   and a badge that is outlined rather than filled -- three cues that survive
+   greyscale -- plus the word "Atelier" spelled out. */
 .card.workshop {
-    background: var(--fill-workshop);
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(46, 107, 138, 0.09) 0, rgba(46, 107, 138, 0.09) 1mm,
+            transparent 1mm, transparent 3mm),
+        var(--fill-workshop);
+    border-left-style: double;
+    border-left-width: 5px;
     border-left-color: var(--workshop);
 }
 
@@ -445,7 +450,21 @@ ul.logos li {
 }
 
 .card.workshop .room {
-    background: var(--workshop);
+    background: none;
+    border: 1px solid var(--workshop);
+    color: var(--workshop);
+}
+
+.card .kind {
+    margin-left: 1.5mm;
+    padding: 0.4mm 1.5mm;
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--workshop);
+    border-radius: 0.6mm;
+    color: var(--workshop);
 }
 
 .card h3 {

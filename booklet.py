@@ -210,12 +210,15 @@ def render_card(event, show_qr: bool) -> str:
     qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
     minutes = int((event._end_datetime
                    - event._start_datetime).total_seconds() // 60)
+    # Spelled out, because the hatch and the rule are cues and this is a fact.
+    kind = ('<span class="kind">Atelier</span>'
+            if 'workshop' in event_classes(event) else '')
     return f'''
         <article class="card {event_classes(event)}">
             {qr}
             <p class="head">
                 <span class="room">{clean(getattr(event, '_room', ''))}</span>
-                <span class="length">{minutes} min</span>
+                <span class="length">{minutes} min</span>{kind}
             </p>
             <h3>{clean(event.title)}</h3>
             {people}
