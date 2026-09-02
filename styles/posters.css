@@ -168,6 +168,17 @@ header {
     color: #555555;
 }
 
+/* Who it is for, when the answer is short enough to read at a distance. */
+.what .audience {
+    display: inline-block;
+    margin: 0.35em 0 0;
+    padding: 0.1em 0.4em;
+    border: 1px solid #cbcbcb;
+    border-radius: 0.2em;
+    font-size: 1.0625em;
+    color: #555555;
+}
+
 .qr {
     width: 18mm;
 }

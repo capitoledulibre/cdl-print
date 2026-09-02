@@ -486,6 +486,24 @@ ul.logos li {
     color: #555555;
 }
 
+/* Set apart from the abstract: it answers a different question. */
+.card .audience {
+    margin: 1.5mm 0 0;
+    padding-top: 1.2mm;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 7.6pt;
+    line-height: 1.3;
+    color: #444444;
+}
+
+.card .audience b {
+    margin-right: 1mm;
+    font-size: 6.6pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--brand);
+}
+
 .card .abstract {
     margin: 0;
     font-size: 8pt;

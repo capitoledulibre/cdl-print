@@ -25,6 +25,10 @@ ABSTRACT_BUDGET = 230
 # The index is a reminder, not a description: one line per talk.
 INDEX_TITLE_BUDGET = 46
 
+# Speakers answer "who is this for?" in anything from two words to a
+# paragraph; a card gives it a line, not a column.
+AUDIENCE_BUDGET = 90
+
 # A saddle-stitched booklet is printed on folded sheets, so its page count has
 # to be a multiple of four. One page of notes earns its place; past two they
 # are padding, and a blank leaf at the back is what padding should look like.
@@ -222,6 +226,10 @@ def render_card(event, show_qr: bool) -> str:
     # Spelled out, because the hatch and the rule are cues and this is a fact.
     kind = ('<span class="kind">Atelier</span>'
             if 'workshop' in event_classes(event) else '')
+    audience = getattr(event, '_audience', None)
+    for_whom = (f'<p class="audience"><b>Pour qui</b> '
+                f'{clean(shorten(audience, AUDIENCE_BUDGET))}</p>'
+                if audience else '')
     return f'''
         <article class="card {event_classes(event)}">
             {qr}
@@ -233,6 +241,7 @@ def render_card(event, show_qr: bool) -> str:
             {people}
             <p class="abstract">{clean(shorten(abstract,
                                                ABSTRACT_BUDGET))}</p>
+            {for_whom}
         </article>'''
 
 

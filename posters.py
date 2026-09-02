@@ -13,6 +13,10 @@ OUTPUT = 'conference-programme-salles-{year}.pdf'
 # timeline, so a nearly empty day does not become a nearly empty page.
 POSTER_MODE_MAX_EVENTS = 2
 
+# A door poster is read from a few metres away, so the audience line only
+# earns its place when it is a handful of words.
+AUDIENCE_MAX_LENGTH = 45
+
 # Type size of a timeline, in px, matching .timeline in the stylesheet.
 BASE_TIMELINE_SIZE = 16
 MIN_TIMELINE_SIZE = 9
@@ -32,6 +36,11 @@ def render_event(event: Event, show_qr: bool = True) -> str:
     speakers = clean(event.persons)
     people = f'<p class="who">{speakers}</p>' if speakers else ''
 
+    audience = getattr(event, '_audience', None)
+    for_whom = ''
+    if audience and len(audience) <= AUDIENCE_MAX_LENGTH:
+        for_whom = f'<p class="audience">{clean(audience)}</p>'
+
     url = getattr(event, '_url', None)
     qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
 
@@ -45,6 +54,7 @@ def render_event(event: Event, show_qr: bool = True) -> str:
                     <div class="what">
                         <h2>{title}</h2>
                         {people}
+                        {for_whom}
                     </div>
                     {qr}
                 </div>
