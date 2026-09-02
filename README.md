@@ -52,6 +52,8 @@ uv run python gen.py --only livret --output-dir build
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
 | `--only` | all three | Build only this output (`salles`, `global`, `livret`); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
+| `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
+| `--no-audience` | shown | Leave out who each talk is for |
 | `--no-qr` | QR codes shown | Leave out the QR code linking to each talk page |
 | `--locale` | `fr_FR.UTF-8` | Locale used to format dates |
 
@@ -68,7 +70,34 @@ uv run python gen.py --only livret --output-dir build
 | `booklet.py` + `styles/booklet.css` | The booklet |
 | `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
 | `leaflet.py` + `styles/leaflet.css` | The leaflet |
+| `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
 | `content.py` | Booklet copy that does not come from the export: editorial, first-timer guide, the curated highlights, stands, partners, practical info. **Mostly placeholder text**; the first-timer page is drawn from capitoledulibre.org. |
+
+## Who each talk is for
+
+`Quel est le public visé ?` is a Pretalx **custom question**, and no schedule
+export carries custom answers -- not the FRAB XML, not `schedule.json`. They
+come from the submissions API, which serves them without a token as long as
+the question is public, and are joined to the schedule on the talk code both
+carry:
+
+```
+/api/events/cdl-<year>/submissions/?expand=answers.question
+```
+
+The question is identified by its Pretalx identifier rather than its wording,
+with the label as a fallback, so rephrasing it does not break the join.
+
+Speakers answer in anything from two words to a paragraph -- for 2026 the
+median is 37 characters and the longest is 289 -- so it is treated as prose,
+not as a badge with a fixed vocabulary. A booklet card gives it a line of its
+own under the abstract; a door poster shows it only when it is at most
+`AUDIENCE_MAX_LENGTH` characters, since that sheet is read from a few metres
+away and must stay uncluttered.
+
+It is an enrichment, never a dependency: a fetch that fails warns and the run
+goes on without it. `--audience-file` reads a saved API dump instead, which is
+also how the tests work offline.
 
 ## Printing in black and white
 
