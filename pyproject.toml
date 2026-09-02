@@ -1,5 +1,5 @@
 [project]
-name = "cdl-paper-generator"
+name = "cdl-print"
 version = "0.1.0"
 description = "Capitole du Libre Paper Schedule Generator"
 authors = [{ name = "Capitole du Libre", email = "contact@capitoledulibre.org" }]

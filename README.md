@@ -1,4 +1,4 @@
-# cdl_paper_generator
+# cdl-print
 
 Generates the Capitole du Libre printed matter from the conference's Pretalx
 FRAB export. One command, three PDFs:
