@@ -1,0 +1,201 @@
+/* The tri-fold leaflet: A4 landscape, three 99mm panels a side. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: a4 landscape;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --night: #211a3c;
+    --cream: #f2e7cf;
+    --ink: #141414;
+    --quiet: #767676;
+    --rule: #d4d4d4;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.sheet {
+    box-sizing: border-box;
+    width: 297mm;
+    height: 210mm;
+    display: flex;
+    page-break-after: always;
+}
+
+/* One panel per fold. The hairline is the fold, not a rule. */
+.panel {
+    box-sizing: border-box;
+    width: 99mm;
+    padding: 9mm 8mm;
+    border-right: 0.2mm dotted var(--rule);
+    overflow: hidden;
+}
+
+.panel:last-child {
+    border-right: none;
+}
+
+.panel h2 {
+    margin: 0 0 3mm;
+    padding-bottom: 1.2mm;
+    border-bottom: 1.5px solid var(--brand);
+    font-size: 12pt;
+    color: var(--brand);
+}
+
+.panel h2.second {
+    margin-top: 5mm;
+}
+
+/* --- the condensed programme -------------------------------------------- */
+
+/* The whole programme runs across the three inside panels as one flow. The
+   gaps are wide enough that no line straddles a fold. */
+.flow {
+    box-sizing: border-box;
+    width: 297mm;
+    height: 210mm;
+    padding: 9mm 8mm;
+    column-count: 3;
+    column-gap: 10mm;
+}
+
+.flow h2 {
+    break-after: avoid;
+    margin: 0 0 2mm;
+    padding-bottom: 1.2mm;
+    border-bottom: 1.5px solid var(--brand);
+    font-size: 11pt;
+    color: var(--brand);
+}
+
+.flow h2 + .hour {
+    margin-top: 0;
+}
+
+.hour {
+    break-after: avoid;
+    margin: 2mm 0 0.6mm;
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.line {
+    margin: 0 0 0.4mm;
+    font-size: 7pt;
+    line-height: 1.22;
+    color: #333333;
+}
+
+.line i {
+    display: inline-block;
+    min-width: 11mm;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--brand);
+}
+
+/* --- prose panels ------------------------------------------------------- */
+
+.item {
+    margin: 0 0 2.4mm;
+    font-size: 7.6pt;
+    line-height: 1.32;
+}
+
+.item b {
+    display: block;
+    font-size: 8.4pt;
+    color: var(--brand);
+}
+
+.pick {
+    margin: 0 0 2.6mm;
+    padding-left: 3mm;
+    border-left: 2px solid var(--brand);
+    font-size: 8.2pt;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.pick b {
+    font-size: 7.4pt;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--brand);
+}
+
+.pick .room {
+    padding: 0.3mm 1.4mm;
+    border: 1px solid var(--brand);
+    border-radius: 0.6mm;
+    font-size: 6.6pt;
+    color: var(--brand);
+}
+
+/* --- the cover panel ---------------------------------------------------- */
+
+.panel.cover {
+    background: var(--night);
+    color: var(--cream);
+    text-align: center;
+    padding-top: 34mm;
+}
+
+.panel.cover .brand {
+    height: 26mm;
+    margin-bottom: 10mm;
+    background: url('../cdl.svg') center / contain no-repeat;
+}
+
+.panel.cover .kicker {
+    margin: 0;
+    font-size: 20pt;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.panel.cover .dates {
+    margin: 4mm 0 0;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #f0a068;
+}
+
+.panel.cover .venue {
+    margin: 1mm 0 0;
+    font-size: 9pt;
+    opacity: 0.75;
+}
+
+.panel.cover .site {
+    margin: 10mm auto 0;
+    padding: 2mm 5mm;
+    display: inline-block;
+    background: var(--brand);
+    color: #ffffff;
+    font-size: 9.5pt;
+    font-weight: 700;
+    border-radius: 8mm;
+}

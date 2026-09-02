@@ -1,11 +1,12 @@
 """Generate the Capitole du Libre printed matter from the schedule export.
 
-Four outputs come out of the same parsed schedule:
+Five outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
   * the hall poster, one A1 sheet per day showing every room at once;
   * the pocket booklet, A5, the programme by the hour plus the annexes;
-  * the room sheets, one A4 per room and per day, for the volunteer on duty.
+  * the room sheets, one A4 per room and per day, for the volunteer on duty;
+  * the tri-fold leaflet, one A4 landscape sheet folded in three.
 """
 
 import argparse
@@ -20,6 +21,7 @@ from weasyprint import CSS, HTML
 from weasyprint.text.fonts import FontConfiguration
 
 import booklet
+import leaflet
 import overview
 import posters
 import roomsheets
@@ -36,7 +38,7 @@ SCHEDULE_URL_TEMPLATE = (
 DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # What `--only` accepts, in the order the outputs are built.
-OUTPUTS = ('salles', 'global', 'livret', 'feuilles')
+OUTPUTS = ('salles', 'global', 'livret', 'feuilles', 'depliant')
 
 
 def default_year() -> int:
@@ -101,6 +103,25 @@ def build_booklet(conference, fonts, output, show_qr) -> int:
 def build_roomsheets(conference, fonts, output) -> int:
     css = CSS(filename=roomsheets.STYLESHEET, font_config=fonts)
     write_pdf(roomsheets.build_html(conference), css, fonts, output)
+    return 0
+
+
+def build_leaflet(conference, fonts, output) -> int:
+    """One folded sheet, so exactly two pages: refuse anything else.
+
+    A panel that outgrows its 99mm silently becomes a third page, which
+    cannot be folded and would not be noticed until the delivery arrives.
+    """
+    css = CSS(filename=leaflet.STYLESHEET, font_config=fonts)
+    markup = leaflet.build_html(conference)
+    pages = len(HTML(string=markup).render(stylesheets=[css],
+                                           font_config=fonts).pages)
+    if pages != leaflet.EXPECTED_PAGES:
+        print(f'error: the leaflet came out as {pages} pages instead of '
+              f'{leaflet.EXPECTED_PAGES}; a panel no longer fits',
+              file=sys.stderr)
+        return 1
+    write_pdf(markup, css, fonts, output)
     return 0
 
 
@@ -200,6 +221,9 @@ def main(argv=None) -> int:
             return 1
     if 'feuilles' in args.only:
         if build_roomsheets(conference, fonts, path(roomsheets.OUTPUT)):
+            return 1
+    if 'depliant' in args.only:
+        if build_leaflet(conference, fonts, path(leaflet.OUTPUT)):
             return 1
 
     return 0
