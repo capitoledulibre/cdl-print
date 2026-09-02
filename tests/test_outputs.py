@@ -185,10 +185,25 @@ def test_only_builds_what_is_asked(tmp_path, conference):
 
 # --- what a newcomer is pointed at ------------------------------------------
 
-def test_every_highlight_matches_a_real_talk(conference, capsys):
-    """A talk renamed in Pretalx must not silently drop off the page."""
+@pytest.fixture(autouse=True)
+def forget_matched_highlights():
+    """find_highlights is cached, so a test changing the picks must clear it."""
+    booklet.find_highlights.cache_clear()
+    yield
+    booklet.find_highlights.cache_clear()
+
+
+def test_a_highlight_is_matched_to_its_talk(conference, monkeypatch, capsys):
+    """The picks are editorial and change every year, so name our own here.
+
+    Stale picks are caught at build time by the warning below, not by a test
+    against a frozen fixture.
+    """
+    monkeypatch.setattr(content, 'HIGHLIGHTS',
+                        [('Bienvenue au', 'pourquoi')])
     found = booklet.find_highlights(conference)
-    assert len(found) == len(content.HIGHLIGHTS)
+    assert len(found) == 1
+    assert 'Bienvenue au' in found[0][0].title
     assert 'warning' not in capsys.readouterr().err
 
 
@@ -199,10 +214,25 @@ def test_an_unmatched_highlight_is_reported(conference, monkeypatch, capsys):
     assert 'no talk matches the highlight' in capsys.readouterr().err
 
 
-def test_highlights_are_in_chronological_order(conference):
+def test_highlights_are_in_chronological_order(conference, monkeypatch):
+    monkeypatch.setattr(content, 'HIGHLIGHTS',
+                        [('Buffet convivial', 'le soir'),
+                         ('Bienvenue au', 'le matin')])
     found = booklet.find_highlights(conference)
     starts = [event._start_datetime for event, _ in found]
+    assert len(starts) == 2
     assert starts == sorted(starts)
+
+
+def test_the_shipped_picks_are_reported_when_they_go_stale(conference,
+                                                           capsys):
+    """content.HIGHLIGHTS names the live edition, not this fixture."""
+    booklet.find_highlights(conference)
+    reported = capsys.readouterr().err.count('no talk matches the highlight')
+    assert reported == sum(
+        1 for fragment, _ in content.HIGHLIGHTS
+        if not any(fragment in event.title
+                   for event in conference._events.values()))
 
 
 def test_the_first_time_page_is_there(booklet_pages):

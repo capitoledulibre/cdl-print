@@ -218,7 +218,9 @@ HIGHLIGHTS_LEDE = (
 
 HIGHLIGHTS = [
     ('Bienvenue au', "L'ouverture : ce qui vous attend, en vingt minutes."),
-    ('Souveraineté numérique', "La table ronde de clôture du samedi."),
-    ('Atelier installation', "Venez avec votre machine, repartez sous Linux."),
-    ('Buffet convivial', "Le moment où l'on rencontre vraiment les gens."),
+    ('Linux Tracing Escape Game',
+     "Un escape game pour démasquer les anomalies d'un système."),
+    ('Sauvegarder librement',
+     "Deux heures pour repartir avec ses sauvegardes en place."),
+    ('Conférence de clôture', "Le mot de la fin, dimanche en fin d'après-midi."),
 ]

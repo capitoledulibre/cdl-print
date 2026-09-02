@@ -5,6 +5,7 @@ accents; the programme pages stay on white so that they stay readable and
 cheap to print in quantity.
 """
 
+import functools
 import locale
 import sys
 import unicodedata
@@ -176,6 +177,7 @@ def render_notes(count: int) -> str:
     </section>''' for _ in range(count))
 
 
+
 def render_back(conference: Conference) -> str:
     return f'''
     <section class="page back">
@@ -278,11 +280,13 @@ def render_first_time() -> str:
     </section>'''
 
 
+@functools.lru_cache(maxsize=None)
 def find_highlights(conference: Conference) -> list:
     """Match each curated fragment to a real talk.
 
     A fragment that matches nothing is reported rather than skipped: a talk
-    renamed in Pretalx must not drop off the page in silence.
+    renamed in Pretalx must not drop off the page in silence. Cached, because
+    several outputs ask and the warning should be said once.
     """
     events = [event for day in conference._days.values()
               for room in day_rooms(day)
