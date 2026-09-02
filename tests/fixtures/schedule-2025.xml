@@ -260,6 +260,263 @@ La table ronde sera animée par Aline Paponaud, DSI chez Inovie Sud-Ouest et co-
         <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/QGN9VX/feedback/</feedback_url>
       </event>
     </room>
+    <room name="A201" guid="1cf0a69f-96c3-5126-bd40-737aa6ead2a5">
+      <event guid="b9e240a3-4d1f-5aa4-9a2f-8008bf421596" id="656" code="QYSSHX">
+        <room>A201</room>
+        <title>La malédiction du bug 323 de GCC</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-656-la-malediction-du-bug-323-de-gcc</slug>
+        <track />
+        <persons>
+          <person id="570">Gee</person>
+        </persons>
+        <language>fr</language>
+        <description>Nous sommes en avril 2023. Gee, auteur du blog BD Grise Bouille, est en pleine finalisation de son premier jeu vidéo, Superflu Riteurnz (qui a depuis été publié sous licence libre). Alors qu'il tente de cross-compiler son jeu depuis GNU/Linux pour Windows 32 bits (non par masochisme mais par souci d'exhaustivité), il tombe alors sur un bug incompréhensible.
+
+Un bug qui fait planter le jeu et qui n'apparaît que sur une plateforme particulière… un bug qui disparaît lorsque l'on tente de l'observer dans un débugueur… un bug où l'on soupçonne l'apparition d'un booléen de Schrödinger, valant à la fois « vrai » et « faux »… Gee en vient même à soupçonner un bug du compilateur. Il est loin de se douter que c'est encore plus profond que cela…
+
+Dans cette conférence, il vous raconte la longue et périlleuse enquête qui aura fini par le mener au mythique bug 323 de GCC, véritable malédiction qui plane depuis de longues années sur une certaine classe de processeurs…</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/QYSSHX/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/QYSSHX/feedback/</feedback_url>
+      </event>
+      <event guid="20086727-c63a-5f4c-a9c1-cd402950cb97" id="622" code="3GHHBR">
+        <room>A201</room>
+        <title>(Glitcher un microcontrôleur) quand on sait pas faire.</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-622-glitcher-un-microcontroleur-quand-on-sait-pas-faire</slug>
+        <track />
+        <persons>
+          <person id="545">Fabien Trégan</person>
+        </persons>
+        <language>fr</language>
+        <description>Le glitchage est un type d'attaque de sécurité matérielle, relativement simple et ludique. Mais ce qui est simple pour les autres ne l'est pas forcement pour soi.
+
+Ce retour d'expérience d'un développeur Java qui n'y connaissait pas chose, devrait permettre de démystifier la technique en racontant un cas simple d'extraction d'un firmware dont on avait besoin pour écrire du code interopérable.
+
+Mais ce sera aussi l'occasion de parler un peu de comment attaquer un projet quand on est rodé pour aborder nos sujets techniques habituels, mais que les difficultés sont ailleurs, liées au contexte ou au fait de manquer de repères ou de confiance.</description>
+        <recording>
+          <license />
+          <optout>true</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/3GHHBR/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/3GHHBR/feedback/</feedback_url>
+      </event>
+      <event guid="d53f9c6d-4680-51a5-901f-3a5edc7749a6" id="600" code="PFYLFE">
+        <room>A201</room>
+        <title>Top 3 des outils de l'OWASP</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-15T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-600-top-3-des-outils-de-l-owasp</slug>
+        <track />
+        <persons>
+          <person id="532">Florian Bernard</person>
+        </persons>
+        <language>fr</language>
+        <description>L'Open Worldwide Application Security Project (OWASP) est principalement connu pour son "TOP 10" qui recense les 10 risques de sécurité les plus critiques dans les applications web ( Broken Access Control, Cryptographic Failures, Injections ...).
+Mais savez-vous que l'OWASP publie également des outils open source (et gratuits) pour nous aider à mieux prévenir ces risques et à renforcer la sécurité dans nos applications ???
+Lors de cette session, nous examinerons 3 de ces outils en action et nous verrons comment ils peuvent contribuer à renforcer la sécurité d'une application à chaque étape de son cycle de vie (développement, test, déploiement).
+- Dependency-Track: Un outil permettant d'analyser, de suivre et de gérer les dépendances logicielles de vos applications
+- Zed Attack Proxy (ZAP): Un outil pour lancer des tests de sécurité et identifier de potentielles failles sur n'importe quelle application web.
+- Mod-Security: Un module qui joue le role de Web Application Firewall (WAF) et qui peut être facilement utilisé dans un proxy pour déjouer les attaques les plus courantes.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/PFYLFE/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/PFYLFE/feedback/</feedback_url>
+      </event>
+      <event guid="ab6913d7-32da-50b6-ae06-314e418a6b17" id="787" code="7W7BNS">
+        <room>A201</room>
+        <title>CryptPad : la sécurité par construction à l’aide du chiffrement de bout-en-bout</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-787-cryptpad-la-securite-par-construction-a-l-aide-du-chiffrement-de-bout-en-bout</slug>
+        <track />
+        <persons>
+          <person id="675">Fabrice Mouhartem</person>
+        </persons>
+        <language>fr</language>
+        <description>CryptPad est une suite bureautique complète construite autour du chiffrement pour assurer la confidentialité de ses utilisateur·ices et leurs données. En tant qu’application web, elle vise à fournir une interface familière et un jeu de fonctions familiers, en rendant oubliable l’utilisation de la cryptographie, qui ne doit pas être un frein à l’adoption.
+
+Depuis l’identification jusqu’à l’édition collaborative, CryptPad a été conçu autour de la cryptographie, et en particulier le chiffrement de bout-en-bout. Cela garantit que toutes les données restent sures, même pour les administrateur·ices du service.
+
+Dans cet exposé, nous vous présenterons CryptPad et les avantages du chiffrement de bout en bout pour que la sécurité ne détériore pas les fonctionnalités collaboratives.
+
+Une démonstration d’une nouvelle API client permettant l’intégration de la collaboration sécurisée via CryptPad dans vos applications est possible.
+
+- [Code Source](https://github.com/cryptpad/cryptpad)
+- [Site du Projet](https://cryptpad.org)
+- [Notre Instance Principale](https://cryptpad.fr)
+- [CryptPad API](https://github.com/cryptpad/cryptpad-api)</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links>
+          <link href="https://cryptpad.fr/file/#/2/file/B2+sAbwxmnviF39YPMuTijcr/">Diapositives</link>
+        </links>
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/7W7BNS/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/7W7BNS/feedback/</feedback_url>
+      </event>
+      <event guid="13519e38-ee5f-5c01-b069-50f7cfa10cd0" id="597" code="777ATK">
+        <room>A201</room>
+        <title>Un VPN libre, auto-hébergé et sans prise de tête avec Headscale</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T17:00:00+01:00</date>
+        <start>17:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-597-un-vpn-libre-auto-heberge-et-sans-prise-de-tete-avec-headscale</slug>
+        <track />
+        <persons>
+          <person id="529">Samy Djemaï</person>
+        </persons>
+        <language>fr</language>
+        <description>La mise en place d'un VPN, que ce soit chez soi ou en entreprise, peut être un véritable casse-tête. Entre solutions closed-source, soucis de sécurité et complexité en termes de gestion, il s'agit d'un sujet pour lequel il n'existait pas de solution magique. Désormais, elle existe, et elle s'appelle **Headscale** !
+
+Je vais vous présenter par le biais de notre use case chez [**Ornikar**](https://www.ornikar.com) ce merveilleux outil qui, en se basant sur l'écosystème open source robuste de **Tailscale**, permet de déployer un VPN auto-hébergé avec de l'authentification OIDC, des règles d'accès, du routage de sous-réseaux, de la gestion DNS, et bien plus encore, le tout avec des clients simples d'utilisation.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links>
+          <link href="https://medium.com/ornikar/un-vpn-open-source-simple-et-puissant-avec-tailscale-et-headscale-a3fbd97907f5">Article Medium</link>
+        </links>
+        <attachments>
+          <attachment href="https://cfp.capitoledulibre.org/media/cdl-2025/submissions/777ATK/resources/Slides_Headscale_Capitole_du_Libre_202_LijVOh0.pdf">Slides</attachment>
+        </attachments>
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/777ATK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/777ATK/feedback/</feedback_url>
+      </event>
+      <event guid="1938a5ef-8871-5dc0-a8a7-5f75e2d0ae69" id="684" code="BGPYHM">
+        <room>A201</room>
+        <title>Security project for QGIS</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T17:30:00+01:00</date>
+        <start>17:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-684-security-project-for-qgis</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/BGPYHM/security4qgis_9waZoGe.jpeg</logo>
+        <persons>
+          <person id="593">Julien Cabieces</person>
+        </persons>
+        <language>fr</language>
+        <description>Nous présentons « The security project for QGIS » : une initiative
+visant à renforcer la cybersécurité du système d’information
+géographique open source le plus déployé : QGIS.
+
+Chaque mois, QGIS est lancé près de 20 millions de fois dans le
+monde. Cela en fait le logiciel open source le plus utilisé dans ce
+domaine. Toutes sortes d'organisations utilisent QGIS au quotidien,
+dont beaucoup manipulent des données sensibles sur le plan de la
+sécurité.
+
+Le contexte international actuel montre une forte augmentation des
+menaces. De plus, de nouvelles réglementations arrivent, impactant le
+développement logiciel (CRA, NIS2…).
+
+Nous avons lancé « The security project for QGIS » pour élever le
+niveau de cybersécurité du projet QGIS. Nous avons identifié des
+aspects clés avec une approche globale : outils techniques, processus,
+gestion communautaire, formation, packaging, chaîne
+d’approvisionnement, etc. Nous avons établi une liste de tâches
+regroupées en trois lots de travail.
+
+Nous sommes actuellement en train de mutualiser les financements pour
+concrétiser ce projet et faire de QGIS un modèle de logiciel open
+source en matière de sécurité.
+
+👉 https://security.qgis.oslandia.com</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/BGPYHM/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/BGPYHM/feedback/</feedback_url>
+      </event>
+      <event guid="0f76a97d-3fd4-5686-bca2-d3137b51cc37" id="703" code="AQT3DM">
+        <room>A201</room>
+        <title>Plakar : moteur de sauvegarde immuable, vérifiable et distribuable</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2025-11-15T18:00:00+01:00</date>
+        <start>18:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-703-plakar-moteur-de-sauvegarde-immuable-verifiable-et-distribuable</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/AQT3DM/this-is-fine_eryBu5U.png</logo>
+        <persons>
+          <person id="613">Gilles Chehade</person>
+        </persons>
+        <language>fr</language>
+        <description>## Résumé
+
+Trop de solutions de sauvegarde nous demandent encore aujourd’hui de faire des compromis : entre simplicité et couverture, entre performance et auditabilité, entre portabilité et sécurité.
+
+Le résultat est une série de bricolages de solutions pour couvrir tous les besoins et, comme c'est bien connu, rien de plus rassurant que de faire reposer son dernier rempart contre la perte de données sur du bricolage.
+
+**Plakar** est une solution open source née d’un constat simple : on mérite mieux.
+
+Cette présentation racontera comment nous avons conçu Plakar autour de **Kloset**, un moteur de snapshot immuable conçu pour capturer **tout type de données** (fichiers, bases, exports SaaS...) dans un format **autoportant, chiffré, vérifiable et diffable**.
+
+Nous aborderons : 
+- la deduplication et le chiffrement dans le contexte de la sauvegarde
+- les choix faits pour garantir l'**immutabilité**, la **vérifiabilité** et l'**exploration sans restauration**
+- le format **PTAR**, et comment **kapsul** permet de créer des capsules portables, idéales pour l’airgap ou l’archivage long terme
+
+Enfin, nous conclurons par une démonstration : créer un dépôt kloset, générer une sauvegarde, explorer l’arborescence et en faire un export `.ptar` en seulement une minute.
+
+**Plakar** est une tentative sérieuse de faire pour la sauvegarde ce que Git a fait pour le versioning : un modèle simple, vérifiable, et fait pour durer.
+
+## Bio intervenant
+
+Gilles Chehade est développeur et architecte système. Il bidouille du C depuis l’adolescence, a cassé des serveurs pour mieux en bâtir d’autres, et finit par coder des outils qu’il aurait aimé avoir. Contributeur OpenBSD depuis 2008, créateur d’OpenSMTPD et co-fondateur de Plakar, il aime les logiciels libres et les outils simples.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/AQT3DM/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/AQT3DM/feedback/</feedback_url>
+      </event>
+    </room>
     <room name="A303" guid="af696857-18cc-5ecc-b7d2-c4a47e5d9a9a">
       <event guid="643bd2fa-3cfe-5610-aac7-7d19487803a9" id="677" code="ZXQVCR">
         <room>A303</room>
@@ -759,6 +1016,149 @@ Nous verrons dans cette conférence en quoi ils peuvent être un outil de résis
         <attachments />
         <url>https://cfp.capitoledulibre.org/cdl-2025/talk/HGQLQA/</url>
         <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/HGQLQA/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="A201" guid="1cf0a69f-96c3-5126-bd40-737aa6ead2a5">
+      <event guid="c143618c-94e8-55fb-9fbf-18d20a15b9dc" id="745" code="PHPTKK">
+        <room>A201</room>
+        <title>Quacken : un clavier ergonomique, libre et polymorphe</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-745-quacken-un-clavier-ergonomique-libre-et-polymorphe</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/PHPTKK/coincoin_xR5Uxd7.png</logo>
+        <persons>
+          <person id="635">NuclearSquid</person>
+        </persons>
+        <language>fr</language>
+        <description>Le marché des claviers ergonomiques est actuellement scindé en deux :
+
+- une offre professionnelle de claviers « premium », prêts à l’emploi mais onéreux (keyboardio, ZSA, MoErgo, Dygma…) ;
+- des designs amateurs libres, qui privilégient l’ergonomie mais nécessitent du temps, du matériel et du savoir‐faire pour les construire soi‐même.
+
+Le Quacken est un projet de clavier ergonomique libre qui cherche à proposer une autre approche :
+
+- sans soudure, facile à assembler et à prendre en main ;
+- adaptable aux besoins de chaque utilisateur·ice, sans aucun compromis sur l’ergonomie ;
+- le tout, pour le moins cher possible, grâce à une conception efficace et une gestion associative.
+
+Cette conférence détaillera les choix de conception, ainsi que les enjeux sociétaux et économiques soulevés durant son développement.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/PHPTKK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/PHPTKK/feedback/</feedback_url>
+      </event>
+      <event guid="47173d11-59f5-5576-8e23-629dbc6e1384" id="788" code="ELAYAP">
+        <room>A201</room>
+        <title>Échange avec les organisaterurs du Capitole du Libre</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-788-echange-avec-les-organisaterurs-du-capitole-du-libre</slug>
+        <track />
+        <persons>
+          <person id="668">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Venez faire vos retours sur l'organisation du Capitole du Libre, sur les sujets abordés, les orateurs, la logistique.
+Les organisateurs commenceront par partager des statistiques et feront un bref état de l'organisation et des éventuels challenges rencontrés.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/ELAYAP/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/ELAYAP/feedback/</feedback_url>
+      </event>
+      <event guid="57e8c644-b50b-59c5-8d2c-9e9c53df9d30" id="719" code="GNPAXK">
+        <room>A201</room>
+        <title>Introduction à la monnaie libre, une révolution silencieuse.</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-719-introduction-a-la-monnaie-libre-une-revolution-silencieuse</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/GNPAXK/GI_BYVPUoW.jpg</logo>
+        <persons>
+          <person id="621">Matiou</person>
+        </persons>
+        <language>fr</language>
+        <description>Cette conférence propose une découverte de la monnaie libre, un concept économique et social novateur sous logiciels libres et issu de la Théorie Relative de la Monnaie (TRM) développée par Stéphane Laborde. Elle questionne nos représentations habituelles de la monnaie, souvent perçue comme neutre, naturelle ou inchangeable, et démontre qu’elle conditionne en réalité toute l'économie, l'innovation, l’accès aux ressources, les relations de pouvoir et les inégalités économiques.
+La monnaie libre, matérialisée depuis maintenant huit années par la Ğ1 (prononcée "June"), est une monnaie créée et partagée équitablement entre tous ses membres, à travers un Dividende Universel quotidien. Chaque individu co-créé la monnaie libre, indépendamment de sa richesse ou de son statut, ce qui garantit une symétrie temporelle et spatiale dans l’accès à la monnaie.
+La conférence explore :
+- Les fondements philosophiques et mathématiques de la TRM 
+- Les injustices liées aux autres systèmes monétaires  (monnaies-dettes bancaires génératrices d'inégalité, d'inflation et de crises chroniques, les cryptomonnaies non libres (de type Bitcoin) inéquitablement réparties et limitées à la fonction de réserve de valeur spéculative...
+- Le fonctionnement pratique de la Ğ1 : compte membre, comptes portefeuilles, certification, toile de confiance, prix en relatif à la masse totale... 
+- Les implications sociales et économiques d’un système basé sur la co-création monétaire sous logiciels libres : liberté du choix de ce qui est valeur, autonomie, coopération, relocalisation, résilience...
+
+En conclusion, cette "révolution silencieuse" ne repose pas sur une résistance ou une conquête violente mais sur une transformation pacifique des consciences et des pratiques économiques, ouverte à toute personne prête à s’informer, à expérimenter et à rejoindre un réseau économique et social libre et émancipateur.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/GNPAXK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/GNPAXK/feedback/</feedback_url>
+      </event>
+      <event guid="88322559-c2e1-50f6-8135-9d65f67c48e3" id="695" code="MEDK7L">
+        <room>A201</room>
+        <title>Commun logiciel et communauté : Duniter version 2</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2025-11-16T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2025-695-commun-logiciel-et-communaute-duniter-version-2</slug>
+        <track />
+        <logo>/media/cdl-2025/submissions/MEDK7L/duniterv2_odwbPoB.svg</logo>
+        <persons>
+          <person id="601">Hugo Trentesaux</person>
+        </persons>
+        <language>fr</language>
+        <description>La Monnaie Libre Ǧ1 se lance en 2017 sur la base du logiciel libre Duniter. Au gré des contributions bénévoles et des besoins de la communauté, ce logiciel évolue jusqu'à ce qu'émerge la proposition d'une version 2 en 2020. Après plusieurs années d'incubation, Duniter v2 est prêt à accueillir la Ǧ1, avec une mise à jour prévue dans l'année à venir.
+
+Cette présentation de 40 minutes porte sur les dynamiques communautaires en œuvre dans la construction d'un logiciel :
+- comment se coordonnent des contributions logicielles diverses ?
+- que signifie un fonctionnement décentralisé, notamment en matière de gouvernance ?
+- en quoi une structure associative peut-elle aider à structurer un tel projet ?
+
+Nous aurons ensuite 15 minutes d'échange, en étant strict sur le temps de parole !
+
+Pour se renseigner en amont :
+- https://duniter.fr/ le site du logiciel
+- https://monnaie-libre.fr/ le site de la monnaie libre et de la Ǧ1
+- https://trentesaux.fr/ le site perso de l'intervenant
+
+Une vidéo de la conférence est disponible sur peertube : https://tube.p2p.legal/w/t1rKdZ24yKegpGG8HwMPZk
+
+Les planches sont disponibles au format pdf avec les liens clicables : https://pagu.re/ipfs/QmNbwXQjLWBUBibM3v7nJd2sRnSf7cwzaE4fe1YaQTxcaE</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments>
+          <attachment href="https://cfp.capitoledulibre.org/media/cdl-2025/submissions/MEDK7L/resources/2025-11-16_cdl2025_AM8ipkt.pdf">Planches</attachment>
+        </attachments>
+        <url>https://cfp.capitoledulibre.org/cdl-2025/talk/MEDK7L/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2025/talk/MEDK7L/feedback/</feedback_url>
       </event>
     </room>
     <room name="A303" guid="af696857-18cc-5ecc-b7d2-c4a47e5d9a9a">

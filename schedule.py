@@ -218,9 +218,24 @@ class Event(object):
             return names[0]
         return '{} et {}'.format(', '.join(names[:-1]), names[-1])
 
+    @property
+    def recording_refused(self) -> bool:
+        """Whether the speaker opted out of being filmed.
+
+        Worth carrying about: nothing else in the programme says so, and a
+        room volunteer who does not know will start the camera.
+        """
+        return getattr(self, '_recording_optout', 'false') == 'true'
+
     def parse(self, event_element):
         for element in event_element:
-            if element.tag == 'persons':
+            if element.tag == 'recording':
+                # <recording> wraps its own children, so the generic branch
+                # below would store nothing but whitespace.
+                for detail in element:
+                    setattr(self, f'_recording_{detail.tag}',
+                            (detail.text or '').strip())
+            elif element.tag == 'persons':
                 for person_element in element:
                     person_id = person_element.get('id')
                     self._persons[person_id] = Person(person_id)
