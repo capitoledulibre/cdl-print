@@ -8,6 +8,8 @@ FRAB export. One command, three PDFs:
 | `conference-programme-salles-<year>.pdf` | A3 portrait, one sheet per room and day | The door posters, read standing from a few metres away |
 | `conference-programme-global-<year>.pdf` | A1 landscape, one sheet per day | The hall poster: every room side by side, for the entrance |
 | `conference-livret-<year>.pdf` | A5, folded and stapled | The pocket booklet: the programme by the hour, and the annexes |
+| `conference-feuilles-salles-<year>.pdf` | A4 portrait, one per room and day | The room sheets: the working document of the volunteer on duty |
+| `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
 
 The year comes from the parsed schedule rather than the command line, so a
 new edition never overwrites the previous one's PDFs.
@@ -64,6 +66,8 @@ uv run python gen.py --only livret --output-dir build
 | `posters.py` + `styles/posters.css` | The door posters |
 | `overview.py` + `styles/overview.css` | The hall poster |
 | `booklet.py` + `styles/booklet.css` | The booklet |
+| `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
+| `leaflet.py` + `styles/leaflet.css` | The leaflet |
 | `content.py` | Booklet copy that does not come from the export: editorial, first-timer guide, the curated highlights, stands, partners, practical info. **Mostly placeholder text**; the first-timer page is drawn from capitoledulibre.org. |
 
 ## Printing in black and white
@@ -145,9 +149,40 @@ booklet can be folded and stapled. Folios are printed like a book's: none on
 the cover or the back.
 
 Fira Sans is embedded from `fonts/`, so the PDFs render the same at the print
-shop as they do here. It has no glyph for the handful of emoji that reach a
-talk title; those still fall back to whatever the generating machine has, so
-check them before a print run.
+shop as they do here. Anything the font cannot draw is dropped from the text
+rather than left to a fallback: a few talk titles carry emoji, which would
+otherwise be a tofu box at the print shop and a grey blob in a greyscale run.
+The coverage is read from the font file itself, so replacing the font changes
+what survives without any code edit.
+
+### The room sheets
+
+Not a programme: the working document of whoever holds a room. Each talk with
+its length, three boxes to tick -- speaker arrived, sound and video tested,
+timing started -- handover fields for the morning and afternoon volunteers,
+and a ruled space for incidents.
+
+It is also the only thing in the whole run that says a speaker **refused to
+be filmed**. The export carries that in `<recording><optout>`, which the
+generic parse branch could not see because `<recording>` wraps its own
+children; the sheet now shows it twice, once as a notice at the top and once
+on the line itself.
+
+### The leaflet
+
+One A4 landscape sheet, three 99mm panels a side, letter fold. Page one is
+the outside, left to right: the flap that folds inward, the back, the front
+cover. Page two is the inside as it reads opened flat. **Confirm the fold
+against a paper dummy before a print run.**
+
+The programme runs across all three inside panels as one flow, grouped under
+each hour. One day per panel was tried first and broke on the 2026 export,
+where sixty-six Saturday talks did not fit a single panel and turned the
+sheet into an unfoldable third page. Three columns hold both days with room
+to spare, which also bought back the hour headings and a readable 7pt.
+
+A panel that outgrows its space would silently become a third page, so the
+build refuses anything but two.
 
 ## Tests
 
