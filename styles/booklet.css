@@ -307,6 +307,12 @@ ul.logos li {
     margin: 0;
 }
 
+/* A blank leaf carries no folio: it is padding, not a page. */
+.page.blank {
+    page: bare;
+    min-height: 210mm;
+}
+
 .page.notes .lines {
     height: 150mm;
     background: repeating-linear-gradient(

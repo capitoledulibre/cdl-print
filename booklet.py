@@ -25,9 +25,12 @@ ABSTRACT_BUDGET = 230
 # The index is a reminder, not a description: one line per talk.
 INDEX_TITLE_BUDGET = 46
 
-# A saddle-stitched booklet is printed on folded sheets, so its page
-# count has to be a multiple of four.
+# A saddle-stitched booklet is printed on folded sheets, so its page count has
+# to be a multiple of four. One page of notes earns its place; past two they
+# are padding, and a blank leaf at the back is what padding should look like.
 SHEET_MULTIPLE = 4
+NOTE_PAGES = 1
+MAX_NOTE_PAGES = 2
 
 
 def shorten(text: str, budget: int) -> str:
@@ -176,6 +179,10 @@ def render_notes(count: int) -> str:
         <div class="lines"></div>
     </section>''' for _ in range(count))
 
+
+def render_blanks(count: int) -> str:
+    """Padding to the next folded sheet, once the notes have had their share."""
+    return '<section class="page blank"></section>' * count
 
 
 def render_back(conference: Conference) -> str:
@@ -430,7 +437,8 @@ def build_html(conference: Conference, show_qr: bool = True,
         render_emergency(),
         render_partners(),
         render_join(),
-        render_notes(1 + filler),
+        render_notes(min(MAX_NOTE_PAGES, NOTE_PAGES + filler)),
+        render_blanks(max(0, NOTE_PAGES + filler - MAX_NOTE_PAGES)),
         render_back(conference),
     ]
     return ''.join(pages)
