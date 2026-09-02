@@ -1,0 +1,716 @@
+[
+ {
+  "code": "3MCASS",
+  "answers": [
+   {
+    "id": 1636,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Producteurs et Utilisateurs de Libre",
+    "answer_file": null,
+    "submission": "3MCASS",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "7X77KT",
+  "answers": [
+   {
+    "id": 1591,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Développeurs, administrateurs systèmes et décideurs techniques (CTO, responsables tech)",
+    "answer_file": null,
+    "submission": "7X77KT",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "9T88ST",
+  "answers": [
+   {
+    "id": 1522,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public, libristes qui s'interrogent sur le sens du Libre",
+    "answer_file": null,
+    "submission": "9T88ST",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "B9DGHJ",
+  "answers": [
+   {
+    "id": 1494,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Freelances, web designers, webmasters et agences web. Niveau intermédiaire : bases HTML/CSS suffisantes, pas besoin d'être développeur.",
+    "answer_file": null,
+    "submission": "B9DGHJ",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "DMRLJQ",
+  "answers": [
+   {
+    "id": 1721,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "DMRLJQ",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "FPMANT",
+  "answers": [
+   {
+    "id": 1596,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Développeurs, passionnés de tech ou toute personne souhaitant installer et tester une IA locale sur sa propre machine.",
+    "answer_file": null,
+    "submission": "FPMANT",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "FRY8TA",
+  "answers": [
+   {
+    "id": 1844,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "FRY8TA",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "KPHZKA",
+  "answers": [
+   {
+    "id": 1586,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "tout public",
+    "answer_file": null,
+    "submission": "KPHZKA",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "LEPN3R",
+  "answers": [
+   {
+    "id": 1356,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Integrateurs IA, et integrateurs Email",
+    "answer_file": null,
+    "submission": "LEPN3R",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "MWMZWN",
+  "answers": [
+   {
+    "id": 1795,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "MWMZWN",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "QXM339",
+  "answers": [
+   {
+    "id": 1601,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "toute personne travaillant des avec des publics non techniques (étudiants, designers, ecoconcepteurs, ...)",
+    "answer_file": null,
+    "submission": "QXM339",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "RGZGLD",
+  "answers": [
+   {
+    "id": 1827,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "RGZGLD",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "RXNBMQ",
+  "answers": [
+   {
+    "id": 1435,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Personnes ayant des connaissances de base des réseaux (par exemple, ce qu'est une adresse IP)",
+    "answer_file": null,
+    "submission": "RXNBMQ",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "S8VJEU",
+  "answers": [
+   {
+    "id": 1842,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "S8VJEU",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "TGZ7WK",
+  "answers": [
+   {
+    "id": 1810,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Toute personne qui s'intéresse à l'IA générative et au logiciel libre. Compatible débutants",
+    "answer_file": null,
+    "submission": "TGZ7WK",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "ULQXZY",
+  "answers": [
+   {
+    "id": 1823,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Les personnes qui s'intéressent au traitement audio automatique",
+    "answer_file": null,
+    "submission": "ULQXZY",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ },
+ {
+  "code": "WSGAFB",
+  "answers": [
+   {
+    "id": 1659,
+    "question": {
+     "id": 10,
+     "identifier": "WRQBZB3S",
+     "question": {
+      "fr": "Quel est le public visé ?"
+     },
+     "help_text": {
+      "fr": "Par exemple: développeur·euses débutant·e, expert·e JavaScript, tout public"
+     },
+     "default_answer": null,
+     "variant": "string",
+     "target": "submission",
+     "deadline": null,
+     "freeze_after": null,
+     "question_required": "required",
+     "position": 1,
+     "tracks": [],
+     "submission_types": [],
+     "min_length": null,
+     "max_length": null,
+     "min_number": null,
+     "max_number": null,
+     "min_date": null,
+     "max_date": null,
+     "min_datetime": null,
+     "max_datetime": null,
+     "icon": null
+    },
+    "answer": "Tout public",
+    "answer_file": null,
+    "submission": "WSGAFB",
+    "review": null,
+    "person": null,
+    "options": []
+   }
+  ]
+ }
+]

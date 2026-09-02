@@ -1,0 +1,573 @@
+<?xml version='1.0' encoding='utf-8'?>
+<schedule>
+  <generator name="pretalx" version="2026.1.2" />
+  <version>0.1</version>
+  <conference>
+    <title>Capitole du Libre 2026</title>
+    <acronym>cdl-2026</acronym>
+    <start>2026-11-14</start>
+    <end>2026-11-15</end>
+    <days>2</days>
+    <timeslot_duration>00:05</timeslot_duration>
+    <base_url>https://cfp.capitoledulibre.org</base_url>
+    <time_zone_name>Europe/Paris</time_zone_name>
+  </conference>
+  <day index="1" date="2026-11-14" start="2026-11-14T04:00:00+01:00" end="2026-11-15T03:59:00+01:00">
+    <room name="B00" guid="abc71b7e-9b2e-5d75-9e1e-3117aba7f9fc">
+      <event guid="c6d53dc0-221a-56eb-8f49-ce6c706c5bfd" id="1013" code="S8VJEU">
+        <room>B00</room>
+        <title>Bienvenue au Capitole du Libre 2026</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2026-11-14T10:00:00+01:00</date>
+        <start>10:00</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-1013-bienvenue-au-capitole-du-libre-2026</slug>
+        <track />
+        <persons>
+          <person id="861">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Accueil du public au Capitole du Libre 2026. Informations sur l'organisation de l'événement, informations pratiques.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/S8VJEU/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/S8VJEU/feedback/</feedback_url>
+      </event>
+      <event guid="0f1233d7-fa81-511d-af3f-bd8581b512de" id="995" code="MWMZWN">
+        <room>B00</room>
+        <title>Hygiène numérique pour moldus et sorciers</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T11:00:00+01:00</date>
+        <start>11:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-995-hygiene-numerique-pour-moldus-et-sorciers</slug>
+        <track />
+        <persons>
+          <person id="841">Michael Opdenacker</person>
+        </persons>
+        <language>fr</language>
+        <description>Quelque soit votre niveau d'expérience en technologies numériques,  venez découvrir ou recevoir une piqûre de rappel sur un ensemble de bonnes pratiques pour protéger vos données personnelles, celles de votre entreprise, de votre foyer et de vos contacts, et éviter de devenir victime de tous types d'attaques, de vols de données et d'escroqueries.
+
+Pour chaque conseil, vous découvrirez à quel(s) risque(s) vous vous exposerez si vous ne le suivez pas. Nous irons des recommandations les plus élémentaires mais qu'on a parfois tendance à oublier, à des pratiques plus poussées pour les personnes les plus paranoïaques ou en tout cas les plus curieuses en matière de technologie.
+
+Bien-sûr, en plus de conseils s'appliquant à tous les systèmes d'exploitation, une partie des recommandations consistera à réduire son exposition aux géants du numérique (les fameux GAFAM), et à augmenter son usage de logiciels libres ! 
+
+La session se voudra aussi interactive pour permettre aux participants d'échanger leur expérience et leurs propres astuces.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/MWMZWN/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/MWMZWN/feedback/</feedback_url>
+      </event>
+      <event guid="616e2f5d-04c4-5ada-8fd8-f4f68c4472c6" id="908" code="KPHZKA">
+        <room>B00</room>
+        <title>Du logiciel libre au silicium ouvert : l’écosystème open source hardware du CERN</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2026-11-14T12:00:00+01:00</date>
+        <start>12:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-908-du-logiciel-libre-au-silicium-ouvert-l-ecosysteme-open-source-hardware-du-cern</slug>
+        <track />
+        <logo>/media/cdl-2026/submissions/KPHZKA/ClydeHamza_2z55hpf_z6Uq8aK.webp</logo>
+        <persons>
+          <person id="774">Hamza Boukabache</person>
+          <person id="778">Clyde Laforge</person>
+        </persons>
+        <language>fr</language>
+        <description>Cette présentation introduit le rôle du CERN dans l’ouverture du matériel scientifique, depuis la création de son Open Source Program Office jusqu’aux nouvelles initiatives autour des puces open hardware. Lancé fin 2023, l’OSPO du CERN a pour mission d’aider les équipes à publier logiciels et designs matériels de manière ouverte, en clarifiant les choix de licence, les bonnes pratiques et les enjeux de propriété intellectuelle. Dans cette continuité, la CERN Open Hardware Licence constitue un outil central : créée en 2011 puis modernisée en version 2.0, elle propose trois modèles, fortement réciproque, faiblement réciproque et permissif afin d’adapter le degré d’ouverture aux besoins des projets.
+
+La présentation prend ensuite l’exemple de White Rabbit, une technologie Ethernet open source développée au CERN pour synchroniser des systèmes distribués avec une précision sub-nanoseconde. Devenue un standard utilisé au-delà de la physique des particules, elle illustre comment un développement scientifique ouvert peut créer un écosystème industriel. Enfin, nous aborderons l’initiative menée avec IHP en Allemagne autour des PDK et des flux de conception open source, dont l’objectif est de rendre la conception de circuits intégrés et de puces ASIC plus accessible, reproductible et collaborative</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/KPHZKA/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/KPHZKA/feedback/</feedback_url>
+      </event>
+      <event guid="cec49931-32a3-5b58-b830-bd2fd39e5a47" id="842" code="RXNBMQ">
+        <room>B00</room>
+        <title>Concevoir un réseau informatique mondial</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-842-concevoir-un-reseau-informatique-mondial</slug>
+        <track />
+        <persons>
+          <person id="718">Stéphane Bortzmeyer</person>
+        </persons>
+        <language>fr</language>
+        <description>Aujourd'hui, l'Internet est partout et tout en dépend. Il est donc
+tentant de considérer que les choix effectués lors de sa conception,
+puis lors de son développement ultérieur, étaient les bons, voire
+qu'aucun autre choix n'était possible. Mais ce n'était évidemment pas
+le cas. Bien que le problème de concevoir un réseau informatique
+mondial soit difficile, il y avait d'autres solutions. On réfléchira
+aux alternatives techniques, aux choix faits, et à leurs
+conséquences. Par exemple, le datagramme vs. les circuits (sans
+oublier les solutions intermédiaires), l'adressage de taille fixe
+plutôt que variable, les choix ou non-choix en matière de sécurité, le
+mécanisme de résolution de noms, le choix du protocole de routage,
+etc.
+
+Le « bon » choix (en admettant qu'il existe) dépend fortement du
+cahier des charges, le grand oublié des discussions sur un Internet
+« alternatif ». Certes, on aurait pu faire autrement, mais le cahier
+des charges de l'Internet oriente quand même sérieusement les choix.
+
+Et la technique n'étant pas tout, on parlera aussi de choix
+organisationnels.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/RXNBMQ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/RXNBMQ/feedback/</feedback_url>
+      </event>
+      <event guid="5e060669-45cf-5326-8453-d35de4e6bbd0" id="939" code="WSGAFB">
+        <room>B00</room>
+        <title>RGPD : dix ans après, où est passée notre vie privée ?</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-939-rgpd-dix-ans-apres-ou-est-passee-notre-vie-privee</slug>
+        <track />
+        <logo>/media/cdl-2026/submissions/WSGAFB/logo-circle_b5Xn4ck_dgTVx3x_BoQj9PX.webp</logo>
+        <persons>
+          <person id="796">aeris</person>
+          <person id="797">glucas</person>
+        </persons>
+        <language>fr</language>
+        <description>Le RGPD était censé redonner aux citoyens le contrôle de leurs données personnelles.
+Pourtant les sites regorgent de bannière cookie à l’apparence trompeuse, les outils de suivi publicitaires se déposent par paquet de 1000 (no joke), les fuites de données se comptent par centaines jusqu’aux services les plus critiques de l’État, l’ouverture de nos courriels est surveillée, et des technologies toujours plus intrusives sont commercialisées, telles les lunettes connectées.
+Pourquoi un règlement aussi ambitieux produit-il si peu d’effets visibles ?
+
+Cette conférence cherche à comprendre pourquoi l’application du RGPD reste si difficile et quels sont les obstacles rencontrés par les citoyens.
+La CNIL veut-elle réellement protéger notre vie privée ? Pourquoi cette opacité ? Qui contrôle notre Autorité de Contrôle ?
+
+Conférence issue des travaux et actions de l’association P·U·R·R (« Pour un RGPD respecté »), qui œuvre depuis trois ans pour une application effective du RGPD et défend les droits du plus grand nombre.
+Trois années de participations aux travaux de la CNIL, de plaintes, de recours en justice, de sollicitations des différentes institutions pouvant agir, etc.
+
+Enfin, nous dégagerons des perspectives : que faire pour faire respecter nos droits et réveiller la CNIL ?
+
+Une conférence accessible à toutes et à tous, destinée aussi bien aux développeurs, administrateurs système, responsables associatifs qu’à toute personne souhaitant reprendre le contrôle de ses données.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/WSGAFB/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/WSGAFB/feedback/</feedback_url>
+      </event>
+      <event guid="ded0989b-c9cd-5642-b257-5cc0ef8c4365" id="1008" code="RGZGLD">
+        <room>B00</room>
+        <title>Créer son premier HomeLab : apprendre, bidouiller et s'auto-héberger avec des logiciels libres</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T17:30:00+01:00</date>
+        <start>17:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-1008-creer-son-premier-homelab-apprendre-bidouiller-et-s-auto-heberger-avec-des-logiciels-libres</slug>
+        <track />
+        <persons>
+          <person id="849">Matteo Planchet</person>
+        </persons>
+        <language>fr</language>
+        <description>Un vieux ordinateur portable suffit pour héberger vos photos, vos fichiers, votre médiathèque et bien plus grâce aux logiciels libres !
+
+Je vous propose de voir comment démarrer votre HomeLab, quels outils libres utiliser et quels services valent vraiment le coup. L'objectif n'est pas de construire un mini-datacenter, mais un terrain de jeu pour apprendre, expérimenter et reprendre un peu le contrôle de ses données.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/RGZGLD/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/RGZGLD/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="B207" guid="92e08a52-0462-5703-93a7-aa88ec348baf">
+      <event guid="9e879d86-417a-5670-937c-73cc2106f29c" id="914" code="QXM339">
+        <room>B207</room>
+        <title>"Numérique éthique en commun", un commun pédagogique pour des ateliers ludiques et participatifs</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2026-11-14T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-914-numerique-ethique-en-commun-un-commun-pedagogique-pour-des-ateliers-ludiques-et-participatifs</slug>
+        <track />
+        <logo>/media/cdl-2026/submissions/QXM339/ethic-o-test_jIs5T89_cdyNJnW.webp</logo>
+        <persons>
+          <person id="775">melanie lacayrouze</person>
+        </persons>
+        <language>fr</language>
+        <description>Présentation d'un commun pédagogique pour le développement de situations et de pratiques pédagogiques favorisant l’esprit critique dans l'enseignement et la formation au numérique. 
+
+Conçus sous forme de briques modulaires, ce commun permet aux enseignants, formateurs, médiateurs numériques, ou tout professionnels du numérique  de créer des situations d'apprentissage coopératif sur les enjeux du numérique avec des propositions d'ateliers clés en main.
+
+Ce commun est publié sous licence libre CC-BY-SA ce qui permet des remix et adaptations.
+
+Si vous connaissez la technique derrière le numérique, mais que vous avez besoin d'outils pour animer des temps de formation ludiques et conviviaux pour parler de numérique libre et éthique, cet atelier est pour vous !</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/QXM339/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/QXM339/feedback/</feedback_url>
+      </event>
+      <event guid="caa2ab85-1c00-5bcd-95b8-bf2682fe9e29" id="1001" code="TGZ7WK">
+        <room>B207</room>
+        <title>Qu’est-ce qu’une IA générative libre ?</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-1001-qu-est-ce-qu-une-ia-generative-libre</slug>
+        <track />
+        <persons>
+          <person id="807">Bertrand Boisvert</person>
+        </persons>
+        <language>fr</language>
+        <description>Qu’est-ce qu’une IA générative libre ? Cette question n'est pas aussi simple que pour les logiciels classiques. Pour y répondre, je commencerai par présenter les principaux composants d’une solution d’IA générative : modèles, moteurs d’inférence, interfaces web, API, RAG, connecteurs MCP et agents.
+
+Nous nous intéresserons ensuite au cas particulier des modèles. Contrairement aux logiciels classiques, il ne suffit pas que leurs poids soient accessibles pour pouvoir les considérer comme libres : il faut également examiner, leurs données d’entraînement et les algorithmes d'entrainement.
+
+Je présenterai ensuite des retours d’expérience sur la mise en place de solutions libres reposant sur des outils comme Ollama, Open WebUI, LM Studio, Whisper et différents modèles ouverts. Malgré leur sophistication, ces technologies sont aujourd’hui relativement accessibles et disposent d’un écosystème riche en composants libres.
+
+Enfin, je comparerai la performance des IA génératives libres à celles des grandes IA propriétaires comme ChatGPT, Claude et Gemini, à partir de plusieurs cas d’usage concrets.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/TGZ7WK/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/TGZ7WK/feedback/</feedback_url>
+      </event>
+      <event guid="f7ec4ef1-16d1-5bd7-990f-6bc09352b5e4" id="910" code="7X77KT">
+        <room>B207</room>
+        <title>Hermes en local : automatisation et "vibe coding" avec un assistant IA open-source</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-14T16:30:00+01:00</date>
+        <start>16:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-910-hermes-en-local-automatisation-et-vibe-coding-avec-un-assistant-ia-open-source</slug>
+        <track />
+        <logo>/media/cdl-2026/submissions/7X77KT/Capture_decran_du_2026-07-16_13-15-46_FCV1rR9_J_qTsCip9.webp</logo>
+        <persons>
+          <person id="771">Sébastien DA ROCHA</person>
+        </persons>
+        <language>fr</language>
+        <description>L'utilisation de l'IA est souvent réduit à des abonnements SaaS ou des démos commerciales. Pourtant, il est possible de transformer sa propre machine en un environnement de travail assisté par IA, de manière souveraine et sans envoyer ses données au cloud.
+
+Cette intervention propose un retour d'expérience brut sur l'utilisation de **Hermes**, un assistant personnel qui permet d'automatiser des tâches (rédaction, recherche, admin sys) et de pratiquer le "vibe coding" (développement piloté par l'intention) en interagissant directement avec son système de fichiers.
+
+Nous explorerons :
+* **L'utilisation au quotidien :** Ce que je lui délègue réellement (et ce que je ne lui délègue pas).
+* **L'apprentissage terrain :** Ce qu'il faut savoir sur la gestion de la mémoire, les *skills* et les limites des modèles locaux.
+* **Les limites :** Ce qui ne marche pas, où l'on perd du temps et pourquoi on finit souvent par faire certaines tâches à la main.
+* **La vision métier :** Quel est le vrai ROI pour une petite structure, au-delà du hype ?</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/7X77KT/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/7X77KT/feedback/</feedback_url>
+      </event>
+      <event guid="8645687e-63f8-5e3c-8c4d-3e9b33c06e5d" id="809" code="LEPN3R">
+        <room>B207</room>
+        <title>Twake: booster votre email grace a l'IA</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2026-11-14T17:30:00+01:00</date>
+        <start>17:30</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-809-twake-booster-votre-email-grace-a-l-ia</slug>
+        <track />
+        <persons>
+          <person id="692">TELLIER Benoit</person>
+        </persons>
+        <language>fr</language>
+        <description>L’email reste l’outil de travail le plus universel, mais aussi l’un des plus figés. Entre des interfaces héritées et des attentes croissantes en matière de productivité, une nouvelle génération d'outils se doit d'émerger.
+
+Cette conférence présente comment Twake Mail, le service de messagerie novateur de la Twake Workplace développé par LINAGORA, modernise cette expérience utilisateur grâce à l'Intelligence Artificielle.
+
+Nous verrons comment l’IA permet d’exploiter intelligemment le contenu de votre boîte mail, à travers Scribe (résumé, reformulation, traduction) et un assistant basé sur OpenRAG (Retrieval Augmented Generation).
+
+Nous aborderons plusieurs cas d’usage : catégorisation automatique, priorisation, suggestions de réponses, aide à la saisie, prompts pour explorer vos mails et entraînement personnalisé des filtres anti-spam.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/LEPN3R/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/LEPN3R/feedback/</feedback_url>
+      </event>
+      <event guid="b916f50d-8892-52b2-b4cd-1d73ebc4d97b" id="1006" code="ULQXZY">
+        <room>B207</room>
+        <title>Automatiser le nettoyage audio de ses vidéos avec CrisperWhisper, FFmpeg et PHP</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2026-11-14T18:00:00+01:00</date>
+        <start>18:00</start>
+        <duration>00:25</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-1006-automatiser-le-nettoyage-audio-de-ses-videos-avec-crisperwhisper-ffmpeg-et-php</slug>
+        <track />
+        <persons>
+          <person id="807">Bertrand Boisvert</person>
+        </persons>
+        <language>fr</language>
+        <description>Cette conférence présentera la chaîne de traitement que j’utilise pour mes vidéos, basée sur CrisperWhisper pour la transcription et la détection précise des hésitations, FFmpeg pour le traitement audiovisuel et des scripts PHP pour automatiser l’ensemble.
+
+Nous verrons le fonctionnement des différentes étapes, depuis la transcription jusqu’à la génération de la vidéo nettoyée, ainsi que les difficultés rencontrées pour obtenir des découpages naturels.
+
+Les scripts et les principaux composants logiciels utilisés sont libres. Le cas de CrisperWhisper est cependant plus complexe : ses poids sont accessibles, mais sa licence CC BY-NC 4.0 interdit les usages commerciaux et les données et algorithme d'entrainement ne sont pas publics. Cette distinction permettra d’aborder plus largement les critères permettant de qualifier un modèle d’IA de libre.
+
+Enfin, nous verrons comment cette chaîne de traitement pourrait accueillir à l’avenir un modèle de reconnaissance vocale entièrement libre.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/ULQXZY/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/ULQXZY/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+  <day index="2" date="2026-11-15" start="2026-11-15T04:00:00+01:00" end="2026-11-16T03:59:00+01:00">
+    <room name="B00" guid="abc71b7e-9b2e-5d75-9e1e-3117aba7f9fc">
+      <event guid="3fb613c8-4aec-56d8-ae2a-861a45d6f20f" id="928" code="3MCASS">
+        <room>B00</room>
+        <title>Collaborer pour être plus forts - pourquoi les acteurs Open Source Européens doivent s'entraider</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-15T11:30:00+01:00</date>
+        <start>11:30</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-928-collaborer-pour-etre-plus-forts-pourquoi-les-acteurs-open-source-europeens-doivent-s-entraider</slug>
+        <track />
+        <persons>
+          <person id="790">Ludovic Dubost</person>
+        </persons>
+        <language>fr</language>
+        <description>L’Open Source européen dispose de tous les atouts pour proposer des alternatives crédibles aux grandes plateformes propriétaires. Mais pour changer d’échelle, la collaboration doit aller au-delà des seuls éditeurs : entre projets, entreprises, utilisateurs, collectivités, administrations, associations et acteurs publics.
+
+Cette présentation montrera plusieurs collaborations et leurs résultats:
+
+- la coopération entre les ZenDis et les éditeurs Open-Source autour du projet openDesk en Allemagne
+- la coopération de XWiki et Open-Project avec le TOSIT autour des alternatives Atlassian Confluence et JIRA
+- les projets ELFA et SuperStack financés par l'Europe auquel CryptPad participe
+- l'initative EuroCommons par le CDC
+- mais aussi les associations OW2, FSFE, Hub Open Source, APELL 
+
+Elle soulignera aussi le rôle essentiel des utilisateurs, des institutions publiques et des associations : exprimer les besoins, soutenir les communs numériques, financer les producteurs du code, favoriser l’adoption et sensibiliser les pouvoirs publics. 
+
+L’autonomie numérique européenne se construira par un écosystème capable de s’entraider, de mutualiser ses efforts et de porter une vision commune.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/3MCASS/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/3MCASS/feedback/</feedback_url>
+      </event>
+      <event guid="5de9bc20-1965-5824-b2e2-7d58c32b3098" id="967" code="DMRLJQ">
+        <room>B00</room>
+        <title>L’impact de l’IA générative sur les projets libres du point de vue d’une mainteneuse</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-15T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-967-l-impact-de-l-ia-generative-sur-les-projets-libres-du-point-de-vue-d-une-mainteneuse</slug>
+        <track />
+        <persons>
+          <person id="815">Lucie Anglade</person>
+        </persons>
+        <language>fr</language>
+        <description>Depuis quelques années, les outils d’IA générative se développent et de plus en plus de personnes les utilisent pour contribuer à des projets libres. Mais quel est l’impact de cet usage sur les mainteneur·euses de projets libres ?
+
+Durant cette présentation, nous parlerons de l’évolution des contributions et de leurs impacts sur les mainteneur·euses en prenant comme exemple le logiciel libre WeasyPrint, sur lequel j’interviens en tant que mainteneuse.
+
+Nous verrons aussi des graphiques avec des données chiffrées, parce qu’ici, on aime les statistiques : évolution du nombre tickets, de pull requests…
+
+Enfin, nous finirons la présentation par les solutions que nous essayons de mettre en place et des pistes sur comment contribuer sainement.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/DMRLJQ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/DMRLJQ/feedback/</feedback_url>
+      </event>
+      <event guid="3f0240a0-cf68-5dca-95ec-e9bdeaaec1e3" id="879" code="9T88ST">
+        <room>B00</room>
+        <title>Faut-il composter le Libre ? (ou pourquoi ne pas jeter le Libre avec l'eau du bain des Big Tech)</title>
+        <subtitle />
+        <type>Conférence 55min</type>
+        <date>2026-11-15T15:00:00+01:00</date>
+        <start>15:00</start>
+        <duration>00:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-879-faut-il-composter-le-libre-ou-pourquoi-ne-pas-jeter-le-libre-avec-l-eau-du-bain-des-big-tech</slug>
+        <track />
+        <persons>
+          <person id="730">Khrys</person>
+        </persons>
+        <language>fr</language>
+        <description>Imposture du Logiciel Libre, vraiment ?
+Analyse et décryptage de la part d'une simple «utilisatrice».</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/9T88ST/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/9T88ST/feedback/</feedback_url>
+      </event>
+      <event guid="273a87eb-ddf9-52a5-835e-d67f2b11e567" id="1014" code="FRY8TA">
+        <room>B00</room>
+        <title>Conférence de clôture</title>
+        <subtitle />
+        <type>Conférence 25min</type>
+        <date>2026-11-15T16:00:00+01:00</date>
+        <start>16:00</start>
+        <duration>00:30</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-1014-conference-de-cloture</slug>
+        <track />
+        <persons>
+          <person id="861">Capitole du Libre</person>
+        </persons>
+        <language>fr</language>
+        <description>Les chiffres clés de cette édition. Conclusion!</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/FRY8TA/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/FRY8TA/feedback/</feedback_url>
+      </event>
+    </room>
+    <room name="B207" guid="92e08a52-0462-5703-93a7-aa88ec348baf">
+      <event guid="8bcb1d76-d3ba-533c-b9da-268da5c6a2a7" id="866" code="B9DGHJ">
+        <room>B207</room>
+        <title>Créez et publiez un site statique, accessible et sobre, avec Silex</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2026-11-15T10:30:00+01:00</date>
+        <start>10:30</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-866-creez-et-publiez-un-site-statique-accessible-et-sobre-avec-silex</slug>
+        <track />
+        <persons>
+          <person id="742">Alex Hoyau</person>
+        </persons>
+        <language>fr</language>
+        <description>Repartez avec un site en ligne. Dans cet atelier, on construit un site avec Silex (website builder libre), on l'audite à la fois côté accessibilité (navigation clavier, structure des titres, contrastes) et côté éco-conception (poids des pages, sobriété), on corrige, et on le publie en statique sur GitLab Pages. Pensé pour les freelances, web designers, webmasters et agences web. Prérequis : bases HTML/CSS et un ordinateur portable.
+
+Format volontairement pratique : 1h55 pour passer d'une page blanche à un site publié, proprement. Même démarche que dans les ateliers Silex à AlpOSS et aux JDLL, orientée production réelle en agence et en freelance.
+
+Déroulé :
+1. Prise en main de Silex : structure de page, blocs, styles. Silex est une couche visuelle au-dessus de HTML/CSS, donc ce que vous apprenez sert au-delà de l'outil.
+2. Accessibilité et éco-conception dès la conception : on audite le site au clavier et avec les outils du navigateur (structure des titres, contrastes, menu), et on regarde la sobriété (poids, requêtes, images). On corrige au fur et à mesure. Accessibilité et éco-conception vont de pair : un site sobre et bien structuré est souvent plus accessible, et inversement.
+3. Publication : génération du site statique et mise en ligne sur GitLab Pages. Vous gardez tous les fichiers.
+
+Public : freelances, web designers, webmasters, agences web. Niveau intermédiaire.
+Prérequis : bases HTML/CSS (savoir ce qu'est une balise et une propriété CSS suffit), un ordinateur portable, un compte GitLab si possible.</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/B9DGHJ/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/B9DGHJ/feedback/</feedback_url>
+      </event>
+      <event guid="7d0f92a6-fdb2-5616-af4f-c5c4abe814d9" id="912" code="FPMANT">
+        <room>B207</room>
+        <title>Installer et utiliser Hermes : assistant IA en local</title>
+        <subtitle />
+        <type>Atelier 2h</type>
+        <date>2026-11-15T14:00:00+01:00</date>
+        <start>14:00</start>
+        <duration>01:55</duration>
+        <abstract>None</abstract>
+        <slug>cdl-2026-912-installer-et-utiliser-hermes-assistant-ia-en-local</slug>
+        <track />
+        <logo>/media/cdl-2026/submissions/FPMANT/Capture_decran_du_2026-07-16_13-15-46_EcMpPvZ_J_mrebArw.webp</logo>
+        <persons>
+          <person id="771">Sébastien DA ROCHA</person>
+        </persons>
+        <language>fr</language>
+        <description>Cet atelier est conçu pour vous faire installer et utiliser un véritable assistant personnel sur votre propre machine, sans dépendre du cloud.
+
+Nous allons configurer un environnement capable de faire de l'automatisation de tâches et du "vibe coding" (coder par conversation) en utilisant des modèles open-source pilotés par **Ollama** et pilotés par l'assistant **Hermes**.
+
+**Le programme :**
+1. **Installation ollama (30 min) :** Installation de Hermes et Ollama, et premier test de modèle local.
+2. **Configuration (60 min) :** Installation de l'assistant Hermes, configuration de ses accès au système de fichiers et exécution de ses premières tâches d'automatisation.
+3. **Exploration (30 min) :** Tests libres sur vos propres fichiers ou code, et discussion sur les limites techniques (VRAM, latence, précision).
+
+L'objectif est de repartir avec un outil qui tourne chez vous.
+
+PS : PC sous Linux grandement recommandé (sinon vous devez être autonome avec macOS ou Windows).
+PPS : Il vaut mieux avoir un GPU si vous voulez faire tourner convenablement ollama (sinon je vous proposerai une alternative sur le cloud).</description>
+        <recording>
+          <license />
+          <optout>false</optout>
+        </recording>
+        <links />
+        <attachments />
+        <url>https://cfp.capitoledulibre.org/cdl-2026/talk/FPMANT/</url>
+        <feedback_url>https://cfp.capitoledulibre.org/cdl-2026/talk/FPMANT/feedback/</feedback_url>
+      </event>
+    </room>
+  </day>
+</schedule>
