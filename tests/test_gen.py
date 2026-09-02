@@ -16,10 +16,20 @@ from weasyprint.text.fonts import FontConfiguration
 from xml.etree import ElementTree
 
 import gen
+import posters
+import render
+import schedule
 
-FIXTURE = os.path.join(os.path.dirname(__file__), 'fixtures',
-                       'schedule-2025.xml')
-STYLESHEET = os.path.join(os.path.dirname(__file__), os.pardir, 'style.css')
+HERE = os.path.dirname(__file__)
+ROOT = os.path.join(HERE, os.pardir)
+FIXTURE = os.path.join(HERE, 'fixtures', 'schedule-2025.xml')
+
+
+def stylesheet(name: str) -> str:
+    return os.path.join(ROOT, name)
+
+
+STYLESHEET = stylesheet(posters.STYLESHEET)
 
 
 def page_text(page) -> str:
@@ -38,8 +48,8 @@ def page_text(page) -> str:
 
 
 @pytest.fixture(scope='module')
-def conference() -> gen.Conference:
-    parsed = gen.Conference(FIXTURE)
+def conference() -> schedule.Conference:
+    parsed = schedule.Conference(FIXTURE)
     parsed.parse()
     return parsed
 
@@ -57,8 +67,8 @@ def lay_out(conference) -> tuple[list, dict, list]:
     """Run the real pipeline: size every room to its sheet, then render."""
     fonts = FontConfiguration()
     css = CSS(filename=STYLESHEET, font_config=fonts)
-    sizes, too_dense = gen.fit_rooms(conference, css, fonts, show_qr=False)
-    document = HTML(string=gen.build_html(conference, show_qr=False,
+    sizes, too_dense = posters.fit_rooms(conference, css, fonts, show_qr=False)
+    document = HTML(string=posters.build_html(conference, show_qr=False,
                                           sizes=sizes)).render(
         stylesheets=[css], font_config=fonts)
     return [page_text(page) for page in document.pages], sizes, too_dense
@@ -109,9 +119,9 @@ def test_no_talk_is_lost(pages, conference):
 def test_no_break_overlaps_a_talk(room_days):
     for day, room in room_days:
         talks = room.sorted_events()
-        for pause in gen.build_breaks(room, day, talks):
+        for pause in schedule.build_breaks(room, day, talks):
             for talk in talks:
-                assert not gen._overlaps(
+                assert not schedule._overlaps(
                     pause._start_datetime, pause._end_datetime,
                     talk._start_datetime, talk._end_datetime), \
                     f'{pause._title} clashes with {talk.title} in {room}'
@@ -121,7 +131,7 @@ def test_breaks_stay_inside_the_programme(room_days):
     for day, room in room_days:
         talks = room.sorted_events()
         first, last = talks[0]._start_datetime, talks[-1]._end_datetime
-        for pause in gen.build_breaks(room, day, talks):
+        for pause in schedule.build_breaks(room, day, talks):
             assert pause._start_datetime >= first
             assert pause._end_datetime <= last
 
@@ -130,21 +140,21 @@ def test_all_day_workshop_gets_no_break(conference):
     """B105 runs 11:00 to 18:25 without stopping."""
     day = list(conference._days.values())[0]
     room = day._rooms['B105']
-    assert gen.build_breaks(room, day, room.sorted_events()) == []
+    assert schedule.build_breaks(room, day, room.sorted_events()) == []
 
 
 def test_evening_only_room_gets_no_lunch_break(conference):
     """Hall C holds the 19:30 buffet and nothing else."""
     day = list(conference._days.values())[0]
     room = day._rooms['Hall C']
-    assert gen.build_breaks(room, day, room.sorted_events()) == []
+    assert schedule.build_breaks(room, day, room.sorted_events()) == []
 
 
 def test_breaks_are_distinct_objects_per_room(conference):
     day = list(conference._days.values())[0]
     identifiers = set()
     for room in day._rooms.values():
-        for pause in gen.build_breaks(room, day, room.sorted_events()):
+        for pause in schedule.build_breaks(room, day, room.sorted_events()):
             assert pause._id not in identifiers
             identifiers.add(pause._id)
 
@@ -156,57 +166,57 @@ def test_poster_mode_does_not_count_breaks(conference):
     day = list(conference._days.values())[0]
     room = day._rooms['B205']
     assert len(room.sorted_events()) == 2
-    assert 'timeline poster' in gen.render_room(conference, day, room,
+    assert 'timeline poster' in posters.render_room(conference, day, room,
                                                 show_qr=False)
 
 
 def test_dense_room_is_not_a_poster(conference):
     day = list(conference._days.values())[0]
     room = day._rooms['B00']
-    assert 'poster' not in gen.render_room(conference, day, room,
+    assert 'poster' not in posters.render_room(conference, day, room,
                                            show_qr=False)
 
 
 # --- export data reaching the page -----------------------------------------
 
 def test_event_type_becomes_usable_classes():
-    day = gen.Day(datetime(2025, 11, 15))
-    event = gen.Event('1', day)
+    day = schedule.Day(datetime(2025, 11, 15))
+    event = schedule.Event('1', day)
 
     event._type = 'Conférence 25min'
-    assert gen.event_classes(event) == 'talk conference-25min'
+    assert render.event_classes(event) == 'talk conference-25min'
 
     event._type = 'Atelier 2h'
-    assert gen.event_classes(event) == 'workshop atelier-2h'
+    assert render.event_classes(event) == 'workshop atelier-2h'
 
     event._type = 'pause'
-    assert gen.event_classes(event) == 'pause'
+    assert render.event_classes(event) == 'pause'
 
 
 def test_unknown_type_still_gets_its_family():
-    day = gen.Day(datetime(2025, 11, 15))
-    event = gen.Event('1', day)
+    day = schedule.Day(datetime(2025, 11, 15))
+    event = schedule.Event('1', day)
     event._type = 'Table ronde 90min'
-    assert gen.event_classes(event).startswith('talk ')
+    assert render.event_classes(event).startswith('talk ')
 
 
 def test_markup_in_a_title_is_escaped():
-    assert gen.clean('Guix & Nix') == 'Guix &amp; Nix'
-    assert '<script>' not in gen.clean('<script>alert(1)</script>')
+    assert render.clean('Guix & Nix') == 'Guix &amp; Nix'
+    assert '<script>' not in render.clean('<script>alert(1)</script>')
 
 
 def test_narrow_no_break_space_is_replaced():
     """The embedded font has no glyph for U+202F, which Pretalx emits."""
-    assert gen.clean('Quacken : libre') == 'Quacken : libre'
+    assert render.clean('Quacken : libre') == 'Quacken : libre'
 
 
 def test_speakers_are_enumerated_in_french():
-    day = gen.Day(datetime(2025, 11, 15))
-    event = gen.Event('1', day)
+    day = schedule.Day(datetime(2025, 11, 15))
+    event = schedule.Event('1', day)
     assert event.persons == ''
 
     for index, name in enumerate(('Ada', 'Grace', 'Alan')):
-        person = gen.Person(str(index))
+        person = schedule.Person(str(index))
         person._name = name
         event._persons[str(index)] = person
         if index == 0:
@@ -259,14 +269,16 @@ def test_year_fills_in_the_schedule_url():
 # --- failure modes ---------------------------------------------------------
 
 def test_a_missing_schedule_is_reported(capsys):
-    assert gen.main(['--schedule-file', '/does/not/exist.xml']) == 1
+    assert gen.main(['--schedule-file', '/does/not/exist.xml',
+                     '--only', 'salles']) == 1
     assert 'cannot read the schedule' in capsys.readouterr().err
 
 
 def test_invalid_xml_is_reported(tmp_path, capsys):
     broken = tmp_path / 'broken.xml'
     broken.write_text('<schedule><oops')
-    assert gen.main(['--schedule-file', str(broken)]) == 1
+    assert gen.main(['--schedule-file', str(broken),
+                     '--only', 'salles']) == 1
     assert 'not valid XML' in capsys.readouterr().err
 
 
@@ -284,8 +296,8 @@ DENSE_FIXTURE = os.path.join(os.path.dirname(__file__), 'fixtures',
 
 
 @pytest.fixture(scope='module')
-def dense() -> gen.Conference:
-    parsed = gen.Conference(DENSE_FIXTURE)
+def dense() -> schedule.Conference:
+    parsed = schedule.Conference(DENSE_FIXTURE)
     parsed.parse()
     return parsed
 
@@ -293,7 +305,7 @@ def dense() -> gen.Conference:
 def test_a_dense_room_still_fits_one_sheet(dense):
     """The 2024 export used to spill B00's footer and clip A001's away."""
     rendered, _sizes, too_dense = lay_out(dense)
-    expected = list(gen.printable_rooms(dense))
+    expected = list(posters.printable_rooms(dense))
 
     assert too_dense == []
     assert len(rendered) == len(expected)
@@ -303,8 +315,8 @@ def test_a_dense_room_still_fits_one_sheet(dense):
 def test_a_dense_room_is_the_one_scaled_down(dense):
     _pages, sizes, _too_dense = lay_out(dense)
     assert sizes, 'the 2024 rooms should need turning down'
-    assert all(size < gen.BASE_TIMELINE_SIZE for size in sizes.values())
-    assert all(size >= gen.MIN_TIMELINE_SIZE for size in sizes.values())
+    assert all(size < posters.BASE_TIMELINE_SIZE for size in sizes.values())
+    assert all(size >= posters.MIN_TIMELINE_SIZE for size in sizes.values())
 
 
 def test_a_room_that_fits_is_left_alone(laid_out):
@@ -316,9 +328,8 @@ def test_a_room_that_fits_is_left_alone(laid_out):
 
 def test_a_room_that_cannot_fit_is_reported(monkeypatch, capsys, tmp_path):
     """With no room to shrink into, the run must refuse rather than print."""
-    monkeypatch.setattr(gen, 'MIN_TIMELINE_SIZE', gen.BASE_TIMELINE_SIZE + 1)
-    output = tmp_path / 'out.pdf'
-    assert gen.main(['--schedule-file', DENSE_FIXTURE,
-                     '--output', str(output), '--no-qr']) == 1
+    monkeypatch.setattr(posters, 'MIN_TIMELINE_SIZE', posters.BASE_TIMELINE_SIZE + 1)
+    assert gen.main(['--schedule-file', DENSE_FIXTURE, '--only', 'salles',
+                     '--output-dir', str(tmp_path), '--no-qr']) == 1
     assert 'do not fit on one sheet' in capsys.readouterr().err
-    assert not output.exists()
+    assert list(tmp_path.iterdir()) == []
