@@ -3,16 +3,25 @@
 import functools
 import html
 import io
+import os
 import re
 import unicodedata
 
 import segno
+from fontTools.ttLib import TTFont
 from weasyprint import CSS, HTML
 
 from schedule import Event
 
 # Ink colour of the QR codes linking to each talk page.
 QR_COLOUR = '#111111'
+
+# The font every output embeds. Its coverage decides what can be printed.
+FONT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                    'fonts', 'FiraSans-Regular.woff2')
+
+# Punctuation left stranded when a leading emoji is dropped.
+STRANDED = ':;,.!? \u00a0\u2013\u2014-'
 
 
 def event_classes(event: Event) -> str:
@@ -35,14 +44,48 @@ def event_classes(event: Event) -> str:
     return f'{family} {slug}' if slug else family
 
 
+@functools.lru_cache(maxsize=1)
+def printable() -> frozenset | None:
+    """The code points the embedded font can actually draw.
+
+    None when the font cannot be read, in which case nothing is dropped:
+    losing a character is worse than risking a fallback glyph.
+    """
+    try:
+        font = TTFont(FONT)
+    except Exception:                                  # pragma: no cover
+        return None
+    covered = set()
+    for table in font['cmap'].tables:
+        covered |= set(table.cmap)
+    return frozenset(covered)
+
+
 def clean(value: str) -> str:
     """Prepare export data for the page.
 
-    Escapes it, since titles such as 'Guix & Nix' must not reach the parser as
-    markup, and swaps the narrow no-break space Pretalx puts before French
-    punctuation for the ordinary one, which the embedded font actually has.
+    Three things happen here. The text is escaped, since titles such as
+    'Guix & Nix' must not reach the parser as markup. The narrow no-break
+    space Pretalx puts before French punctuation becomes the ordinary one,
+    which the embedded font has. And anything the font cannot draw is
+    dropped: a few talk titles carry emoji, and letting a fallback font
+    supply them means a tofu box at the print shop and a grey blob in a
+    greyscale run.
     """
-    return html.escape((value or '').replace('\u202f', '\u00a0'))
+    text = (value or '').replace('\u202f', '\u00a0')
+
+    covered = printable()
+    if covered is not None:
+        kept = ''.join(character for character in text
+                       if character.isspace() or ord(character) in covered)
+        if kept != text:
+            # Tidy up after what was removed, without touching the no-break
+            # spaces: a dropped leading emoji leaves ': questionnez Docker'.
+            kept = re.sub(r'[ \t]{2,}', ' ', kept).strip()
+            kept = kept.lstrip(STRANDED).strip()
+        text = kept
+
+    return html.escape(text)
 
 
 @functools.lru_cache(maxsize=None)
