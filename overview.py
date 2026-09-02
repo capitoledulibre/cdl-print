@@ -12,7 +12,7 @@ from render import clean, event_classes
 from schedule import Conference, Day, EXCLUDED_ROOMS, build_breaks
 
 STYLESHEET = 'styles/overview.css'
-OUTPUT = 'conference-programme-global.pdf'
+OUTPUT = 'conference-programme-global-{year}.pdf'
 
 # The grid is laid out in rows of this many minutes.
 SLOT_MINUTES = 5

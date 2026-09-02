@@ -156,7 +156,8 @@ def main(argv=None) -> int:
     fonts = FontConfiguration()
 
     def path(name):
-        return os.path.join(args.output_dir, name)
+        return os.path.join(args.output_dir,
+                            name.format(year=conference.year))
 
     if 'salles' in args.only:
         if build_posters(conference, fonts, path(posters.OUTPUT), args.qr):
