@@ -330,6 +330,7 @@ def test_a_room_that_cannot_fit_is_reported(monkeypatch, capsys, tmp_path):
     """With no room to shrink into, the run must refuse rather than print."""
     monkeypatch.setattr(posters, 'MIN_TIMELINE_SIZE', posters.BASE_TIMELINE_SIZE + 1)
     assert gen.main(['--schedule-file', DENSE_FIXTURE, '--only', 'salles',
+                     '--no-audience',
                      '--output-dir', str(tmp_path), '--no-qr']) == 1
     assert 'do not fit on one sheet' in capsys.readouterr().err
     assert list(tmp_path.iterdir()) == []

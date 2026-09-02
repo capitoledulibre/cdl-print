@@ -155,7 +155,7 @@ def test_filler_rounds_up_to_a_sheet():
 
 def test_a_run_writes_the_three_programme_outputs(tmp_path, conference):
     assert gen.main(['--schedule-file', FIXTURE, '--no-qr',
-                     '--only', 'salles', '--only', 'global',
+                     '--no-audience', '--only', 'salles', '--only', 'global',
                      '--only', 'livret', '--output-dir', str(tmp_path)]) == 0
     written = {path.name for path in tmp_path.iterdir()}
     assert written == {name.format(year=conference.year)
@@ -165,8 +165,8 @@ def test_a_run_writes_the_three_programme_outputs(tmp_path, conference):
 
 def test_the_file_names_carry_the_edition(tmp_path, conference):
     """A new year must not overwrite the previous one's PDFs."""
-    assert gen.main(['--schedule-file', FIXTURE, '--no-qr', '--only', 'livret',
-                     '--output-dir', str(tmp_path)]) == 0
+    assert gen.main(['--schedule-file', FIXTURE, '--no-qr', '--no-audience',
+                     '--only', 'livret', '--output-dir', str(tmp_path)]) == 0
     written = [path.name for path in tmp_path.iterdir()]
     assert written == [f'conference-livret-{conference.year}.pdf']
 
@@ -177,8 +177,8 @@ def test_the_edition_comes_from_the_schedule_not_the_flags(conference):
 
 
 def test_only_builds_what_is_asked(tmp_path, conference):
-    assert gen.main(['--schedule-file', FIXTURE, '--no-qr', '--only', 'global',
-                     '--output-dir', str(tmp_path)]) == 0
+    assert gen.main(['--schedule-file', FIXTURE, '--no-qr', '--no-audience',
+                     '--only', 'global', '--output-dir', str(tmp_path)]) == 0
     assert {path.name for path in tmp_path.iterdir()} == {
         overview.OUTPUT.format(year=conference.year)}
 

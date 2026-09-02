@@ -20,6 +20,7 @@ from xml.etree import ElementTree
 from weasyprint import CSS, HTML
 from weasyprint.text.fonts import FontConfiguration
 
+import audience
 import booklet
 import leaflet
 import overview
@@ -150,6 +151,13 @@ def parse_args(argv=None):
         help='read the schedule from a local XML export instead of the '
              'network, ignoring --year and --url')
     parser.add_argument(
+        '--audience-file',
+        help='read the "public visé" answers from a local API dump instead '
+             'of the network')
+    parser.add_argument(
+        '--no-audience', dest='audience', action='store_false',
+        help='leave out who each talk is for')
+    parser.add_argument(
         '--only', choices=OUTPUTS, action='append',
         help='build only this output; repeatable (default: all three)')
     parser.add_argument(
@@ -203,6 +211,11 @@ def main(argv=None) -> int:
         print(f'warning: locale {args.locale} is unavailable, '
               'dates will not be localised',
               file=sys.stderr)
+
+    if args.audience:
+        # An enrichment, not a dependency: a failure here warns and the run
+        # goes on without it.
+        audience.gather(conference, conference.year, args.audience_file)
 
     fonts = FontConfiguration()
 

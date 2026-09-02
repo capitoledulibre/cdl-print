@@ -119,7 +119,8 @@ def test_the_leaflet_is_one_folded_sheet(conference):
 def test_a_third_page_is_refused(conference, tmp_path, capsys, monkeypatch):
     """A panel outgrowing its 99mm cannot be folded, so it must not ship."""
     monkeypatch.setattr(leaflet, 'EXPECTED_PAGES', 99)
-    assert gen.main(['--schedule-file', FIXTURE, '--only', 'depliant',
+    assert gen.main(['--schedule-file', FIXTURE, '--no-audience',
+                     '--only', 'depliant',
                      '--output-dir', str(tmp_path)]) == 1
     assert 'a panel no longer fits' in capsys.readouterr().err
     assert list(tmp_path.iterdir()) == []
@@ -144,5 +145,5 @@ def test_the_leaflet_holds_every_talk(conference):
 
 def test_one_run_writes_every_output(tmp_path, conference):
     assert gen.main(['--schedule-file', FIXTURE, '--no-qr',
-                     '--output-dir', str(tmp_path)]) == 0
+                     '--no-audience', '--output-dir', str(tmp_path)]) == 0
     assert len(list(tmp_path.iterdir())) == len(gen.OUTPUTS)
