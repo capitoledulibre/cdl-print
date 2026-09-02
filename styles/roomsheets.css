@@ -1,0 +1,247 @@
+/* The room sheets: one A4 per room and per day, for the volunteer on duty.
+   Printed in black and white and written on with a pen. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: a4 portrait;
+    margin: 0;
+}
+
+:root {
+    --ink: #111111;
+    --rule: #cccccc;
+    --quiet: #777777;
+    --fill: #f4f4f4;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: 9pt;
+}
+
+.page {
+    box-sizing: border-box;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 14mm 14mm 10mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+}
+
+header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 3mm;
+    margin-bottom: 4mm;
+    border-bottom: 3px solid var(--ink);
+}
+
+.kicker {
+    margin: 0;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--quiet);
+}
+
+header h1 {
+    margin: 1mm 0 0;
+    font-size: 34pt;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.day {
+    text-align: right;
+}
+
+.day p {
+    margin: 0;
+    font-size: 13pt;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.day .count {
+    margin-top: 1mm;
+    font-size: 9pt;
+    font-weight: 400;
+    text-transform: none;
+    color: var(--quiet);
+}
+
+/* A refusal is the one thing on this sheet that cannot be got wrong. */
+.notice {
+    margin: 0 0 4mm;
+    padding: 2.5mm 3mm;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 9.5pt;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 1.5mm 2mm;
+    border-bottom: 1.5px solid var(--ink);
+    font-size: 8pt;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--quiet);
+}
+
+td {
+    padding: 2.5mm 2mm;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+}
+
+.when {
+    width: 26mm;
+    line-height: 1.1;
+}
+
+.when b {
+    display: block;
+    font-size: 13pt;
+}
+
+.when i {
+    display: block;
+    font-style: normal;
+    font-size: 9pt;
+    color: var(--quiet);
+}
+
+.when .length {
+    display: block;
+    margin-top: 1mm;
+    font-size: 7.5pt;
+    color: var(--quiet);
+}
+
+.what .title {
+    margin: 0;
+    font-size: 10.5pt;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.what .who {
+    margin: 1mm 0 0;
+    font-size: 9pt;
+    color: #444444;
+}
+
+.what .warning {
+    margin: 1.5mm 0 0;
+    padding: 1mm 2mm;
+    display: inline-block;
+    border: 1.5px solid var(--ink);
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.checks {
+    width: 52mm;
+}
+
+/* Hollow squares, to be ticked with a pen. */
+.box {
+    display: block;
+    margin-bottom: 1.2mm;
+    padding-left: 6mm;
+    position: relative;
+    font-size: 8pt;
+    line-height: 4mm;
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2mm;
+    width: 3.6mm;
+    height: 3.6mm;
+    border: 1.2px solid var(--ink);
+}
+
+tr.pause td {
+    padding: 1.5mm 2mm;
+    background: var(--fill);
+    font-size: 8.5pt;
+    color: var(--quiet);
+}
+
+/* --- what the volunteer writes ------------------------------------------ */
+
+.handover {
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 1.5px solid var(--ink);
+}
+
+.handover p {
+    margin: 0 0 3mm;
+    display: flex;
+    gap: 6mm;
+}
+
+.field {
+    flex: 1;
+    padding-bottom: 4mm;
+    border-bottom: 1px solid var(--rule);
+    font-size: 8pt;
+    color: var(--quiet);
+}
+
+.notes {
+    flex: 1;
+    margin-top: 2mm;
+    min-height: 24mm;
+    border: 1px solid var(--rule);
+    padding: 2mm 3mm;
+    background:
+        repeating-linear-gradient(to bottom,
+            transparent, transparent 7mm,
+            var(--rule) 7mm, var(--rule) 7.1mm);
+}
+
+.notes .label {
+    margin: 0;
+    font-size: 8pt;
+    color: var(--quiet);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4mm;
+    padding-top: 2mm;
+    border-top: 1px solid var(--rule);
+    font-size: 7.5pt;
+    text-transform: capitalize;
+    color: var(--quiet);
+}

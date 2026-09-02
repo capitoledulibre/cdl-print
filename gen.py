@@ -1,10 +1,11 @@
 """Generate the Capitole du Libre printed matter from the schedule export.
 
-Three outputs come out of the same parsed schedule:
+Four outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
   * the hall poster, one A1 sheet per day showing every room at once;
-  * the pocket booklet, A5, with the grid, a card per talk and the annexes.
+  * the pocket booklet, A5, the programme by the hour plus the annexes;
+  * the room sheets, one A4 per room and per day, for the volunteer on duty.
 """
 
 import argparse
@@ -21,6 +22,7 @@ from weasyprint.text.fonts import FontConfiguration
 import booklet
 import overview
 import posters
+import roomsheets
 from schedule import Conference
 
 # --- Configuration ---------------------------------------------------------
@@ -34,7 +36,7 @@ SCHEDULE_URL_TEMPLATE = (
 DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # What `--only` accepts, in the order the outputs are built.
-OUTPUTS = ('salles', 'global', 'livret')
+OUTPUTS = ('salles', 'global', 'livret', 'feuilles')
 
 
 def default_year() -> int:
@@ -93,6 +95,12 @@ def build_booklet(conference, fonts, output, show_qr) -> int:
                                     filler=filler)
 
     write_pdf(markup, css, fonts, output)
+    return 0
+
+
+def build_roomsheets(conference, fonts, output) -> int:
+    css = CSS(filename=roomsheets.STYLESHEET, font_config=fonts)
+    write_pdf(roomsheets.build_html(conference), css, fonts, output)
     return 0
 
 
@@ -189,6 +197,9 @@ def main(argv=None) -> int:
             return 1
     if 'livret' in args.only:
         if build_booklet(conference, fonts, path(booklet.OUTPUT), args.qr):
+            return 1
+    if 'feuilles' in args.only:
+        if build_roomsheets(conference, fonts, path(roomsheets.OUTPUT)):
             return 1
 
     return 0

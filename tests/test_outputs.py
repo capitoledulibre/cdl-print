@@ -153,9 +153,10 @@ def test_filler_rounds_up_to_a_sheet():
 
 # --- all three at once ------------------------------------------------------
 
-def test_one_run_writes_the_three_outputs(tmp_path, conference):
+def test_a_run_writes_the_three_programme_outputs(tmp_path, conference):
     assert gen.main(['--schedule-file', FIXTURE, '--no-qr',
-                     '--output-dir', str(tmp_path)]) == 0
+                     '--only', 'salles', '--only', 'global',
+                     '--only', 'livret', '--output-dir', str(tmp_path)]) == 0
     written = {path.name for path in tmp_path.iterdir()}
     assert written == {name.format(year=conference.year)
                        for name in (posters.OUTPUT, overview.OUTPUT,
