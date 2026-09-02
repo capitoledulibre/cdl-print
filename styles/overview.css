@@ -1,0 +1,173 @@
+/* The hall poster: one A1 landscape sheet per day, rooms across, time down. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: a1 landscape;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --brand-light: #f0a068;
+    --workshop: #2e6b8a;
+    --quiet: #999999;
+    --rule: #dddddd;
+    --fill: #f7f6f4;
+    --fill-workshop: #f0f5f8;
+    --gutter: 42mm;
+}
+
+body {
+    margin: 0;
+    color: #111111;
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.page {
+    box-sizing: border-box;
+    width: 841mm;
+    min-height: 594mm;
+    padding: 16mm 14mm 12mm;
+    page-break-after: always;
+}
+
+/* The grid is not a flex item: WeasyPrint cannot lay a CSS grid out inside a
+   flex container, so the page is a plain block and the grid is given the
+   height the header leaves it. */
+
+header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 6mm;
+    margin-bottom: 5mm;
+    border-bottom: 5px solid var(--brand);
+}
+
+.brand {
+    width: 78mm;
+    height: 34mm;
+    background: url('../cdl.svg') left top / contain no-repeat;
+}
+
+.ident {
+    text-align: right;
+}
+
+.ident h1 {
+    margin: 0;
+    font-size: 130px;
+    line-height: 0.9;
+    letter-spacing: -4px;
+    text-transform: capitalize;
+    color: var(--brand);
+}
+
+.ident p {
+    margin: 3mm 0 0;
+    font-size: 38px;
+    color: #444444;
+}
+
+/* --- room headings ----------------------------------------------------- */
+
+.headers {
+    display: grid;
+    gap: 0 2mm;
+    margin-bottom: 3mm;
+}
+
+.room-name {
+    padding: 3mm 2mm;
+    background: #222222;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 2mm;
+}
+
+/* --- the grid itself ---------------------------------------------------- */
+
+.grid {
+    height: 492mm;
+    display: grid;
+    gap: 1.2mm 2mm;
+}
+
+.hour {
+    grid-column: 1;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--quiet);
+    border-top: 2px solid var(--rule);
+    padding-top: 1mm;
+}
+
+.slot {
+    /* No overflow:hidden here: WeasyPrint crashes laying out a grid item that
+       carries it. Titles are shortened in overview.py instead. */
+    padding: 2mm 2.5mm;
+    background: var(--fill);
+    border-left: 4px solid var(--brand);
+    border-radius: 1mm;
+}
+
+.slot.conference-25min {
+    border-left-color: var(--brand-light);
+}
+
+.slot.workshop {
+    background: var(--fill-workshop);
+    border-left-color: var(--workshop);
+}
+
+.slot .when {
+    margin: 0 0 0.8mm;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand);
+}
+
+.slot h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.12;
+}
+
+.slot .who {
+    margin: 0.8mm 0 0;
+    font-size: 16px;
+    color: #555555;
+}
+
+/* Breaks are structure, not programme: keep them quiet and unlabelled. */
+.slot.pause {
+    background: repeating-linear-gradient(
+        45deg, #ffffff, #ffffff 3mm, #f0f0f0 3mm, #f0f0f0 6mm);
+    border-left: 4px solid var(--rule);
+}
+
+.slot.pause .when {
+    color: var(--quiet);
+}
+
+.slot.pause h2 {
+    font-size: 19px;
+    font-weight: 400;
+    color: #888888;
+}
