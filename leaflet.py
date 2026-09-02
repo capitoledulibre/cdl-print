@@ -74,9 +74,12 @@ def render_cover(conference: Conference) -> str:
 
 def render_practical() -> str:
     """Practical information, with the newcomer essentials above it."""
+    # The first three tips, plus the last one: on a leaflet, knowing that the
+    # volunteers in red are there to be asked is worth more than a fourth tip.
+    tips = content.FIRST_TIME[:3] + content.FIRST_TIME[-1:]
     newcomer = ''.join(
         f'<p class="item"><b>{clean(heading)}</b> {clean(body)}</p>'
-        for heading, body in content.FIRST_TIME[:3])
+        for heading, body in tips)
     rows = ''.join(f'<p class="item"><b>{clean(name)}</b> {clean(about)}</p>'
                    for name, about in content.PRACTICAL)
     return f'''

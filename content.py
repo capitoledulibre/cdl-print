@@ -92,11 +92,12 @@ STANDS = [
 PRACTICAL_TITLE = 'Infos pratiques'
 
 PRACTICAL = [
-    ('Restauration', "Petit-déjeuner d'accueil offert à l'ouverture, food "
-                     "trucks sur site le midi, et buvette associative dans le "
-                     "Hall C. Le cocktail du samedi soir est offert."),
-    ('Wifi', "Réseau ouvert « CapitoleDuLibre », sans mot de passe. Eduroam "
-             "fonctionne également sur tout le campus."),
+    ('Restauration', "Food trucks sur site le midi et buvette associative "
+                     "dans le Hall C. Le cocktail du samedi soir est offert "
+                     "et ouvert à toutes et tous."),
+    ('Wifi', "Il n'y a pas de réseau ouvert au public : le wifi du site est "
+             "réservé aux stands et aux ateliers. Prévoyez votre connexion "
+             "si vous en avez besoin."),
     ('Accessibilité', "Les bâtiments A et C sont accessibles en fauteuil. "
                       "Pour le bâtiment B, demandez à un bénévole : un "
                       "itinéraire par l'arrière existe."),
@@ -109,7 +110,7 @@ PRACTICAL = [
 EMERGENCY_TITLE = 'En cas de pépin'
 
 EMERGENCY = [
-    "Les bénévoles portent un t-shirt orange : n'hésitez pas à les "
+    "Les bénévoles portent un t-shirt rouge : n'hésitez pas à les "
     "solliciter, c'est fait pour ça.",
     "Accueil et poste de secours : Hall C, rez-de-chaussée.",
     "Urgences : 15 (SAMU) · 17 (police) · 18 (pompiers) · 112 (numéro "
@@ -150,9 +151,12 @@ JOIN = [
 
 # --- what to point a first-time visitor at ----------------------------------
 #
-# Drawn from capitoledulibre.org. The venue address, the transport details and
-# the accessibility note are not on the site's front page and need checking
-# against the definitive practical page before printing.
+# Drawn from capitoledulibre.org, then corrected by the team. Careful: the
+# site's front page mentions a welcome breakfast and the venue has wifi, but
+# neither is for the public -- the breakfast is not offered to visitors and
+# the wifi carries the stands and the workshops. Do not "fix" these back from
+# the site. The venue address, the transport details and the accessibility
+# note still need checking against the definitive practical page.
 
 FIRST_TIME_TITLE = 'Premier Capitole du Libre ?'
 
@@ -191,12 +195,12 @@ FIRST_TIME = [
      "tard."),
 
     ('Les bénévoles sont là pour ça',
-     "T-shirt orange, présents partout. Une salle introuvable, une question "
+     "T-shirt rouge, présents partout. Une salle introuvable, une question "
      "sur le programme, un souci quelconque : demandez-leur."),
 ]
 
 FIRST_TIME_DAY = [
-    ('9h30', "Accueil et petit-déjeuner offert"),
+    ('9h30', "Ouverture de l'accueil"),
     ('10h00', "Premières conférences"),
     ('12h30', "Pause déjeuner, food trucks sur site"),
     ('14h00', "Reprise, conférences et ateliers"),
