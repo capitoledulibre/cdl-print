@@ -1,11 +1,12 @@
 # cdl-print
 
 Generates the Capitole du Libre printed matter from the conference's Pretalx
-FRAB export. One command, three PDFs:
+FRAB export. One command, six PDFs:
 
 | File | Format | What it is |
 | --- | --- | --- |
 | `conference-programme-salles-<year>.pdf` | A3 portrait, one sheet per room and day | The door posters, read standing from a few metres away |
+| `conference-panneaux-salles-<year>.pdf` | A3 landscape, one sheet per room | The room signs: the name alone, read from the far end of the corridor |
 | `conference-programme-global-<year>.pdf` | A1 landscape, one sheet per day | The hall poster: every room side by side, for the entrance |
 | `conference-livret-<year>.pdf` | A5, folded and stapled | The pocket booklet: the programme by the hour, and the annexes |
 | `conference-feuilles-salles-<year>.pdf` | A4 portrait, one per room and day | The room sheets: the working document of the volunteer on duty |
@@ -32,7 +33,7 @@ uv sync
 uv run python gen.py
 ```
 
-This fetches the schedule for the current year and writes the three PDFs into
+This fetches the schedule for the current year and writes the six PDFs into
 the working directory. Set `CDL_YEAR` to build another edition:
 
 ```shell
@@ -50,7 +51,7 @@ uv run python gen.py --only livret --output-dir build
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
-| `--only` | all three | Build only this output (`salles`, `global`, `livret`); repeatable |
+| `--only` | all of them | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
 | `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
 | `--no-audience` | shown | Leave out who each talk is for |
@@ -66,6 +67,7 @@ uv run python gen.py --only livret --output-dir build
 | `schedule.py` | Parses the export into conference, days, rooms, events and people. Knows nothing about pages. |
 | `render.py` | Shared by every output: escaping, QR codes, fitting a page. |
 | `posters.py` + `styles/posters.css` | The door posters |
+| `signage.py` + `styles/signage.css` | The room signs |
 | `overview.py` + `styles/overview.css` | The hall poster |
 | `booklet.py` + `styles/booklet.css` | The booklet |
 | `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
@@ -136,6 +138,23 @@ A room too dense for its sheet has its timeline set a step smaller until it
 fits, so a page is never split in two or quietly clipped. A room that will
 not fit even at `MIN_TIMELINE_SIZE` aborts the run with a message naming it.
 Sizing every room this way is what makes a run take a few seconds.
+
+### The room signs
+
+The companion sheet of the door poster, and deliberately the emptier of the
+two: someone at the far end of a corridor is not reading a programme, they
+are looking for a number. So the sheet carries the room name and nothing
+else, set as large as the paper allows, and it is landscape where the
+programme is portrait -- a room name is one short word, and the wider sheet
+is what buys the type its size.
+
+One sheet per room, not per room and per day: a door does not change name
+between Saturday and Sunday, so a room used on both days is printed once.
+
+The name is sized the way a dense room's timeline is: down a step at a time
+from `BASE_NAME_SIZE` until it holds its sheet, so `Hall C` shrinks rather
+than pushing the footer onto a second page, and a name that will not fit even
+at `MIN_NAME_SIZE` aborts the run instead of printing something broken.
 
 ### The hall poster
 
@@ -223,5 +242,5 @@ The suite renders the trimmed schedule exports under `tests/fixtures/` -- no
 network needed -- and checks the shapes a printer depends on: one page per
 room and day, no page losing its footer to clipping, dense rooms scaled
 rather than split, one hall sheet per day, a booklet page count that folds,
-no talk or speaker disappearing from any of the three, and file names that
-carry the edition.
+no talk or speaker disappearing from any of the three, one sign per room
+whichever days it is used, and file names that carry the edition.

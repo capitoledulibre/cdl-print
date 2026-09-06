@@ -1,0 +1,101 @@
+/* Capitole du Libre room signs: one A3 sheet per room, the name alone. */
+
+/* Embedded so that the PDF renders the same at the print shop as it does
+   here; see fonts/LICENSE.txt. */
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+/* Landscape, unlike the portrait programme it hangs beside: a room name is
+   one short word, and the wider sheet is what buys it its type size. */
+@page {
+    size: a3 landscape;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --ink: #111111;
+    --quiet: #999999;
+    --rule: #dddddd;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Helvetica', 'Arial',
+                 sans-serif;
+}
+
+.page {
+    box-sizing: border-box;
+    width: 420mm;
+    min-height: 297mm;
+    padding: 16mm 20mm 12mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+}
+
+/* --- header ------------------------------------------------------------ */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5mm;
+    border-bottom: 4px solid var(--brand);
+}
+
+.brand {
+    width: 60mm;
+    height: 26mm;
+    background: url('../cdl.svg') left center / contain no-repeat;
+}
+
+.kicker {
+    margin: 0;
+    font-size: 44px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--quiet);
+}
+
+/* --- the name ---------------------------------------------------------- */
+
+/* All the sheet has to say, taking all the room the sheet has. gen.py
+   overrides the size per page for a name the default will not hold. */
+.name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 520px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-align: center;
+    color: var(--brand);
+}
+
+/* --- footer ------------------------------------------------------------ */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--rule);
+    font-size: 22px;
+    color: var(--quiet);
+}

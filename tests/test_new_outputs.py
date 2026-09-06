@@ -1,8 +1,9 @@
-"""The room sheets and the leaflet.
+"""The room sheets, the room signs and the leaflet.
 
 Each is a physical object before it is a PDF: a sheet a volunteer writes on,
-and one sheet folded in three. What these hold is that shape, plus the one
-fact only the room sheets carry -- that a speaker refused to be filmed.
+a name hung on a door, and one sheet folded in three. What these hold is that
+shape, plus the one fact only the room sheets carry -- that a speaker refused
+to be filmed.
 """
 
 import locale
@@ -17,6 +18,7 @@ import gen
 import leaflet
 import roomsheets
 import schedule
+import signage
 
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
@@ -104,6 +106,57 @@ def test_a_room_sheet_lists_its_talks_and_its_checks(conference):
     for check in roomsheets.CHECKS:
         assert check in first
     assert 'Bénévole du matin' in first
+
+
+# --- the room signs ---------------------------------------------------------
+
+def signs(conference) -> str:
+    """The signs as gen.py builds them: fitted, so each holds one sheet."""
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, signage.STYLESHEET),
+              font_config=fonts)
+    sizes, too_long = signage.fit_signs(conference, css, fonts)
+    assert not too_long
+    return signage.build_html(conference, sizes=sizes)
+
+
+def test_one_sign_per_room_whichever_days_it_is_used(conference):
+    """A door does not change name between Saturday and Sunday."""
+    document = lay_out(signs(conference), signage.STYLESHEET)
+    names = {room._name for day in conference._days.values()
+             for room in day._rooms.values() if room.sorted_events()}
+    assert len(document.pages) == len(names)
+    for page in document.pages:
+        assert page.width == pytest.approx(420 * MM, abs=2)
+        assert page.height == pytest.approx(297 * MM, abs=2)
+
+
+def test_a_sign_carries_its_room_name(conference):
+    document = lay_out(signs(conference), signage.STYLESHEET)
+    laid_out = [page_text(page) for page in document.pages]
+    for room in signage.signed_rooms(conference):
+        assert any(room._name in text for text in laid_out), room._name
+
+
+def test_a_long_name_is_stepped_down_rather_than_spilled(conference):
+    """Otherwise the footer would quietly land on a second sheet."""
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, signage.STYLESHEET),
+              font_config=fonts)
+    sizes, too_long = signage.fit_signs(conference, css, fonts)
+    assert not too_long
+    assert sizes['Hall C'] < signage.BASE_NAME_SIZE
+
+
+def test_a_name_that_will_not_fit_at_all_is_refused(conference, tmp_path,
+                                                    capsys, monkeypatch):
+    monkeypatch.setattr(signage, 'BASE_NAME_SIZE', 5000)
+    monkeypatch.setattr(signage, 'MIN_NAME_SIZE', 5000)
+    assert gen.main(['--schedule-file', FIXTURE, '--no-audience',
+                     '--only', 'panneaux',
+                     '--output-dir', str(tmp_path)]) == 1
+    assert 'do not fit their sheet' in capsys.readouterr().err
+    assert list(tmp_path.iterdir()) == []
 
 
 # --- the leaflet ------------------------------------------------------------

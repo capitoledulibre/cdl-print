@@ -1,8 +1,9 @@
 """Generate the Capitole du Libre printed matter from the schedule export.
 
-Five outputs come out of the same parsed schedule:
+Six outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
+  * the room signs, one A3 landscape sheet per room, the name read from afar;
   * the hall poster, one A1 sheet per day showing every room at once;
   * the pocket booklet, A5, the programme by the hour plus the annexes;
   * the room sheets, one A4 per room and per day, for the volunteer on duty;
@@ -26,6 +27,7 @@ import leaflet
 import overview
 import posters
 import roomsheets
+import signage
 from schedule import Conference
 
 # --- Configuration ---------------------------------------------------------
@@ -39,7 +41,8 @@ SCHEDULE_URL_TEMPLATE = (
 DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # What `--only` accepts, in the order the outputs are built.
-OUTPUTS = ('salles', 'global', 'livret', 'feuilles', 'depliant')
+OUTPUTS = ('salles', 'panneaux', 'global', 'livret', 'feuilles',
+           'depliant')
 
 
 def default_year() -> int:
@@ -72,6 +75,21 @@ def build_posters(conference, fonts, output, show_qr) -> int:
 
     markup = posters.build_html(conference, show_qr=show_qr, sizes=sizes)
     write_pdf(markup, css, fonts, output)
+    return 0
+
+
+def build_signage(conference, fonts, output) -> int:
+    css = CSS(filename=signage.STYLESHEET, font_config=fonts)
+    sizes, too_long = signage.fit_signs(conference, css, fonts)
+    if too_long:
+        print('error: these room names do not fit their sheet even at the '
+              f'smallest type size ({signage.MIN_NAME_SIZE}px):',
+              file=sys.stderr)
+        for room in too_long:
+            print(f'  {room}', file=sys.stderr)
+        return 1
+
+    write_pdf(signage.build_html(conference, sizes=sizes), css, fonts, output)
     return 0
 
 
@@ -159,7 +177,7 @@ def parse_args(argv=None):
         help='leave out who each talk is for')
     parser.add_argument(
         '--only', choices=OUTPUTS, action='append',
-        help='build only this output; repeatable (default: all three)')
+        help='build only this output; repeatable (default: all of them)')
     parser.add_argument(
         '--output-dir', default='.',
         help='directory to write the PDFs into (default: the current one)')
@@ -225,6 +243,9 @@ def main(argv=None) -> int:
 
     if 'salles' in args.only:
         if build_posters(conference, fonts, path(posters.OUTPUT), args.qr):
+            return 1
+    if 'panneaux' in args.only:
+        if build_signage(conference, fonts, path(signage.OUTPUT)):
             return 1
     if 'global' in args.only:
         if build_overview(conference, fonts, path(overview.OUTPUT)):
