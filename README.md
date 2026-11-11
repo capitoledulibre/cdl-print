@@ -163,6 +163,11 @@ position. Titles are shortened to what their block can hold, computed from
 the sheet geometry: WeasyPrint crashes laying out a grid item that carries
 `overflow: hidden`, so clipping has to happen before the markup is written.
 
+A block shorter than its text stretches the grid instead, and the end of the
+day lands alone on an extra A0 sheet. Back-to-back lightning talks are
+therefore one block named after the session, as on the door posters, and the
+build refuses a hall poster that is not exactly one sheet per day.
+
 ### The booklet
 
 The cover is the edition poster from `assets/`, and the annexes wear the dark

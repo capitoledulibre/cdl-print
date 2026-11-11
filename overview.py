@@ -8,7 +8,7 @@ position: an actual grid, not a list.
 
 from datetime import timedelta
 
-from render import clean, event_classes
+from render import clean, event_classes, group_lightning
 from schedule import Conference, Day, EXCLUDED_ROOMS, build_breaks
 
 STYLESHEET = 'styles/overview.css'
@@ -107,6 +107,26 @@ def render_event(event, column: int, origin, budget: int,
         </div>'''
 
 
+def render_lightning(talks: list, column: int, origin, budget: int) -> str:
+    """A run of lightning talks as one block, named after the session.
+
+    The block is a few minutes tall: there is room for its name, not for
+    the talks, which the door poster and the booklet list one by one.
+    """
+    first, last = talks[0], talks[-1]
+    title = first.title
+    if not title.lower().startswith('lightning talk'):
+        title = 'Lightning talks'
+    top = slot_of(first._start_datetime, origin) + 1
+    bottom = slot_of(last._end_datetime, origin) + 1
+    return f'''
+        <div class="slot talk lightning"
+             style="grid-column: {column}; grid-row: {top} / {bottom}">
+            <p class="when">{first._start_datetime:%Hh%M}</p>
+            <h2>{clean(shorten(title, budget))}</h2>
+        </div>'''
+
+
 def render_day(conference: Conference, day: Day) -> str:
     rooms = day_rooms(day)
     if not rooms:
@@ -124,12 +144,18 @@ def render_day(conference: Conference, day: Day) -> str:
     slots = render_hour_marks(origin, end, origin)
     for index, room in enumerate(rooms):
         talks = room.sorted_events()
-        for event in talks + build_breaks(room, day, talks):
-            minutes = int((event._end_datetime
-                           - event._start_datetime).total_seconds() // 60)
-            slots += render_event(event, index + 2, origin,
-                                  title_budget(len(rooms), span, minutes),
-                                  minutes)
+        events = sorted(talks + build_breaks(room, day, talks),
+                        key=lambda event: event._start_datetime)
+        for item in group_lightning(events):
+            run = item if isinstance(item, list) else [item]
+            minutes = int((run[-1]._end_datetime
+                           - run[0]._start_datetime).total_seconds() // 60)
+            budget = title_budget(len(rooms), span, minutes)
+            if isinstance(item, list):
+                slots += render_lightning(item, index + 2, origin, budget)
+            else:
+                slots += render_event(item, index + 2, origin, budget,
+                                      minutes)
 
     return f'''
     <section class="page">

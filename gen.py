@@ -94,8 +94,23 @@ def build_signage(conference, fonts, output) -> int:
 
 
 def build_overview(conference, fonts, output) -> int:
+    """One A0 sheet per day: refuse a day that runs onto a second one.
+
+    Blocks too short for their text stretch the grid past the sheet, and
+    the overflow lands alone on an extra A0 page nobody will hang.
+    """
     css = CSS(filename=overview.STYLESHEET, font_config=fonts)
-    write_pdf(overview.build_html(conference), css, fonts, output)
+    markup = overview.build_html(conference)
+    days = sum(1 for day in conference._days.values()
+               if overview.day_rooms(day))
+    pages = len(HTML(string=markup).render(stylesheets=[css],
+                                           font_config=fonts).pages)
+    if pages != days:
+        print(f'error: the hall poster came out as {pages} sheets for '
+              f'{days} days; a day no longer fits its sheet',
+              file=sys.stderr)
+        return 1
+    write_pdf(markup, css, fonts, output)
     return 0
 
 

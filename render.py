@@ -98,6 +98,30 @@ def qr_code(url: str) -> str:
     return buffer.getvalue().decode('utf-8')
 
 
+def is_lightning(event: Event) -> bool:
+    return (event._type or '').lower().startswith('lightning')
+
+
+def group_lightning(events: list) -> list:
+    """Gather each run of back-to-back lightning talks into one list.
+
+    A lightning talk lasts five minutes but its title needs as much room as
+    any other, so given a block of its own it stretches the page: B00 on the
+    2026 Saturday no longer fit its door poster at any readable size, and
+    pushed the hall poster onto a second A1 sheet. A run becomes one block.
+    """
+    grouped = []
+    for event in events:
+        if (is_lightning(event) and grouped
+                and isinstance(grouped[-1], list)):
+            grouped[-1].append(event)
+        elif is_lightning(event):
+            grouped.append([event])
+        else:
+            grouped.append(event)
+    return grouped
+
+
 def duration_minutes(event: Event) -> int:
     delta = event._end_datetime - event._start_datetime
     return int(delta.total_seconds() // 60)

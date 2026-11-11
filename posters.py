@@ -3,7 +3,8 @@
 from weasyprint import CSS
 
 from audience import code_of
-from render import clean, duration_minutes, event_classes, fit_size, qr_code
+from render import (clean, duration_minutes, event_classes, fit_size,
+                    group_lightning, qr_code)
 from schedule import (Conference, Day, EXCLUDED_ROOMS, Event, Room,
                       build_breaks)
 
@@ -78,6 +79,51 @@ def render_event(event: Event, show_qr: bool = True) -> str:
     '''
 
 
+def render_lightning(talks: list, show_qr: bool = True) -> str:
+    """One slot for a run of lightning talks, each on a line of its own.
+
+    The session is often an event of its own, titled after the format and
+    starting the run: it then heads the slot, with its QR code, rather than
+    being listed as a talk.
+    """
+    head = None
+    if talks[0].title.lower().startswith('lightning talk'):
+        head, talks = talks[0], talks[1:]
+
+    title = clean(head.title) if head else 'Lightning talks'
+    speakers = clean(head.persons) if head else ''
+    people = f'<p class="who">{speakers}</p>' if speakers else ''
+    items = ''.join(
+        f'<li><b>{talk._start_datetime:%Hh%M}</b> {clean(talk.title)}'
+        + (f' <span>{clean(talk.persons)}</span>' if talk.persons else '')
+        + '</li>'
+        for talk in talks)
+
+    url = site_url(head) if head else None
+    qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
+
+    first = head or talks[0]
+    last = talks[-1] if talks else head
+    minutes = int((last._end_datetime
+                   - first._start_datetime).total_seconds() // 60)
+
+    return f'''
+                <div class="slot talk lightning"
+                     style="flex-grow: {minutes}">
+                    <div class="when">
+                        <b>{first._start_datetime:%Hh%M}</b>
+                        <i>{last._end_datetime:%Hh%M}</i>
+                    </div>
+                    <div class="what">
+                        <h2>{title}</h2>
+                        {people}
+                        <ul class="talks">{items}</ul>
+                    </div>
+                    {qr}
+                </div>
+    '''
+
+
 def render_room(conference: Conference, day: Day, room: Room,
                 show_qr: bool = True, timeline_size: float = None) -> str:
     talks = room.sorted_events()
@@ -91,13 +137,17 @@ def render_room(conference: Conference, day: Day, room: Room,
 
     slots = ''
     previous_end = None
-    for event in events:
-        if previous_end is not None and event._start_datetime > previous_end:
-            gap = int((event._start_datetime
-                       - previous_end).total_seconds() // 60)
+    for item in group_lightning(events):
+        run = item if isinstance(item, list) else [item]
+        start = run[0]._start_datetime
+        if previous_end is not None and start > previous_end:
+            gap = int((start - previous_end).total_seconds() // 60)
             slots += f'<div class="hole" style="flex-grow: {gap}"></div>'
-        previous_end = event._end_datetime
-        slots += render_event(event, show_qr=show_qr)
+        previous_end = run[-1]._end_datetime
+        if isinstance(item, list):
+            slots += render_lightning(item, show_qr=show_qr)
+        else:
+            slots += render_event(item, show_qr=show_qr)
 
     # A room with one or two talks would otherwise stretch a couple of lines
     # of small text over a whole A3; the poster variant scales the type up.

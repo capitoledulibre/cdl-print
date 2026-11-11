@@ -179,6 +179,32 @@ header {
     color: #555555;
 }
 
+/* A run of lightning talks, one line each under the session title. */
+.what .talks {
+    margin: 0.5em 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.what .talks li {
+    margin: 0.25em 0 0;
+    font-size: 1.1875em;
+    line-height: 1.2;
+}
+
+.what .talks b {
+    display: inline-block;
+    min-width: 3.4em;
+}
+
+.what .talks span {
+    color: #555555;
+}
+
+.what .talks span::before {
+    content: '\2014\00a0';
+}
+
 .qr {
     width: 18mm;
 }

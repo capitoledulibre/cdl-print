@@ -303,3 +303,50 @@ def test_the_short_and_long_formats_no_longer_differ_by_tint():
     for name in ('styles/posters.css', 'styles/overview.css'):
         with open(os.path.join(ROOT, name), encoding='utf-8') as handle:
             assert 'conference-25min' not in handle.read()
+
+
+def test_a_day_spilling_onto_a_second_sheet_is_refused(tmp_path, capsys,
+                                                       monkeypatch):
+    """An extra A0 sheet carrying the end of a day must not ship."""
+    build = overview.build_html
+    monkeypatch.setattr(overview, 'build_html',
+                        lambda conference: build(conference) * 2)
+    assert gen.main(['--schedule-file', FIXTURE, '--no-audience',
+                     '--only', 'global',
+                     '--output-dir', str(tmp_path)]) == 1
+    assert 'a day no longer fits its sheet' in capsys.readouterr().err
+    assert list(tmp_path.iterdir()) == []
+
+
+# --- lightning talks on the door posters -------------------------------------
+
+def lightning(day, start, title, kind='Lightning Talk', duration='00:04'):
+    event = schedule.Event(title, day)
+    event._title, event._type = title, kind
+    event._start, event._duration = start, duration
+    return event
+
+
+def test_back_to_back_lightning_talks_share_one_slot(conference):
+    """Twelve talks with four lightning ones no longer fit an A3 sheet.
+
+    A run of them is one slot, headed by the session event when there is
+    one, and broken by anything that is not a lightning talk.
+    """
+    day = next(iter(conference._days.values()))
+    events = [lightning(day, '10:00', 'Ouverture', 'Conférence 25min',
+                        '00:25'),
+              lightning(day, '10:30', 'Lightning Talks'),
+              lightning(day, '10:35', 'Libre ou Open Source ?'),
+              lightning(day, '10:40', 'Une salle de contrôle'),
+              lightning(day, '11:00', 'Hygiène numérique',
+                        'Conférence 55min', '00:55')]
+    grouped = render.group_lightning(events)
+    assert [len(item) if isinstance(item, list) else item.title
+            for item in grouped] == ['Ouverture', 3, 'Hygiène numérique']
+
+    slot = posters.render_lightning(grouped[1], show_qr=False)
+    assert slot.count('<li>') == 2
+    assert '<h2>Lightning Talks</h2>' in slot
+    assert '10h30' in slot and '10h44' in slot
+    assert 'flex-grow: 14' in slot
