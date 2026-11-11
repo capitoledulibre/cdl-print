@@ -1,4 +1,4 @@
-"""The hall poster: one A1 sheet per day, every room side by side.
+"""The hall poster: one A0 sheet per day, every room side by side.
 
 Unlike a door poster, this one is read by several people at once looking for
 where to go next, so the whole day has to be visible in one glance. Rooms are
@@ -21,14 +21,14 @@ SLOT_MINUTES = 5
 # here because a title too long for its block cannot be clipped in CSS:
 # WeasyPrint crashes on a grid item carrying overflow:hidden, so titles are
 # shortened to what their block can hold before they are written out.
-SHEET_WIDTH_MM = 841
-SHEET_PADDING_MM = 14
-GUTTER_MM = 42
-COLUMN_GAP_MM = 2
-GRID_HEIGHT_MM = 492
-SLOT_PADDING_MM = 5
-TITLE_SIZE_PX = 18
-WHEN_HEIGHT_MM = 5.5
+SHEET_WIDTH_MM = 1189
+SHEET_PADDING_MM = 20
+GUTTER_MM = 59
+COLUMN_GAP_MM = 2.8
+GRID_HEIGHT_MM = 700
+SLOT_PADDING_MM = 6
+TITLE_SIZE_PX = 22
+WHEN_HEIGHT_MM = 6.8
 PX_TO_MM = 25.4 / 96
 
 # A speaker line costs more than it gives on a block this short.

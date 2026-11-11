@@ -7,7 +7,7 @@ FRAB export. One command, six PDFs:
 | --- | --- | --- |
 | `conference-programme-salles-<year>.pdf` | A3 portrait, one sheet per room and day | The door posters, read standing from a few metres away |
 | `conference-panneaux-salles-<year>.pdf` | A3 landscape, one sheet per room | The room signs: the name alone, read from the far end of the corridor |
-| `conference-programme-global-<year>.pdf` | A1 landscape, one sheet per day | The hall poster: every room side by side, for the entrance |
+| `conference-programme-global-<year>.pdf` | A0 landscape, one sheet per day | The hall poster: every room side by side, for the entrance |
 | `conference-livret-<year>.pdf` | A5, folded and stapled | The pocket booklet: the programme by the hour, and the annexes |
 | `conference-feuilles-salles-<year>.pdf` | A4 portrait, one per room and day | The room sheets: the working document of the volunteer on duty |
 | `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
@@ -186,7 +186,7 @@ renamed in Pretalx cannot quietly drop off the page.
 
 There is no timetable grid in the booklet. At A5 it came out at 5.25pt with
 titles cut to twenty characters -- unreadable, and no longer information. The
-bird's-eye view is the job of the A1 hall poster. What the booklet has
+bird's-eye view is the job of the A0 hall poster. What the booklet has
 instead is a **`Salle par salle`** index at the back, one line per talk, for
 whoever is already sitting in a room and wants to know what follows, and an
 alphabetical **`Les intervenants`** index, filed through the locale so that

@@ -59,12 +59,12 @@ def page_text(page) -> str:
 
 # --- the hall poster --------------------------------------------------------
 
-def test_the_hall_poster_is_one_a1_sheet_per_day(conference):
+def test_the_hall_poster_is_one_a0_sheet_per_day(conference):
     document = lay_out(overview.build_html(conference), overview.STYLESHEET)
     assert len(document.pages) == len(conference._days)
     for page in document.pages:
-        assert page.width == pytest.approx(841 * MM, abs=2)
-        assert page.height == pytest.approx(594 * MM, abs=2)
+        assert page.width == pytest.approx(1189 * MM, abs=2)
+        assert page.height == pytest.approx(841 * MM, abs=2)
 
 
 def test_the_hall_poster_names_every_room_of_the_day(conference):

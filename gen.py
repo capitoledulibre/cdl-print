@@ -4,7 +4,7 @@ Six outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
   * the room signs, one A3 landscape sheet per room, the name read from afar;
-  * the hall poster, one A1 sheet per day showing every room at once;
+  * the hall poster, one A0 sheet per day showing every room at once;
   * the pocket booklet, A5, the programme by the hour plus the annexes;
   * the room sheets, one A4 per room and per day, for the volunteer on duty;
   * the tri-fold leaflet, one A4 landscape sheet folded in three.

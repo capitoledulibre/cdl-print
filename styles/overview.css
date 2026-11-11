@@ -14,8 +14,11 @@
     src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
 }
 
+/* A0, one sheet per day. The frame -- logo, day, room names, hours -- is
+   the A1 design scaled by the sheet ratio, 1.41; the programme text only by
+   about 1.2, so the rest of the room goes to cutting fewer titles. */
 @page {
-    size: a1 landscape;
+    size: a0 landscape;
     margin: 0;
 }
 
@@ -27,7 +30,7 @@
     --rule: #dddddd;
     --fill: #f7f6f4;
     --fill-workshop: #f0f5f8;
-    --gutter: 42mm;
+    --gutter: 59mm;
 }
 
 body {
@@ -38,9 +41,9 @@ body {
 
 .page {
     box-sizing: border-box;
-    width: 841mm;
-    min-height: 594mm;
-    padding: 16mm 14mm 12mm;
+    width: 1189mm;
+    min-height: 841mm;
+    padding: 22mm 20mm 17mm;
     page-break-after: always;
 }
 
@@ -52,14 +55,14 @@ header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding-bottom: 6mm;
-    margin-bottom: 5mm;
-    border-bottom: 5px solid var(--brand);
+    padding-bottom: 8mm;
+    margin-bottom: 7mm;
+    border-bottom: 7px solid var(--brand);
 }
 
 .brand {
-    width: 78mm;
-    height: 34mm;
+    width: 110mm;
+    height: 48mm;
     background: url('../cdl.svg') left top / contain no-repeat;
 }
 
@@ -69,16 +72,16 @@ header {
 
 .ident h1 {
     margin: 0;
-    font-size: 130px;
+    font-size: 184px;
     line-height: 0.9;
-    letter-spacing: -4px;
+    letter-spacing: -6px;
     text-transform: capitalize;
     color: var(--brand);
 }
 
 .ident p {
-    margin: 3mm 0 0;
-    font-size: 38px;
+    margin: 4mm 0 0;
+    font-size: 54px;
     color: #444444;
 }
 
@@ -86,15 +89,15 @@ header {
 
 .headers {
     display: grid;
-    gap: 0 2mm;
-    margin-bottom: 3mm;
+    gap: 0 2.8mm;
+    margin-bottom: 4mm;
 }
 
 .room-name {
-    padding: 3mm 2mm;
+    padding: 4mm 2.8mm;
     background: #222222;
     color: #ffffff;
-    font-size: 30px;
+    font-size: 42px;
     font-weight: 700;
     text-align: center;
     border-radius: 2mm;
@@ -103,26 +106,26 @@ header {
 /* --- the grid itself ---------------------------------------------------- */
 
 .grid {
-    height: 492mm;
+    height: 700mm;
     display: grid;
-    gap: 1.2mm 2mm;
+    gap: 1.7mm 2.8mm;
 }
 
 .hour {
     grid-column: 1;
-    font-size: 44px;
+    font-size: 62px;
     font-weight: 700;
     color: var(--quiet);
-    border-top: 2px solid var(--rule);
+    border-top: 3px solid var(--rule);
     padding-top: 1mm;
 }
 
 .slot {
     /* No overflow:hidden here: WeasyPrint crashes laying out a grid item that
        carries it. Titles are shortened in overview.py instead. */
-    padding: 2mm 2.5mm;
+    padding: 2.4mm 3mm;
     background: var(--fill);
-    border-left: 4px solid var(--brand);
+    border-left: 5px solid var(--brand);
     border-radius: 1mm;
 }
 
@@ -142,22 +145,22 @@ header {
 }
 
 .slot .when {
-    margin: 0 0 0.8mm;
-    font-size: 18px;
+    margin: 0 0 1mm;
+    font-size: 22px;
     font-weight: 700;
     color: var(--brand);
 }
 
 .slot h2 {
     margin: 0;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.12;
 }
 
 .slot .who {
-    margin: 0.8mm 0 0;
-    font-size: 16px;
+    margin: 1mm 0 0;
+    font-size: 19px;
     color: #555555;
 }
 
@@ -165,7 +168,7 @@ header {
 .slot.pause {
     background: repeating-linear-gradient(
         45deg, #ffffff, #ffffff 3mm, #f0f0f0 3mm, #f0f0f0 6mm);
-    border-left: 4px solid var(--rule);
+    border-left: 5px solid var(--rule);
 }
 
 .slot.pause .when {
@@ -173,7 +176,7 @@ header {
 }
 
 .slot.pause h2 {
-    font-size: 19px;
+    font-size: 23px;
     font-weight: 400;
     color: #888888;
 }
