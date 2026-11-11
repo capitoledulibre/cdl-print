@@ -13,6 +13,9 @@ FRAB export. One command, seven PDFs:
 | `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
 | `conference-briefing-stands-<year>.pdf` | A4 portrait, one sheet | The stand briefing: the weekend, the wifi, who to call |
 
+On request, the same command also makes the video covers: one 1920x1080
+PNG per filmed talk, for YouTube and PeerTube, in `couvertures-<year>/`.
+
 The year comes from the parsed schedule rather than the command line, so a
 new edition never overwrites the previous one's PDFs.
 
@@ -21,6 +24,19 @@ new edition never overwrites the previous one's PDFs.
 ### Prerequisites
 
 * [uv](https://docs.astral.sh/uv/getting-started/installation/)
+* Pango, which WeasyPrint draws text with: `brew install pango` on macOS,
+  `apt install libpango-1.0-0 libpangoft2-1.0-0` on Debian and Ubuntu
+* the `fr_FR.UTF-8` locale, for the dates; another one can be passed with
+  `--locale`
+* optionally, [Ghostscript](https://www.ghostscript.com/), to make greyscale
+  copies (see [Printing in black and white](#printing-in-black-and-white))
+
+On macOS, Python may not find the Homebrew libraries and stop with
+`cannot load library 'libgobject-2.0-0'`. Point it at them:
+
+```shell
+export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
+```
 
 ### Installing
 
@@ -40,6 +56,25 @@ the working directory. Set `CDL_YEAR` to build another edition:
 ```shell
 CDL_YEAR=2025 uv run python gen.py
 ```
+
+The wifi password printed on the stand briefing is not kept in the
+repository; pass it in the environment, or the briefing prints a blank line
+for it:
+
+```shell
+CDL_WIFI_PASSWORD=... uv run python gen.py
+```
+
+The video covers are only built when named, since they are not needed until
+the recordings go online:
+
+```shell
+uv run python gen.py --only couvertures
+```
+
+A run fetches the schedule, the "public visé" answers and, for the covers,
+the speakers' photos from Pretalx. Only the schedule is required: the other
+two warn and the run goes on without them.
 
 ### Options
 
@@ -66,7 +101,7 @@ uv run python gen.py --only livret --output-dir build
 | Module | Role |
 | --- | --- |
 | `schedule.py` | Parses the export into conference, days, rooms, events and people. Knows nothing about pages. |
-| `render.py` | Shared by every output: escaping, QR codes, fitting a page. |
+| `render.py` | Shared by every output: escaping, QR codes, fitting a page, grouping lightning talks, partner logos, the campus plan and the rooms by floor. |
 | `posters.py` + `styles/posters.css` | The door posters |
 | `signage.py` + `styles/signage.css` | The room signs |
 | `overview.py` + `styles/overview.css` | The hall poster |
@@ -76,7 +111,9 @@ uv run python gen.py --only livret --output-dir build
 | `standbrief.py` + `styles/standbrief.css` | The stand briefing |
 | `covers.py` + `styles/covers.css` | The video covers, on request |
 | `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
-| `content.py` | Booklet copy that does not come from the export: editorial, first-timer guide, the curated highlights, stands, partners, practical info. **Mostly placeholder text**; the first-timer page is drawn from capitoledulibre.org. |
+| `avatars.py` | The speakers' photos for the video covers, fetched from the Pretalx speakers API |
+| `content.py` | Copy that does not come from the export, for the booklet, the leaflet and the stand briefing: first-timer guide, practical information, opening hours, the curated highlights, partners and their logos, the campus plan legend, the wifi network. The editorial, the stands of the village, the Toulibre page and the emergency page are **still placeholder text**. |
+| `assets/` | The edition poster, the campus plan, the partners' logos, the Toulibre logo and the Occitan cross |
 
 ## Who each talk is for
 
@@ -115,7 +152,17 @@ the same grey. Nothing that matters is told apart by colour alone:
   the height of a block already says how long a talk runs.
 
 Colour still does its work on screen and in a colour run; it is never the
-only cue. Check any change against a greyscale conversion of the PDF.
+only cue. Check any change against a greyscale conversion of the PDF, which
+Ghostscript makes:
+
+```shell
+gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite \
+   -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray \
+   -o conference-depliant-2026-nb.pdf conference-depliant-2026.pdf
+```
+
+Ghostscript keeps the workshop hatching as vectors; some lighter converters
+drop it, and with it the one cue that tells a workshop from a talk.
 
 The booklet's dark pages survive greyscale with good contrast, but a
 full-bleed near-black A5 page is heavy on toner in a long print run. If that
@@ -342,4 +389,8 @@ network needed -- and checks the shapes a printer depends on: one page per
 room and day, no page losing its footer to clipping, dense rooms scaled
 rather than split, one hall sheet per day, a booklet page count that folds,
 no talk or speaker disappearing from any of the three, one sign per room
-whichever days it is used, and file names that carry the edition.
+whichever days it is used, a leaflet of exactly two pages whose programme
+stays on the sheet, room sheet pages numbered per room and day, a stand
+briefing of one sheet that never prints a guessed password, a cover for
+every filmed talk and none for a workshop, and file names that carry the
+edition. Nothing in the suite touches the network.
