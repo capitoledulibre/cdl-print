@@ -20,6 +20,7 @@ import render
 import roomsheets
 import schedule
 import signage
+import standbrief
 
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
@@ -273,3 +274,44 @@ def test_one_run_writes_every_output(tmp_path, conference):
     assert gen.main(['--schedule-file', FIXTURE, '--no-qr',
                      '--no-audience', '--output-dir', str(tmp_path)]) == 0
     assert len(list(tmp_path.iterdir())) == len(gen.OUTPUTS)
+
+
+# --- the stand briefing -----------------------------------------------------
+
+def test_the_stand_briefing_is_one_a4_sheet(conference):
+    document = lay_out(standbrief.build_html(conference),
+                       standbrief.STYLESHEET)
+    assert len(document.pages) == standbrief.EXPECTED_PAGES
+    page = document.pages[0]
+    assert page.width == pytest.approx(210 * MM, abs=2)
+    assert page.height == pytest.approx(297 * MM, abs=2)
+
+
+def test_an_unknown_field_is_a_blank_not_a_guess(conference, monkeypatch):
+    monkeypatch.setitem(standbrief.content.STAND_BRIEF_FIELDS,
+                        'Réseau wifi', None)
+    assert 'Réseau wifi' in standbrief.missing_fields()
+    assert '<span class="blank">' in standbrief.field('Réseau wifi')
+
+    monkeypatch.setitem(standbrief.content.STAND_BRIEF_FIELDS,
+                        'Réseau wifi', 'libre-net')
+    assert 'Réseau wifi' not in standbrief.missing_fields()
+    assert 'libre-net' in standbrief.build_html(conference)
+
+
+def test_the_wifi_password_comes_from_the_environment(conference,
+                                                      monkeypatch):
+    """content.py is published: the password must never need to be in it."""
+    monkeypatch.delenv('CDL_WIFI_PASSWORD', raising=False)
+    assert 'Mot de passe wifi' in standbrief.missing_fields()
+
+    monkeypatch.setenv('CDL_WIFI_PASSWORD', 's3cr3t')
+    assert 'Mot de passe wifi' not in standbrief.missing_fields()
+    assert 's3cr3t' in standbrief.build_html(conference)
+
+
+def test_the_weekend_runs_in_time_order(conference):
+    for day in conference._days.values():
+        moments = standbrief.day_moments(conference, day)
+        times = [when for when, _what in moments]
+        assert times == sorted(times)

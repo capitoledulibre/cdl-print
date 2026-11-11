@@ -315,3 +315,66 @@ HIGHLIGHTS = [
 LEAFLET_HIGHLIGHTS_LEFT_OUT = ('Linux Tracing Escape Game',
                                'Sauvegarder librement')
 
+
+# --- the stand briefing -----------------------------------------------------
+#
+# One A4 handed to each stand when it sets up, the associations' and the
+# sponsors' alike: hence no mention of the village associatif.
+
+STAND_BRIEF_TITLE = 'Briefing stands'
+
+STAND_BRIEF_LEDE = (
+    "Merci d'être avec nous ce week-end ! L'essentiel pour votre stand, "
+    "sur une page."
+)
+
+# What only the team knows. A field left as None prints as a blank line to
+# fill in by hand, and the build warns about it. The wifi password is never
+# written here, since this file is published: it is read from the
+# environment, see STAND_BRIEF_SECRETS in standbrief.py.
+STAND_BRIEF_FIELDS = {
+    'Réseau wifi': 'wifinp',
+    'Identifiant wifi': 'capitole',
+    'Mot de passe wifi': None,
+}
+
+# Fixed points of the day the schedule export does not carry.
+STAND_OPENING = '09:30'
+STAND_COCKTAIL = '19:30'
+
+# The network sits behind a captive portal, so a QR code could join the
+# network but not log in: the credentials are printed instead.
+STAND_WIFI_STEPS = (
+    "Connectez-vous au réseau, puis saisissez l'identifiant et le mot de "
+    "passe sur la page qui s'ouvre."
+)
+
+STAND_WIFI_NOTE = (
+    "Réservé aux stands et aux ateliers. Merci de ne pas le communiquer aux "
+    "visiteurs : il n'y a pas de réseau ouvert au public."
+)
+
+STAND_HELP = [
+    "L'équipe porte un t-shirt rouge « STAFF » : arrêtez la première "
+    "personne venue, elle saura qui appeler.",
+    "L'accueil, au Hall C, répond aux questions et garde les objets trouvés "
+    "pendant tout l'événement.",
+    "Un comportement problématique : prévenez l'équipe, ou écrivez à "
+    "conduite@capitoledulibre.org.",
+    "Urgences : 15 (SAMU) · 17 (police) · 18 (pompiers) · 112.",
+]
+
+STAND_TIPS_TITLE = 'Pour orienter les visiteurs'
+
+STAND_TIPS = [
+    ('Le programme', "Le dépliant, et capitoledulibre.org/programme pour "
+                     "les changements de dernière minute."),
+    ('Manger', "Deux food trucks dans le parc le midi, buvette au Hall C."),
+    ('Les enfants', "L'initiation au code, pour les 8-14 ans, le samedi au "
+                    "bâtiment B."),
+    ('Soutenir', "Un don, un café soutien à la buvette, ou un passage à "
+                 "la boutique."),
+    ('Accessibilité', "Tous les bâtiments, avec ascenseurs."),
+    ('Le cocktail', "Samedi à 19h30 dans le hall principal, offert à tous, "
+                    "exposants compris."),
+]

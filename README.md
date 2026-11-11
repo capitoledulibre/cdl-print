@@ -1,7 +1,7 @@
 # cdl-print
 
 Generates the Capitole du Libre printed matter from the conference's Pretalx
-FRAB export. One command, six PDFs:
+FRAB export. One command, seven PDFs:
 
 | File | Format | What it is |
 | --- | --- | --- |
@@ -11,6 +11,7 @@ FRAB export. One command, six PDFs:
 | `conference-livret-<year>.pdf` | A5, folded and stapled | The pocket booklet: the programme by the hour, and the annexes |
 | `conference-feuilles-salles-<year>.pdf` | A4 portrait, one per room and day | The room sheets: the working document of the volunteer on duty |
 | `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
+| `conference-briefing-stands-<year>.pdf` | A4 portrait, one sheet | The stand briefing: the weekend, the wifi, who to call |
 
 The year comes from the parsed schedule rather than the command line, so a
 new edition never overwrites the previous one's PDFs.
@@ -33,7 +34,7 @@ uv sync
 uv run python gen.py
 ```
 
-This fetches the schedule for the current year and writes the six PDFs into
+This fetches the schedule for the current year and writes the seven PDFs into
 the working directory. Set `CDL_YEAR` to build another edition:
 
 ```shell
@@ -51,7 +52,7 @@ uv run python gen.py --only livret --output-dir build
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
-| `--only` | all of them | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`); repeatable |
+| `--only` | all of them | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
 | `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
 | `--no-audience` | shown | Leave out who each talk is for |
@@ -72,6 +73,7 @@ uv run python gen.py --only livret --output-dir build
 | `booklet.py` + `styles/booklet.css` | The booklet |
 | `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
 | `leaflet.py` + `styles/leaflet.css` | The leaflet |
+| `standbrief.py` + `styles/standbrief.css` | The stand briefing |
 | `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
 | `content.py` | Booklet copy that does not come from the export: editorial, first-timer guide, the curated highlights, stands, partners, practical info. **Mostly placeholder text**; the first-timer page is drawn from capitoledulibre.org. |
 
@@ -271,6 +273,26 @@ printers.
 
 A panel that outgrows its space would silently become a third page, so the
 build refuses anything but two.
+
+### The stand briefing
+
+One A4 for each stand, associations' and sponsors' alike -- hence no mention
+of the village associatif -- handed over at setup and pinned behind the table: the run of the weekend, the wifi, who to call, the
+campus plan, and the answers visitors ask stands for most.
+
+The run of each day is drawn from the schedule -- doors, first and last
+talk, the breaks, and the talks the leaflet puts forward -- so a moved talk
+moves here too. The wifi network and login are only known to the team: they
+live in `STAND_BRIEF_FIELDS` in `content.py`. A field left as `None` prints
+as a blank line to fill in with a pen, and the build warns about each one,
+so a missing value is never replaced by a guess.
+
+The wifi password is the exception. `content.py` is published with the
+repository, so the password is read from the environment instead:
+
+```shell
+CDL_WIFI_PASSWORD=... uv run python gen.py --only stands
+```
 
 ## Tests
 

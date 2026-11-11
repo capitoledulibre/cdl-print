@@ -1,13 +1,14 @@
 """Generate the Capitole du Libre printed matter from the schedule export.
 
-Six outputs come out of the same parsed schedule:
+Seven outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
   * the room signs, one A3 landscape sheet per room, the name read from afar;
   * the hall poster, one A0 sheet per day showing every room at once;
   * the pocket booklet, A5, the programme by the hour plus the annexes;
   * the room sheets, one A4 per room and per day, for the volunteer on duty;
-  * the tri-fold leaflet, one A4 landscape sheet folded in three.
+  * the tri-fold leaflet, one A4 landscape sheet folded in three;
+  * the stand briefing, one A4 for each stand of the village associatif.
 """
 
 import argparse
@@ -28,6 +29,7 @@ import overview
 import posters
 import roomsheets
 import signage
+import standbrief
 from schedule import Conference
 
 # --- Configuration ---------------------------------------------------------
@@ -42,7 +44,7 @@ DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # What `--only` accepts, in the order the outputs are built.
 OUTPUTS = ('salles', 'panneaux', 'global', 'livret', 'feuilles',
-           'depliant')
+           'depliant', 'stands')
 
 
 def default_year() -> int:
@@ -180,6 +182,21 @@ def build_leaflet(conference, fonts, output) -> int:
     return 0
 
 
+def build_standbrief(conference, fonts, output) -> int:
+    """One sheet pinned behind a stand: refuse anything longer."""
+    standbrief.warn_missing()
+    css = CSS(filename=standbrief.STYLESHEET, font_config=fonts)
+    markup = standbrief.build_html(conference)
+    pages = len(HTML(string=markup).render(stylesheets=[css],
+                                           font_config=fonts).pages)
+    if pages != standbrief.EXPECTED_PAGES:
+        print(f'error: the stand briefing came out as {pages} pages; it '
+              f'no longer fits one sheet', file=sys.stderr)
+        return 1
+    write_pdf(markup, css, fonts, output)
+    return 0
+
+
 def write_pdf(markup: str, css: CSS, fonts, output: str):
     try:
         os.remove(output)
@@ -294,6 +311,9 @@ def main(argv=None) -> int:
             return 1
     if 'depliant' in args.only:
         if build_leaflet(conference, fonts, path(leaflet.OUTPUT)):
+            return 1
+    if 'stands' in args.only:
+        if build_standbrief(conference, fonts, path(standbrief.OUTPUT)):
             return 1
 
     return 0
