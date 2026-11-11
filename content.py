@@ -65,12 +65,26 @@ BUILDINGS = {
 # Taken from capitoledulibre.org/lieu/. The legend follows the numbered pins
 # of assets/plan-enseeiht.svg, in the same order.
 
+PLAN_TITLE = 'Plan du site'
+
 PLAN_LEGEND = [
     'Accueil & buvette',
     'Village associatif',
     'Food trucks',
     'Amphi B00',
     'Atelier installation',
+]
+
+# The leaflet is handed out on site, so it carries the opening hours rather
+# than directions. They replace the 'Horaires' entry of PRACTICAL there.
+ACCESS_HOURS_TITLE = 'Horaires d’accès'
+
+ACCESS_HOURS = [
+    ('Samedi', "Ouverture à 9h30. Cocktail offert à 19h30 dans le hall "
+               "principal. À partir de 19h30, seules les personnes déjà "
+               "entrées peuvent accéder au site : les billets ne sont plus "
+               "validés. Pour le cocktail, arrivez avant !"),
+    ('Dimanche', "Ouverture à 9h30. L'accès ferme à 16h30."),
 ]
 
 STANDS_TITLE = 'Le village associatif'
@@ -188,6 +202,9 @@ PARTNER_LOGOS = {
     'Région Occitanie': 'region-occitanie.png',
 }
 
+# The leaflet has room for the sponsors and the institutions only.
+LEAFLET_PARTNER_GROUPS = ('Platine', 'Or', 'Argent', 'Bronze', 'Institutions')
+
 JOIN_TITLE = 'Rejoindre Toulibre'
 
 JOIN = [
@@ -250,6 +267,16 @@ FIRST_TIME = [
      "sur le programme, un souci quelconque : demandez-leur."),
 ]
 
+# The leaflet is handed out at the event, so telling its reader to register
+# is moot. It says instead what keeps the event free, and how to help.
+LEAFLET_SUPPORT = (
+    'C’est gratuit grâce à vous',
+    "Le Capitole du Libre vit grâce à ses partenaires et à vos dons. Pour "
+    "nous soutenir : faites un don, prenez un café à la buvette, ou un café "
+    "soutien, un peu plus cher, dont la différence est un don, ou passez "
+    "à la boutique.",
+)
+
 FIRST_TIME_DAY = [
     ('9h30', "Ouverture de l'accueil"),
     ('10h00', "Premières conférences"),
@@ -283,3 +310,8 @@ HIGHLIGHTS = [
      "Deux heures pour repartir avec ses sauvegardes en place."),
     ('Conférence de clôture', "Le mot de la fin, dimanche en fin d'après-midi."),
 ]
+
+# Highlights the leaflet leaves to the booklet, by the same title fragments.
+LEAFLET_HIGHLIGHTS_LEFT_OUT = ('Linux Tracing Escape Game',
+                               'Sauvegarder librement')
+

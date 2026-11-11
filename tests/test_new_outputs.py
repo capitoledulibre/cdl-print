@@ -16,6 +16,7 @@ from weasyprint.text.fonts import FontConfiguration
 
 import gen
 import leaflet
+import render
 import roomsheets
 import schedule
 import signage
@@ -203,7 +204,7 @@ def test_a_third_page_is_refused(conference, tmp_path, capsys, monkeypatch):
     assert gen.main(['--schedule-file', FIXTURE, '--no-audience',
                      '--only', 'depliant',
                      '--output-dir', str(tmp_path)]) == 1
-    assert 'a panel no longer fits' in capsys.readouterr().err
+    assert 'no longer fits' in capsys.readouterr().err
     assert list(tmp_path.iterdir()) == []
 
 
@@ -217,9 +218,53 @@ def test_the_leaflet_holds_every_talk(conference):
     laid_out = squashed(' '.join(page_text(page) for page in document.pages))
     for day in conference._days.values():
         for event in leaflet.day_talks(day):
-            # Titles are shortened to the panel width, so only the head of a
+            # Titles are cut at the column edge, so only the head of a
             # long one is on the sheet.
             assert squashed(event.title)[:15] in laid_out, event.title
+
+
+def line_boxes(box):
+    if 'line' in (getattr(box, 'element', None) is not None
+                  and box.element.get('class', '') or '').split():
+        yield box
+        return
+    for child in getattr(box, 'children', ()):
+        yield from line_boxes(child)
+
+
+def test_a_long_programme_stays_on_the_sheet():
+    """Columns of a fixed-height flow overflow sideways, off the paper.
+
+    That is how the 2026 Sunday went missing: the text was laid out, so it
+    was found in the document, but in a fourth column past the right edge.
+    Every line has to sit on the page, at whatever size makes it fit.
+    """
+    dense = schedule.Conference(os.path.join(HERE, 'fixtures',
+                                             'schedule-2024-dense.xml'))
+    dense.parse()
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, leaflet.STYLESHEET),
+              font_config=fonts)
+    size = leaflet.fit_flow(dense, css, fonts)
+    assert size is not None
+    document = HTML(string=leaflet.build_html(dense, size)).render(
+        stylesheets=[css], font_config=fonts)
+    assert len(document.pages) == leaflet.EXPECTED_PAGES
+    inside = document.pages[-1]
+    lines = list(line_boxes(inside._page_box))
+    assert len(lines) == sum(len(leaflet.day_talks(day))
+                             for day in dense._days.values())
+    for line in lines:
+        assert line.position_x + line.width <= inside.width + 1
+
+
+def test_the_plan_lists_every_room_by_floor(conference):
+    markup = leaflet.render_rooms(conference)
+    for name in conference._rooms:
+        assert name in markup
+    assert render.floor_label('B00') == 'RDC'
+    assert render.floor_label('B105') == '1er'
+    assert render.floor_label('A201') == '2e'
 
 
 # --- all of them at once ----------------------------------------------------

@@ -70,11 +70,19 @@ body {
 /* --- the condensed programme -------------------------------------------- */
 
 /* The whole programme runs across the three inside panels as one flow. The
-   gaps are wide enough that no line straddles a fold. */
+   gaps are wide enough that no line straddles a fold. Neither the flow nor
+   its sheet has a fixed height: a programme too long for the page must run
+   onto a third one, which the build refuses, rather than into a fourth
+   column off the sheet. The type size is set inline, from the largest size
+   that fits, and everything below is relative to it. */
+.sheet.inside {
+    height: auto;
+    display: block;
+}
+
 .flow {
     box-sizing: border-box;
     width: 297mm;
-    height: 210mm;
     padding: 9mm 8mm;
     column-count: 3;
     column-gap: 10mm;
@@ -85,8 +93,12 @@ body {
     margin: 0 0 2mm;
     padding-bottom: 1.2mm;
     border-bottom: 1.5px solid var(--brand);
-    font-size: 11pt;
+    font-size: 1.57em;
     color: var(--brand);
+}
+
+.flow .line + h2 {
+    margin-top: 4mm;
 }
 
 .flow h2 + .hour {
@@ -96,21 +108,46 @@ body {
 .hour {
     break-after: avoid;
     margin: 2mm 0 0.6mm;
-    font-size: 8pt;
+    font-size: 1.14em;
     font-weight: 700;
     color: var(--ink);
 }
 
+/* A title runs the full width of its column and is cut with an ellipsis
+   only where it meets the edge. A fixed character budget cut short titles
+   that had room to spare, since a column holds far more at 7pt than at the
+   size the budget was set for. */
 .line {
     margin: 0 0 0.4mm;
-    font-size: 7pt;
+    font-size: 1em;
     line-height: 1.22;
     color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.icon {
+    width: 0.95em;
+    height: 0.95em;
+    margin-right: 0.35em;
+    vertical-align: -0.12em;
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.key {
+    margin: 0 0 2mm;
+    font-size: 1em;
+    color: var(--quiet);
 }
 
 .line i {
     display: inline-block;
-    min-width: 11mm;
+    min-width: 4.45em;
     font-style: normal;
     font-weight: 700;
     color: var(--brand);
@@ -130,8 +167,10 @@ body {
     color: var(--brand);
 }
 
+/* Day, hour and room run in ahead of the title: a line of their own each
+   cost the flap room for two more picks. */
 .pick {
-    margin: 0 0 2.6mm;
+    margin: 0 0 1.8mm;
     padding-left: 3mm;
     border-left: 2px solid var(--brand);
     font-size: 8.2pt;
@@ -156,17 +195,27 @@ body {
 
 /* --- the cover panel ---------------------------------------------------- */
 
+/* Light on purpose: a full panel of dark ink is heavy on toner, and comes
+   out streaky on the office printers most of the run goes through. */
 .panel.cover {
-    background: var(--night);
-    color: var(--cream);
+    position: relative;
+    color: var(--night);
     text-align: center;
-    padding-top: 34mm;
+    padding-top: 22mm;
 }
 
 .panel.cover .brand {
     height: 26mm;
-    margin-bottom: 10mm;
+    margin-bottom: 8mm;
     background: url('../cdl.svg') center / contain no-repeat;
+}
+
+.panel.cover .kicker::before {
+    content: '';
+    display: block;
+    width: 30mm;
+    margin: 0 auto 6mm;
+    border-top: 1.5mm solid var(--brand);
 }
 
 .panel.cover .kicker {
@@ -180,22 +229,175 @@ body {
     margin: 4mm 0 0;
     font-size: 11pt;
     font-weight: 700;
-    color: #f0a068;
+    color: var(--brand);
 }
 
 .panel.cover .venue {
     margin: 1mm 0 0;
     font-size: 9pt;
-    opacity: 0.75;
+    color: var(--quiet);
+}
+
+.panel.cover .online {
+    margin: 8mm auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4mm;
+    text-align: left;
+}
+
+.panel.cover .qr {
+    width: 18mm;
+    height: 18mm;
+}
+
+.panel.cover .qr svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.panel.cover .online p {
+    margin: 0;
+    font-size: 8.4pt;
+    line-height: 1.5;
 }
 
 .panel.cover .site {
-    margin: 10mm auto 0;
-    padding: 2mm 5mm;
+    padding: 0.6mm 3mm;
     display: inline-block;
     background: var(--brand);
     color: #ffffff;
-    font-size: 9.5pt;
+    font-size: 9pt;
     font-weight: 700;
     border-radius: 8mm;
+}
+
+/* Thanks to the partners, along the foot of the cover: logos, a higher
+   tier printed larger. A logo is fitted inside its box whatever its shape. */
+.panel.cover .partners {
+    position: absolute;
+    left: 8mm;
+    right: 8mm;
+    bottom: 7mm;
+    padding-top: 2.4mm;
+    border-top: 0.3mm solid var(--rule);
+    text-align: left;
+}
+
+.panel.cover .partners h3 {
+    margin: 0 0 1mm;
+    font-size: 8pt;
+    color: var(--brand);
+}
+
+.panel.cover .tier {
+    margin: 1.6mm 0 0.8mm;
+    font-size: 5.8pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--quiet);
+}
+
+.panel.cover .logos {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.2mm 3mm;
+}
+
+.panel.cover .logos li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17mm;
+    height: 8mm;
+}
+
+.panel.cover .logos img {
+    /* max-width and max-height together squash a square logo into a wide
+       box in WeasyPrint; object-fit keeps its proportions. */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.panel.cover .logos .name {
+    font-size: 6pt;
+    color: #333333;
+}
+
+.panel.cover .logos.platine li {
+    width: 17mm;
+    height: 9mm;
+}
+
+/* Six bronze logos have to share the panel's 83mm on one row. */
+.panel.cover .logos.argent,
+.panel.cover .logos.bronze {
+    column-gap: 2mm;
+}
+
+.panel.cover .logos.argent li,
+.panel.cover .logos.bronze li {
+    width: 12mm;
+    height: 6.2mm;
+}
+
+.panel.cover .logos.institutions li {
+    width: 20mm;
+    height: 10mm;
+}
+
+/* --- the plan panel ----------------------------------------------------- */
+
+.plan svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.legend {
+    margin: 1.6mm 0 2mm;
+    padding: 0;
+    list-style: none;
+    font-size: 7pt;
+    line-height: 1.5;
+}
+
+.legend li {
+    display: inline-block;
+    margin-right: 2.6mm;
+    white-space: nowrap;
+}
+
+.legend li b {
+    display: inline-block;
+    width: 3.4mm;
+    height: 3.4mm;
+    margin-right: 1mm;
+    border-radius: 50%;
+    background: #1f3f6b;
+    color: #ffffff;
+    font-size: 6.4pt;
+    line-height: 3.4mm;
+    text-align: center;
+}
+
+.building {
+    margin: 0 0 0.8mm;
+    font-size: 7pt;
+    line-height: 1.3;
+}
+
+.building b {
+    display: inline-block;
+    width: 4mm;
+    font-size: 8.4pt;
+    color: var(--brand);
 }

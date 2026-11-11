@@ -159,7 +159,16 @@ def build_leaflet(conference, fonts, output) -> int:
     cannot be folded and would not be noticed until the delivery arrives.
     """
     css = CSS(filename=leaflet.STYLESHEET, font_config=fonts)
-    markup = leaflet.build_html(conference)
+    if not leaflet.outside_fits(conference, css, fonts):
+        print('error: an outside panel of the leaflet no longer fits',
+              file=sys.stderr)
+        return 1
+    size = leaflet.fit_flow(conference, css, fonts)
+    if size is None:
+        print(f'error: the leaflet programme no longer fits its three columns '
+              f'even at {leaflet.MIN_FLOW_SIZE}pt', file=sys.stderr)
+        return 1
+    markup = leaflet.build_html(conference, size)
     pages = len(HTML(string=markup).render(stylesheets=[css],
                                            font_config=fonts).pages)
     if pages != leaflet.EXPECTED_PAGES:

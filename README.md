@@ -239,6 +239,36 @@ where sixty-six Saturday talks did not fit a single panel and turned the
 sheet into an unfoldable third page. Three columns hold both days with room
 to spare, which also bought back the hour headings and a readable 7pt.
 
+The flow has no fixed height. With one, a programme too long for its three
+columns spilled into a fourth column past the edge of the sheet, and the
+2026 Sunday afternoon went missing without an error. The programme is now
+set at the largest size from 7pt down to `MIN_FLOW_SIZE` that keeps the
+sheet at two pages, and the build aborts below that. A workshop is marked
+with a wrench, explained by a key at the top of the first column. A title
+runs the full width of its column and is cut with an ellipsis only at the
+edge, rather than at a fixed character count.
+
+It is a letter fold rather than an accordion: opened, the whole inside is
+one spread and the programme reads at a glance, where an accordion would
+turn one programme column into the back of the folded leaflet.
+
+The back carries the campus plan, `assets/plan-enseeiht.svg`, redrawn for
+print from the one on capitoledulibre.org/lieu/: flat shapes, and numbered
+pins with a legend instead of icons. Under it, the rooms of the programme by
+building and floor, drawn from the schedule so they never go stale, then the
+practical information. The flap folded inside has the newcomer essentials,
+the public opening hours (`ACCESS_HOURS` in `content.py`, in place of
+directions: the leaflet is handed out on site) and the highlights. The cover
+carries a QR code to the live programme and, along its
+foot, the logos of the sponsors and institutions from `PARTNER_GROUPS` in
+`content.py`, a higher tier printed larger; `LEAFLET_PARTNER_GROUPS` picks
+which groups fit. The logos live in `assets/partners/`, downloaded from
+capitoledulibre.org/partenaires/, and `PARTNER_LOGOS` maps each name to its
+file. The booklet's partner page uses the same logos, and prints a group as
+a line of names unless every partner in it has one. The cover is white on
+purpose: a full panel of dark ink is heavy on toner and streaks on office
+printers.
+
 A panel that outgrows its space would silently become a third page, so the
 build refuses anything but two.
 

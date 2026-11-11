@@ -10,23 +10,33 @@ against a paper dummy before a print run.
 """
 
 import content
-from render import clean
+from render import (campus_plan, clean, event_classes, partner_logo, qr_code,
+                    rooms_by_floor)
 from schedule import Conference, Day, EXCLUDED_ROOMS
 
 STYLESHEET = 'styles/leaflet.css'
 OUTPUT = 'conference-depliant-{year}.pdf'
 
-# A column of the inside spread holds about this much of a title.
-TITLE_BUDGET = 40
+# Where the cover's QR code leads: the live programme, with any change made
+# after the print run.
+PROGRAMME_URL = 'https://capitoledulibre.org/programme/'
+
+# Marks a workshop in the programme, where there is no room to spell out
+# 'Atelier'. A wrench, drawn in the text colour so it survives greyscale.
+WORKSHOP_ICON = (
+    '<svg class="icon" viewBox="0 0 24 24" aria-label="Atelier">'
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77'
+    'a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91'
+    'a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>')
+
+# Type size of the programme lines, in points. The inside spread is set as
+# large as it will go, down to the smallest size still worth printing.
+BASE_FLOW_SIZE = 7.0
+MIN_FLOW_SIZE = 5.6
+FLOW_SIZE_STEP = 0.2
 
 # The leaflet is one folded sheet: two pages, no more.
 EXPECTED_PAGES = 2
-
-
-def shorten(text: str, budget: int) -> str:
-    if len(text) <= budget:
-        return text
-    return f'{text[:budget].rsplit(" ", 1)[0]}…'
 
 
 def day_talks(day: Day) -> list:
@@ -53,10 +63,47 @@ def render_day_flow(day: Day) -> str:
         if start != previous:
             previous = start
             lines += f'<p class="hour">{start:%Hh%M}</p>'
+        workshop = event_classes(event).startswith('workshop')
         lines += (f'<p class="line">'
                   f'<i>{clean(getattr(event, "_room", ""))}</i>'
-                  f'{clean(shorten(event.title, TITLE_BUDGET))}</p>')
+                  f'{WORKSHOP_ICON if workshop else ""}'
+                  f'{clean(event.title)}</p>')
     return lines
+
+
+def render_rooms(conference: Conference) -> str:
+    """The rooms of the programme, building by building and floor by floor."""
+    names = [name for name in conference._rooms if name not in EXCLUDED_ROOMS]
+    lines = ''
+    for building, floors in rooms_by_floor(names):
+        detail = ' &middot; '.join(
+            f'{floor} {", ".join(clean(room) for room in rooms)}'
+            for floor, rooms in floors)
+        lines += f'<p class="building"><b>{clean(building)}</b>{detail}</p>'
+    return lines
+
+
+def render_back(conference: Conference) -> str:
+    """The back of the folded leaflet: the plan, then practical information.
+
+    In a letter fold this is the panel seen when the leaflet is turned over,
+    so it carries what a visitor looks up standing in the hall.
+    """
+    legend = ''.join(f'<li><b>{number}</b>{clean(label)}</li>'
+                     for number, label in enumerate(content.PLAN_LEGEND, 1))
+    # The opening hours have a section of their own on the flap.
+    rows = ''.join(f'<p class="item"><b>{clean(name)}</b> {clean(about)}</p>'
+                   for name, about in content.PRACTICAL
+                   if name != 'Horaires')
+    return f'''
+        <div class="panel">
+            <h2>{clean(content.PLAN_TITLE)}</h2>
+            <div class="plan">{campus_plan()}</div>
+            <ol class="legend">{legend}</ol>
+            {render_rooms(conference)}
+            <h2 class="second">{clean(content.PRACTICAL_TITLE)}</h2>
+            {rows}
+        </div>'''
 
 
 def render_cover(conference: Conference) -> str:
@@ -68,26 +115,57 @@ def render_cover(conference: Conference) -> str:
             <p class="kicker">Programme</p>
             <p class="dates">{dates}</p>
             <p class="venue">ENSEEIHT &middot; Toulouse</p>
-            <p class="site">capitoledulibre.org</p>
+            <div class="online">
+                <div class="qr">{qr_code(PROGRAMME_URL)}</div>
+                <p>Le programme à jour<br>
+                <span class="site">capitoledulibre.org</span></p>
+            </div>
+            {render_partners()}
         </div>'''
 
 
-def render_practical() -> str:
-    """Practical information, with the newcomer essentials above it."""
-    # The first three tips, plus the last one: on a leaflet, knowing that the
-    # volunteers in red are there to be asked is worth more than a fourth tip.
-    tips = content.FIRST_TIME[:3] + content.FIRST_TIME[-1:]
+def render_partners() -> str:
+    """The sponsors tier by tier, then the institutions, as logos.
+
+    Each group is a class of its own, so the stylesheet can print a higher
+    tier larger.
+    """
+    groups = ''
+    for name, partners in content.PARTNER_GROUPS:
+        if name not in content.LEAFLET_PARTNER_GROUPS:
+            continue
+        logos = ''.join(f'<li>{partner_logo(partner, content.PARTNER_LOGOS)}'
+                        f'</li>' for partner in partners)
+        tier = name.lower()
+        groups += (f'<p class="tier">{clean(name)}</p>'
+                   f'<ul class="logos {tier}">{logos}</ul>')
+    return f'''
+            <div class="partners">
+                <h3>{clean(content.PARTNERS_TITLE)}</h3>
+                {groups}
+            </div>'''
+
+
+def render_flap(conference: Conference) -> str:
+    """The flap folded inside: newcomer essentials, hours and highlights."""
+    # How to support the event in place of the registration tip, which is
+    # moot by the time someone holds the leaflet; then the next two tips, and
+    # the last one: knowing that the volunteers in red are there to be asked
+    # is worth more than a fourth tip.
+    tips = ([content.LEAFLET_SUPPORT] + content.FIRST_TIME[1:3]
+            + content.FIRST_TIME[-1:])
     newcomer = ''.join(
         f'<p class="item"><b>{clean(heading)}</b> {clean(body)}</p>'
         for heading, body in tips)
-    rows = ''.join(f'<p class="item"><b>{clean(name)}</b> {clean(about)}</p>'
-                   for name, about in content.PRACTICAL)
+    hours = ''.join(f'<p class="item"><b>{clean(day)}</b> {clean(about)}</p>'
+                    for day, about in content.ACCESS_HOURS)
     return f'''
         <div class="panel">
             <h2>{clean(content.FIRST_TIME_TITLE)}</h2>
             {newcomer}
-            <h2 class="second">{clean(content.PRACTICAL_TITLE)}</h2>
-            {rows}
+            <h2 class="second">{clean(content.ACCESS_HOURS_TITLE)}</h2>
+            {hours}
+            {render_highlights(conference)}
         </div>'''
 
 
@@ -95,27 +173,64 @@ def render_highlights(conference: Conference) -> str:
     import booklet
     entries = ''
     for event, why in booklet.find_highlights(conference):
+        if any(fragment in event.title
+               for fragment in content.LEAFLET_HIGHLIGHTS_LEFT_OUT):
+            continue
         entries += (f'<p class="pick">'
                     f'<b>{event._start_datetime:%a} '
                     f'{event._start_datetime:%Hh%M}</b> '
                     f'<span class="room">'
-                    f'{clean(getattr(event, "_room", ""))}</span><br>'
+                    f'{clean(getattr(event, "_room", ""))}</span> '
                     f'{clean(event.title)}</p>')
-    stands = ', '.join(clean(name) for name, _ in content.STANDS[:8])
     return f'''
-        <div class="panel">
-            <h2>{clean(content.HIGHLIGHTS_TITLE)}</h2>
-            {entries}
-            <h2 class="second">{clean(content.STANDS_TITLE)}</h2>
-            <p class="item">{stands} et d’autres, dans le Hall C.</p>
-        </div>'''
+        <h2 class="second">{clean(content.HIGHLIGHTS_TITLE)}</h2>
+        {entries}'''
 
 
-def build_html(conference: Conference) -> str:
+def render_outside(conference: Conference) -> str:
+    return (render_flap(conference) + render_back(conference)
+            + render_cover(conference))
+
+
+def outside_fits(conference: Conference, css, fonts) -> bool:
+    """Whether the three outside panels hold on their one page.
+
+    Checked on its own so that a panel grown too long is not reported as a
+    programme too long for its columns: either makes a third page.
+    """
+    from weasyprint import HTML
+
+    markup = f'<section class="sheet">{render_outside(conference)}</section>'
+    return len(HTML(string=markup).render(stylesheets=[css],
+                                          font_config=fonts).pages) == 1
+
+
+def build_html(conference: Conference, size: float = BASE_FLOW_SIZE) -> str:
     days = list(conference._days.values())
-    outside = (render_highlights(conference) + render_practical()
-               + render_cover(conference))
-    inside = ''.join(render_day_flow(day) for day in days)
+    outside = render_outside(conference)
+    key = f'<p class="key">{WORKSHOP_ICON} atelier</p>'
+    inside = key + ''.join(render_day_flow(day) for day in days)
     return (f'<section class="sheet">{outside}</section>'
-            f'<section class="sheet"><div class="flow">{inside}</div>'
+            f'<section class="sheet inside">'
+            f'<div class="flow" style="font-size: {size}pt">{inside}</div>'
             f'</section>')
+
+
+def fit_flow(conference: Conference, css, fonts) -> float | None:
+    """Largest programme size at which the sheet is still two pages.
+
+    The inside spread has no fixed height, so a programme too long for its
+    three columns runs onto a third page instead of into a fourth column
+    off the edge of the sheet, where it would be lost without a word.
+    Returns None when even the smallest size does not fit.
+    """
+    from weasyprint import HTML
+
+    size = BASE_FLOW_SIZE
+    while size >= MIN_FLOW_SIZE - 1e-6:
+        document = HTML(string=build_html(conference, size)).render(
+            stylesheets=[css], font_config=fonts)
+        if len(document.pages) == EXPECTED_PAGES:
+            return size
+        size = round(size - FLOW_SIZE_STEP, 2)
+    return None
