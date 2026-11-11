@@ -212,14 +212,13 @@ what survives without any code edit.
 
 Not a programme: the working document of whoever holds a room. Each talk with
 its length, three boxes to tick -- speaker arrived, sound and video tested,
-timing started -- handover fields for the morning and afternoon volunteers,
-and a ruled space for incidents.
+timing started -- and a ruled space for incidents.
 
-It is also the only thing in the whole run that says a speaker **refused to
-be filmed**. The export carries that in `<recording><optout>`, which the
-generic parse branch could not see because `<recording>` wraps its own
-children; the sheet now shows it twice, once as a notice at the top and once
-on the line itself.
+It is also the only thing in the whole run that says what must **not be
+filmed**: every workshop, and any talk whose speaker refused. Both are
+flagged on their line and counted in a notice at the top of the sheet. A
+refusal is read from `<recording><optout>` in the export, which the generic
+parse branch could not see because `<recording>` wraps its own children.
 
 ### The leaflet
 

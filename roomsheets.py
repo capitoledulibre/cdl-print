@@ -2,10 +2,11 @@
 
 Not a programme. This is the working document of whoever holds a room: who
 is due, for how long, and the three things to tick before each talk. It also
-carries what nothing else does -- that a speaker refused to be filmed.
+carries what nothing else does -- what must not be filmed: the workshops,
+and any talk whose speaker refused.
 """
 
-from render import clean
+from render import clean, event_classes
 from schedule import Conference, Day, EXCLUDED_ROOMS, Room, build_breaks
 
 STYLESHEET = 'styles/roomsheets.css'
@@ -13,6 +14,15 @@ OUTPUT = 'conference-feuilles-salles-{year}.pdf'
 
 # Ticked off by hand, in the order they happen.
 CHECKS = ('Intervenant arrivé', 'Son et vidéo testés', 'Minutage lancé')
+
+
+def is_workshop(event) -> bool:
+    return event_classes(event).startswith('workshop')
+
+
+def not_filmed(event) -> bool:
+    """Workshops are never filmed, and a speaker may refuse for a talk."""
+    return is_workshop(event) or event.recording_refused
 
 
 def render_row(event) -> str:
@@ -28,8 +38,13 @@ def render_row(event) -> str:
 
     people = (f'<p class="who">{clean(event.persons)}</p>'
               if event._persons else '<p class="who">&mdash;</p>')
-    warning = ('<p class="warning">Pas de captation : cet intervenant a '
-               'refusé d’être filmé</p>' if event.recording_refused else '')
+    warning = ''
+    if is_workshop(event):
+        warning = ('<p class="warning">Pas de captation : les ateliers ne '
+                   'sont pas filmés</p>')
+    elif event.recording_refused:
+        warning = ('<p class="warning">Pas de captation : cet intervenant a '
+                   'refusé d’être filmé</p>')
     boxes = ''.join(f'<span class="box">{clean(check)}</span>'
                     for check in CHECKS)
     return f'''
@@ -56,14 +71,15 @@ def render_sheet(conference: Conference, day: Day, room: Room) -> str:
     events = sorted(talks + build_breaks(room, day, talks),
                     key=lambda event: event._start_datetime)
     rows = ''.join(render_row(event) for event in events)
-    refused = sum(1 for event in talks if event.recording_refused)
+    unfilmed = sum(1 for event in talks if not_filmed(event))
+    plural = 's' if len(talks) > 1 else ''
 
     notice = ''
-    if refused == 1:
+    if unfilmed == 1:
         notice = ('<p class="notice">Une intervention de cette salle ne doit '
                   'pas être filmée. Voir la ligne signalée.</p>')
-    elif refused:
-        notice = (f'<p class="notice">{refused} interventions de cette salle '
+    elif unfilmed:
+        notice = (f'<p class="notice">{unfilmed} interventions de cette salle '
                   'ne doivent pas être filmées. Voir les lignes '
                   'signalées.</p>')
 
@@ -76,7 +92,7 @@ def render_sheet(conference: Conference, day: Day, room: Room) -> str:
             </div>
             <div class="day">
                 <p>{day._date:%A %d %B}</p>
-                <p class="count">{len(talks)} interventions</p>
+                <p class="count">{len(talks)} intervention{plural}</p>
             </div>
         </header>
         {notice}
@@ -90,12 +106,6 @@ def render_sheet(conference: Conference, day: Day, room: Room) -> str:
             </thead>
             <tbody>{rows}</tbody>
         </table>
-        <div class="handover">
-            <p><span class="field">Bénévole du matin</span>
-               <span class="field">Téléphone</span></p>
-            <p><span class="field">Bénévole de l’après-midi</span>
-               <span class="field">Téléphone</span></p>
-        </div>
         <div class="notes">
             <p class="label">Incidents, retards, remarques</p>
         </div>

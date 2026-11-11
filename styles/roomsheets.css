@@ -197,29 +197,9 @@ tr.pause td {
 
 /* --- what the volunteer writes ------------------------------------------ */
 
-.handover {
-    margin-top: 5mm;
-    padding-top: 3mm;
-    border-top: 1.5px solid var(--ink);
-}
-
-.handover p {
-    margin: 0 0 3mm;
-    display: flex;
-    gap: 6mm;
-}
-
-.field {
-    flex: 1;
-    padding-bottom: 4mm;
-    border-bottom: 1px solid var(--rule);
-    font-size: 8pt;
-    color: var(--quiet);
-}
-
 .notes {
     flex: 1;
-    margin-top: 2mm;
+    margin-top: 5mm;
     min-height: 24mm;
     border: 1px solid var(--rule);
     padding: 2mm 3mm;

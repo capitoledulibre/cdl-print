@@ -80,10 +80,14 @@ def test_the_refusal_reaches_the_room_sheet(conference):
     assert 'ne doit pas être filmée' in sheet
 
 
-def test_a_room_without_a_refusal_carries_no_notice(conference):
-    day = list(conference._days.values())[0]
-    room = day._rooms['B205']
-    assert not any(event.recording_refused for event in room.sorted_events())
+def test_a_room_with_nothing_to_keep_off_camera_carries_no_notice(
+        conference):
+    day, room = next(
+        (day, room) for day in conference._days.values()
+        for room in day._rooms.values()
+        if room.sorted_events()
+        and not any(roomsheets.not_filmed(event)
+                    for event in room.sorted_events()))
     assert 'captation' not in roomsheets.render_sheet(conference, day, room)
 
 
@@ -105,7 +109,14 @@ def test_a_room_sheet_lists_its_talks_and_its_checks(conference):
     first = page_text(document.pages[0])
     for check in roomsheets.CHECKS:
         assert check in first
-    assert 'Bénévole du matin' in first
+    assert 'Bénévole du matin' not in first
+
+
+def test_a_workshop_is_flagged_as_not_filmed(conference):
+    workshop = next(event for event in conference._events.values()
+                    if roomsheets.is_workshop(event))
+    assert roomsheets.not_filmed(workshop)
+    assert 'les ateliers ne sont pas filmés' in roomsheets.render_row(workshop)
 
 
 # --- the room signs ---------------------------------------------------------
