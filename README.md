@@ -52,7 +52,7 @@ uv run python gen.py --only livret --output-dir build
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
-| `--only` | all of them | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`); repeatable |
+| `--only` | all the printed matter | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`, or `couvertures` for the video covers, which are only built when named); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
 | `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
 | `--no-audience` | shown | Leave out who each talk is for |
@@ -74,6 +74,7 @@ uv run python gen.py --only livret --output-dir build
 | `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
 | `leaflet.py` + `styles/leaflet.css` | The leaflet |
 | `standbrief.py` + `styles/standbrief.css` | The stand briefing |
+| `covers.py` + `styles/covers.css` | The video covers, on request |
 | `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
 | `content.py` | Booklet copy that does not come from the export: editorial, first-timer guide, the curated highlights, stands, partners, practical info. **Mostly placeholder text**; the first-timer page is drawn from capitoledulibre.org. |
 
@@ -293,6 +294,42 @@ repository, so the password is read from the environment instead:
 ```shell
 CDL_WIFI_PASSWORD=... uv run python gen.py --only stands
 ```
+
+### The video covers
+
+Not printed matter, but built from the same schedule: one 1920x1080 PNG per
+filmed talk, the cover shown on YouTube and PeerTube before a recording
+plays. They are built only when asked for, into a folder of their own:
+
+```shell
+uv run python gen.py --only couvertures
+```
+
+That writes `couvertures-<year>/`, one file per talk named so the folder
+reads in programme order: `2026-11-14_10h00_b00_bienvenue-au-capitole-du-libre-2026.png`.
+Workshops get no cover, since they are not filmed, nor does a talk whose
+speaker refused to be.
+
+The talk leads: its format and day, its title set as large as its box
+allows, then who gives it. The partners are thanked along a white band at
+the foot, tier by tier, Toulibre as the organiser first with the ENSEEIHT
+student clubs who run the sound, video, network and photos (`CLUBS` in
+`covers.py`), from the same `PARTNER_GROUPS` and logos as the leaflet. The
+band is three blocks set apart by rules: the organiser, the sponsors, the
+institutions. The sponsors sit on a grid, Platine above Argent and Or above
+Bronze, the higher tier's cells half as wide again, so that both rows of a
+column end on the same line instead of trailing off at different widths.
+
+The speakers' photos stand right of the title, round, up to three. They come
+from the Pretalx speakers API, joined to the talk on its code like the
+audience answers and ordered as the names are; `avatars.py` downloads them
+once into `.cache/avatars-<year>/`. A speaker without a photo, or a fetch
+that fails, gives a cover without one rather than a failed run.
+
+As with the posters, each title is laid out, measured and set a step
+smaller until it holds; one that will not hold even at `MIN_TITLE_SIZE`
+aborts the run. WeasyPrint lays the covers out as a PDF, and pdfium
+(`pypdfium2`) turns each page into a PNG.
 
 ## Tests
 

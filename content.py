@@ -200,6 +200,10 @@ PARTNER_LOGOS = {
     'Conseil départemental de la Haute-Garonne': 'haute-garonne.svg',
     'Mairie de Toulouse': 'mairie-toulouse.svg',
     'Région Occitanie': 'region-occitanie.png',
+    'TVn7': 'tvn7.png',
+    'CAn7': 'can7.png',
+    'net7': 'net7.png',
+    'photo7': 'photo7.png',
 }
 
 # The leaflet has room for the sponsors and the institutions only.

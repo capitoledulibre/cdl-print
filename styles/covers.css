@@ -1,0 +1,352 @@
+/* The video covers: 1920x1080, one per filmed talk. One CSS px is one
+   pixel of the final image. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: 1920px 1080px;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --brand-light: #f0a068;
+    --night: #211a3c;
+    --cream: #f2e7cf;
+}
+
+body {
+    margin: 0;
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.cover {
+    position: relative;
+    box-sizing: border-box;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--night);
+    color: #ffffff;
+    page-break-after: always;
+}
+
+/* The Occitan cross of the logo, large and faint behind the title. */
+.cross {
+    position: absolute;
+    top: -150px;
+    right: -170px;
+    width: 900px;
+    height: 900px;
+    opacity: 0.16;
+    transform: rotate(12deg);
+}
+
+.cross svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- the edition, top left and right ---------------------------------- */
+
+header {
+    position: absolute;
+    top: 64px;
+    left: 96px;
+    right: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    width: 300px;
+    height: 132px;
+    background: url('../cdl.svg') left center / contain no-repeat;
+}
+
+.edition {
+    margin: 0;
+    text-align: right;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--cream);
+}
+
+.edition span {
+    font-weight: 400;
+    color: var(--brand-light);
+}
+
+/* --- the talk --------------------------------------------------------- */
+
+/* The title box is TITLE_WIDTH wide and at most TITLE_MAX_HEIGHT tall, as
+   in covers.py. */
+/* Centred between the header and the partner band, so a one-line title
+   does not leave the lower half empty. */
+main {
+    position: absolute;
+    top: 230px;
+    bottom: 290px;
+    left: 96px;
+    width: 1480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kicker {
+    margin: 0 0 26px;
+    font-size: 30px;
+    color: var(--cream);
+}
+
+.kicker .kind {
+    display: inline-block;
+    margin-right: 18px;
+    padding: 6px 18px;
+    border-radius: 24px;
+    background: var(--brand);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.title {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+}
+
+.speakers {
+    margin: 30px 0 0;
+    padding-left: 22px;
+    border-left: 6px solid var(--brand);
+    font-size: 42px;
+    line-height: 1.2;
+    color: var(--brand-light);
+}
+
+/* With the speakers' photos to its right, the title gives up some width:
+   TITLE_WIDTH_WITH_PHOTOS in covers.py. */
+.with-photos main {
+    width: 1300px;
+}
+
+/* The photos, round, in a column right of the title and centred on it. */
+.photos {
+    position: absolute;
+    top: 230px;
+    bottom: 290px;
+    right: 96px;
+    width: 400px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.photos li {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 8px solid var(--brand);
+    overflow: hidden;
+    background: var(--night);
+}
+
+.photos.count-2 li {
+    width: 210px;
+    height: 210px;
+}
+
+/* Two photos overlap a little, like a pair of chips. */
+.photos.count-2 li + li {
+    margin-top: -24px;
+}
+
+.photos.count-3 li {
+    width: 160px;
+    height: 160px;
+}
+
+.photos.count-3 li + li {
+    margin-top: -18px;
+}
+
+.photos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.credit {
+    position: absolute;
+    right: 96px;
+    bottom: 262px;
+    margin: 0;
+    font-size: 22px;
+    color: rgba(242, 231, 207, 0.6);
+}
+
+/* --- the partners, along a quiet band at the foot ---------------------- */
+
+.partners {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 232px;
+    box-sizing: border-box;
+    padding: 22px 96px 20px;
+    display: flex;
+    gap: 40px;
+    background: #ffffff;
+    color: #555555;
+}
+
+.partners p {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+/* Three blocks set apart by rules: the organiser, the sponsors, the
+   institutions. Within the sponsors, a grid of twelve 80px cells: each
+   column is six cells wide, a lower tier one logo per cell, the tier above
+   one logo per cell and a half. Both rows of a column, and the rule between
+   the columns, so fall on the same lines. */
+.organiser {
+    flex: none;
+    width: 300px;
+    padding-right: 36px;
+    border-right: 2px solid #e6e6e6;
+}
+
+.organiser .with {
+    margin-top: 14px;
+}
+
+.toulibre svg {
+    display: block;
+    width: 190px;
+    height: auto;
+    margin-top: 6px;
+}
+
+.clubs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+.clubs li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 66px;
+    height: 36px;
+    margin-right: 12px;
+    text-align: center;
+}
+
+.clubs li:last-child {
+    margin-right: 0;
+}
+
+.clubs img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sponsors {
+    flex: none;
+    white-space: nowrap;
+}
+
+.column {
+    display: inline-block;
+    vertical-align: top;
+    width: 480px;
+}
+
+.column + .column {
+    margin-left: 24px;
+    padding-left: 24px;
+    border-left: 2px solid #e6e6e6;
+}
+
+.tier + .tier {
+    margin-top: 14px;
+}
+
+.tier ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+/* One cell per logo, the logo fitted inside whatever its shape, with the
+   cell's padding as the space between two logos. */
+.tier li {
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 80px;
+    height: 40px;
+    padding: 0 8px;
+    text-align: center;
+}
+
+.tier.platine li,
+.tier.or li {
+    width: 120px;
+    height: 54px;
+    padding: 0 12px;
+}
+
+.tier img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.tier .name {
+    font-size: 15px;
+    color: #555555;
+}
+
+/* Not '.institutions': the tier inside already carries that class. */
+.public {
+    flex: none;
+    padding-left: 24px;
+    border-left: 2px solid #e6e6e6;
+}
+
+.tier.institutions li {
+    width: 88px;
+    height: 72px;
+    padding: 0 8px;
+}

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- The Occitan cross, as drawn on capitoledulibre.org. -->
+  <g transform="translate(100,100)"><polygon points="0,-82 -16,-40 0,-24 16,-40"></polygon><circle cx="0" cy="-90" r="8"></circle><circle cx="-13" cy="-76" r="6.5"></circle><circle cx="13" cy="-76" r="6.5"></circle><polygon points="0,82 -16,40 0,24 16,40"></polygon><circle cx="0" cy="90" r="8"></circle><circle cx="-13" cy="76" r="6.5"></circle><circle cx="13" cy="76" r="6.5"></circle><polygon points="-82,0 -40,-16 -24,0 -40,16"></polygon><circle cx="-90" cy="0" r="8"></circle><circle cx="-76" cy="-13" r="6.5"></circle><circle cx="-76" cy="13" r="6.5"></circle><polygon points="82,0 40,-16 24,0 40,16"></polygon><circle cx="90" cy="0" r="8"></circle><circle cx="76" cy="-13" r="6.5"></circle><circle cx="76" cy="13" r="6.5"></circle></g>
+</svg>

@@ -1,5 +1,6 @@
 # Generated files
 *.pdf
+couvertures-*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

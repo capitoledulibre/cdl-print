@@ -9,6 +9,9 @@ Seven outputs come out of the same parsed schedule:
   * the room sheets, one A4 per room and per day, for the volunteer on duty;
   * the tri-fold leaflet, one A4 landscape sheet folded in three;
   * the stand briefing, one A4 for each stand of the village associatif.
+
+On request only, the video covers: one 1920x1080 PNG per filmed talk, for
+YouTube and PeerTube, written to a folder of their own.
 """
 
 import argparse
@@ -23,6 +26,8 @@ from weasyprint import CSS, HTML
 from weasyprint.text.fonts import FontConfiguration
 
 import audience
+import avatars
+import covers
 import booklet
 import leaflet
 import overview
@@ -45,6 +50,10 @@ DEFAULT_LOCALE = 'fr_FR.UTF-8'
 # What `--only` accepts, in the order the outputs are built.
 OUTPUTS = ('salles', 'panneaux', 'global', 'livret', 'feuilles',
            'depliant', 'stands')
+
+# Built only when asked for by name: not printed matter, and not needed until
+# the recordings go online after the event.
+ON_REQUEST = ('couvertures',)
 
 
 def default_year() -> int:
@@ -197,6 +206,25 @@ def build_standbrief(conference, fonts, output) -> int:
     return 0
 
 
+def build_covers(conference, fonts, directory, cache) -> int:
+    """One PNG per filmed talk; refuse a title that will not fit at all."""
+    found = avatars.gather(conference, conference.year, cache)
+    print(f'speaker photos found for {found} talks')
+    css = CSS(filename=covers.STYLESHEET, font_config=fonts)
+    events = covers.filmed_events(conference)
+    sizes, overflowing, document = covers.fit_titles(conference, events,
+                                                     css, fonts)
+    if overflowing:
+        print('error: these titles do not fit their cover even at '
+              f'{covers.MIN_TITLE_SIZE}px:', file=sys.stderr)
+        for event in overflowing:
+            print(f'  {event.title}', file=sys.stderr)
+        return 1
+    written = covers.write_pngs(document, events, directory)
+    print(f'wrote {len(written)} covers into {directory}')
+    return 0
+
+
 def write_pdf(markup: str, css: CSS, fonts, output: str):
     try:
         os.remove(output)
@@ -229,8 +257,9 @@ def parse_args(argv=None):
         '--no-audience', dest='audience', action='store_false',
         help='leave out who each talk is for')
     parser.add_argument(
-        '--only', choices=OUTPUTS, action='append',
-        help='build only this output; repeatable (default: all of them)')
+        '--only', choices=OUTPUTS + ON_REQUEST, action='append',
+        help='build only this output; repeatable (default: all the printed '
+             'matter; the video covers only when asked for by name)')
     parser.add_argument(
         '--output-dir', default='.',
         help='directory to write the PDFs into (default: the current one)')
@@ -314,6 +343,11 @@ def main(argv=None) -> int:
             return 1
     if 'stands' in args.only:
         if build_standbrief(conference, fonts, path(standbrief.OUTPUT)):
+            return 1
+    if 'couvertures' in args.only:
+        cache = os.path.join(args.output_dir, '.cache',
+                             f'avatars-{conference.year}')
+        if build_covers(conference, fonts, path(covers.OUTPUT_DIR), cache):
             return 1
 
     return 0
