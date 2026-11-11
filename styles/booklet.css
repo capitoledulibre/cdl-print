@@ -281,16 +281,71 @@ ul.logos {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 2mm;
+    align-items: center;
+    gap: 2mm 4mm;
 }
 
+/* A logo is fitted inside its box whatever its shape; a higher tier gets
+   a larger box. */
 ul.logos li {
-    padding: 2.5mm 3.5mm;
-    border: 1px solid var(--rule);
-    border-radius: 1.5mm;
-    background: var(--fill);
-    font-size: 8.5pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24mm;
+    height: 10mm;
+}
+
+ul.logos img {
+    /* max-width and max-height together squash a square logo into a wide
+       box in WeasyPrint; object-fit keeps its proportions. */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+ul.logos .name {
+    font-size: 8pt;
     color: #555555;
+}
+
+ul.logos.platine li {
+    width: 27mm;
+    height: 12mm;
+}
+
+/* Six bronze logos share the 122mm text width on one row. */
+ul.logos.argent li,
+ul.logos.bronze li {
+    width: 17mm;
+    height: 8mm;
+}
+
+ul.logos.argent,
+ul.logos.bronze {
+    column-gap: 3mm;
+}
+
+/* Seven groups on one page: tighter headings than elsewhere. */
+.page.partners h2 {
+    margin: 4mm 0 1.6mm;
+    font-size: 9.5pt;
+}
+
+ul.logos.institutions li {
+    width: 28mm;
+    height: 14mm;
+}
+
+ul.logos.média li {
+    width: 22mm;
+    height: 10mm;
+}
+
+p.names {
+    margin: 0;
+    font-size: 8.5pt;
+    line-height: 1.45;
+    color: #444444;
 }
 
 .placeholder {

@@ -11,7 +11,7 @@ import sys
 import unicodedata
 
 import content
-from render import clean, event_classes, qr_code
+from render import clean, event_classes, partner_logo, qr_code
 from schedule import Conference, Day, EXCLUDED_ROOMS
 
 STYLESHEET = 'styles/booklet.css'
@@ -156,10 +156,21 @@ def render_emergency() -> str:
 def render_partners() -> str:
     groups = ''
     for name, partners in content.PARTNER_GROUPS:
-        logos = ''.join(f'<li>{clean(partner)}</li>' for partner in partners)
-        groups += f'<h2>{clean(name)}</h2><ul class="logos">{logos}</ul>'
+        if all(partner in content.PARTNER_LOGOS for partner in partners):
+            logos = ''.join(
+                f'<li>{partner_logo(partner, content.PARTNER_LOGOS)}</li>'
+                for partner in partners)
+            groups += (f'<h2>{clean(name)}</h2>'
+                       f'<ul class="logos {name.lower()}">{logos}</ul>')
+        else:
+            # A group not fully covered by logos, such as the technical
+            # partners, is a line of names: mixing the two looks unfinished,
+            # and boxes for a dozen names overran the page.
+            names = ' · '.join(partners)
+            groups += (f'<h2>{clean(name)}</h2>'
+                       f'<p class="names">{clean(names)}</p>')
     return f'''
-    <section class="page">
+    <section class="page partners">
         <h1>{clean(content.PARTNERS_TITLE)}</h1>
         <p class="intro">{clean(content.PARTNERS_INTRO)}</p>
         {groups}

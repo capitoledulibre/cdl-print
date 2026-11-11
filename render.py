@@ -4,6 +4,7 @@ import functools
 import html
 import io
 import os
+import pathlib
 import re
 import unicodedata
 
@@ -120,6 +121,20 @@ def group_lightning(events: list) -> list:
         else:
             grouped.append(event)
     return grouped
+
+
+def partner_logo(name: str, logos: dict) -> str:
+    """A partner's logo as an <img>, or its name when it has none.
+
+    The markup is rendered from a string with no base URL, so the path is
+    an absolute file URI rather than one relative to the project.
+    """
+    filename = logos.get(name)
+    if not filename:
+        return f'<span class="name">{clean(name)}</span>'
+    path = pathlib.Path(__file__).resolve().parent / 'assets' / 'partners'
+    return (f'<img src="{(path / filename).as_uri()}" '
+            f'alt="{clean(name)}">')
 
 
 def duration_minutes(event: Event) -> int:

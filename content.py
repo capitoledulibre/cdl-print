@@ -127,14 +127,49 @@ PARTNERS_INTRO = (
     "et au travail de ses bénévoles."
 )
 
+# Taken from capitoledulibre.org/partenaires/, sponsors by tier first.
 PARTNER_GROUPS = [
-    ('Institutions', ['Toulouse Métropole', 'Région Occitanie', 'ENSEEIHT',
-                      'Toulouse INP']),
-    ('Entreprises', ['Partenaire Or 1', 'Partenaire Or 2', 'Partenaire Argent 1',
-                     'Partenaire Argent 2', 'Partenaire Argent 3',
-                     'Partenaire Bronze 1']),
-    ('Associations', ['April', 'Framasoft', 'LinuxFr.org', 'Chatons']),
+    ('Platine', ['Airbus', 'Bootlin', 'CS Group', 'Thales']),
+    ('Or', ['Brax Technologies', 'Data Bene', 'Linagora', 'Makina Corpus']),
+    ('Argent', ['ANITI', 'Collabora', 'Evolix', 'Smile', 'Worteks', 'XWiki']),
+    ('Bronze', ['Attitude SI', 'Bareos', 'Bleemeo', 'BlueMind', 'Loxodata',
+                'Viveris']),
+    ('Institutions', ['Conseil départemental de la Haute-Garonne',
+                      'Mairie de Toulouse', 'Région Occitanie']),
+    ('Média', ['SysOps Pratique']),
+    ('Partenaires techniques', ['Bleemeo', 'CAn7', 'Epitech Toulouse',
+                                'Etincelle Coworking', 'INP-net', 'net7',
+                                'photo7', 'Scaleway', 'Tetaneutral', 'N7',
+                                'Toulouse Tech Hub', 'TVn7']),
 ]
+
+# Logos under assets/partners/, downloaded from the same page. A partner
+# without one is printed as its name.
+PARTNER_LOGOS = {
+    'Airbus': 'airbus.png',
+    'Bootlin': 'bootlin.png',
+    'CS Group': 'cs-group.svg',
+    'Thales': 'thales.svg',
+    'Brax Technologies': 'brax-technologies.svg',
+    'Data Bene': 'databene.png',
+    'Linagora': 'linagora.svg',
+    'Makina Corpus': 'makina-corpus.png',
+    'ANITI': 'aniti.png',
+    'Collabora': 'collabora.svg',
+    'Evolix': 'evolix.png',
+    'Smile': 'smile.png',
+    'Worteks': 'worteks.png',
+    'XWiki': 'xwiki.svg',
+    'Attitude SI': 'attitudesi.png',
+    'Bareos': 'bareos.png',
+    'Bleemeo': 'bleemeo.svg',
+    'BlueMind': 'bluemind.png',
+    'Loxodata': 'loxodata.png',
+    'Viveris': 'viveris.svg',
+    'Conseil départemental de la Haute-Garonne': 'haute-garonne.svg',
+    'Mairie de Toulouse': 'mairie-toulouse.svg',
+    'Région Occitanie': 'region-occitanie.png',
+}
 
 JOIN_TITLE = 'Rejoindre Toulibre'
 
