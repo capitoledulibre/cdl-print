@@ -161,3 +161,16 @@ def test_a_plain_mapping_is_accepted(tmp_path):
 
 def test_an_api_dump_is_accepted():
     assert len(audience.load(ANSWERS)) == 17
+
+
+def test_a_door_poster_links_to_the_site_not_the_cfp():
+    event = schedule.Event('1', schedule.Day(None))
+    event._url = 'https://cfp.capitoledulibre.org/cdl-2026/talk/S8VJEU/'
+    assert (posters.site_url(event)
+            == 'https://capitoledulibre.org/programme/talk/S8VJEU/')
+
+
+def test_a_door_poster_keeps_a_url_it_cannot_read_a_code_from():
+    event = schedule.Event('1', schedule.Day(None))
+    event._url = 'https://example.org/somewhere'
+    assert posters.site_url(event) == 'https://example.org/somewhere'

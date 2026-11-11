@@ -2,6 +2,7 @@
 
 from weasyprint import CSS
 
+from audience import code_of
 from render import clean, duration_minutes, event_classes, fit_size, qr_code
 from schedule import (Conference, Day, EXCLUDED_ROOMS, Event, Room,
                       build_breaks)
@@ -22,6 +23,22 @@ BASE_TIMELINE_SIZE = 16
 MIN_TIMELINE_SIZE = 9
 TIMELINE_SIZE_STEP = 0.5
 
+# A talk's page on the conference site, keyed on the same Pretalx code as the
+# CfP page. Attendees scanning a door know the site, not the CfP tool.
+SITE_TALK_TEMPLATE = 'https://capitoledulibre.org/programme/talk/{code}/'
+
+
+def site_url(event: Event) -> str | None:
+    """The event's page on capitoledulibre.org, falling back to its CfP URL.
+
+    The fallback covers an export whose URLs carry no talk code, so a door
+    still gets a working QR code rather than none.
+    """
+    code = code_of(event)
+    if code:
+        return SITE_TALK_TEMPLATE.format(code=code)
+    return getattr(event, '_url', None) or None
+
 
 def render_event(event: Event, show_qr: bool = True) -> str:
     """One slot of the timeline, its height driven by its duration.
@@ -41,7 +58,7 @@ def render_event(event: Event, show_qr: bool = True) -> str:
     if audience and len(audience) <= AUDIENCE_MAX_LENGTH:
         for_whom = f'<p class="audience">{clean(audience)}</p>'
 
-    url = getattr(event, '_url', None)
+    url = site_url(event)
     qr = f'<div class="qr">{qr_code(url)}</div>' if show_qr and url else ''
 
     return f'''
