@@ -33,34 +33,45 @@ VENUE = {
     'body': [
         "Le Capitole du Libre se tient à l'ENSEEIHT, en plein centre de "
         "Toulouse, au 2 rue Charles Camichel. Les conférences occupent les "
-        "bâtiments A, B et C ; le village associatif et la restauration se "
-        "trouvent dans le Hall C.",
+        "bâtiments A, B et C. L'accueil, la buvette et le village "
+        "associatif sont dans le Hall C, les food trucks dans le parc.",
 
-        "Métro ligne B, station Carmes ou Palais de Justice. Tram T1, arrêt "
-        "Palais de Justice. Les vélos peuvent être attachés le long de la "
-        "grille, côté rue Camichel.",
+        "Métro ligne B, station François Verdier (5 min à pied), ou ligne A, "
+        "station Jean Jaurès (10 min). Gare Matabiau à 15 min à pied. Des "
+        "attaches vélo sont disponibles dans les rues alentour.",
     ],
-    'map_caption': 'Plan d’accès — à remplacer par le plan définitif',
+    # The campus plan goes under the text, and a QR code to the venue on
+    # OpenStreetMap for the way there.
+    'plan': True,
+    'map_url': 'https://www.openstreetmap.org/?mlat=43.6024&mlon=1.4545'
+               '#map=17/43.6024/1.4545',
+    'map_label': 'Le lieu sur OpenStreetMap',
 }
 
 BUILDINGS = {
     'title': 'Trouver sa salle',
     'body': [
         "Les salles portent le nom de leur bâtiment suivi de l'étage et du "
-        "numéro : A201 est au deuxième étage du bâtiment A. Le Hall C, au "
-        "rez-de-chaussée, accueille le village associatif, la restauration "
-        "et le buffet du samedi soir.",
+        "numéro : A201 est au deuxième étage du bâtiment A. B00 est "
+        "l'amphithéâtre, au rez-de-chaussée du bâtiment B. Ascenseurs dans "
+        "chaque bâtiment.",
     ],
-    'floors': [
-        ('Bâtiment A', 'A001, A002 au rez-de-chaussée · A201 à A203 au 2e · '
-                       'A301 à A304 au 3e'),
-        ('Bâtiment B', 'B00 en amphithéâtre · B105 au 1er · B205 à B208 au 2e '
-                       '· B306 à B308 au 3e'),
-        ('Bâtiment C', 'C002 au rez-de-chaussée · Hall C pour le village '
-                       'associatif'),
-    ],
-    'map_caption': 'Plan des étages — à remplacer par le plan définitif',
+    # The rooms are listed floor by floor from the schedule itself.
+    'floors': True,
 }
+
+# --- the campus plan --------------------------------------------------------
+#
+# Taken from capitoledulibre.org/lieu/. The legend follows the numbered pins
+# of assets/plan-enseeiht.svg, in the same order.
+
+PLAN_LEGEND = [
+    'Accueil & buvette',
+    'Village associatif',
+    'Food trucks',
+    'Amphi B00',
+    'Atelier installation',
+]
 
 STANDS_TITLE = 'Le village associatif'
 
@@ -191,7 +202,7 @@ JOIN = [
 # neither is for the public -- the breakfast is not offered to visitors and
 # the wifi carries the stands and the workshops. Do not "fix" these back from
 # the site. The venue address, the transport details and the accessibility
-# note still need checking against the definitive practical page.
+# note were checked against capitoledulibre.org/lieu/ with the team.
 
 FIRST_TIME_TITLE = 'Premier Capitole du Libre ?'
 

@@ -348,17 +348,61 @@ p.names {
     color: #444444;
 }
 
-.placeholder {
+/* The campus plan, shared with the leaflet: numbered pins and their key. */
+figure.plan {
     margin: 6mm 0 0;
-    padding: 18mm 6mm;
-    border: 2px dashed var(--rule);
-    border-radius: 2mm;
-    text-align: center;
-    color: var(--quiet);
-    font-size: 8.5pt;
 }
 
-.placeholder p {
+figure.plan svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.legend {
+    margin: 2.5mm 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 8.5pt;
+    line-height: 1.7;
+}
+
+.legend li {
+    display: inline-block;
+    margin-right: 3.5mm;
+    white-space: nowrap;
+}
+
+.legend li b {
+    display: inline-block;
+    width: 4mm;
+    height: 4mm;
+    margin-right: 1.2mm;
+    border-radius: 50%;
+    background: #1f3f6b;
+    color: #ffffff;
+    font-size: 7.5pt;
+    line-height: 4mm;
+    text-align: center;
+}
+
+/* Directions are a link away: a QR code to the venue on OpenStreetMap. */
+.where {
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    margin-top: 6mm;
+    font-size: 9pt;
+    color: #444444;
+}
+
+.where .qr svg {
+    display: block;
+    width: 18mm;
+    height: 18mm;
+}
+
+.where p {
     margin: 0;
 }
 

@@ -3,6 +3,7 @@
 import functools
 import html
 import io
+import itertools
 import os
 import pathlib
 import re
@@ -20,6 +21,10 @@ QR_COLOUR = '#111111'
 # The font every output embeds. Its coverage decides what can be printed.
 FONT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                     'fonts', 'FiraSans-Regular.woff2')
+
+# The campus plan, redrawn for print from the one on capitoledulibre.org.
+PLAN = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                    'assets', 'plan-enseeiht.svg')
 
 # Punctuation left stranded when a leading emoji is dropped.
 STRANDED = ':;,.!? \u00a0\u2013\u2014-'
@@ -135,6 +140,37 @@ def partner_logo(name: str, logos: dict) -> str:
     path = pathlib.Path(__file__).resolve().parent / 'assets' / 'partners'
     return (f'<img src="{(path / filename).as_uri()}" '
             f'alt="{clean(name)}">')
+
+
+@functools.lru_cache(maxsize=1)
+def campus_plan() -> str:
+    """The campus plan as inline SVG, its pins numbered as PLAN_LEGEND."""
+    with open(PLAN, encoding='utf-8') as plan:
+        return plan.read()
+
+
+def floor_label(room: str) -> str:
+    """'RDC', '1er', '2e'... from a room name such as A201 or B00."""
+    floor = room[1:2]
+    if not floor.isdigit() or floor == '0':
+        return 'RDC'
+    return '1er' if floor == '1' else f'{floor}e'
+
+
+def rooms_by_floor(names) -> list:
+    """[(building, [(floor, [room, ...]), ...]), ...] for these room names.
+
+    Drawn from the schedule rather than copied from the website, so a room
+    added or dropped in Pretalx is right on paper without anyone editing it.
+    """
+    buildings = []
+    for building, rooms in itertools.groupby(sorted(names),
+                                             key=lambda name: name[:1]):
+        floors = [(floor, list(group))
+                  for floor, group in itertools.groupby(rooms,
+                                                        key=floor_label)]
+        buildings.append((building, floors))
+    return buildings
 
 
 def duration_minutes(event: Event) -> int:

@@ -1,0 +1,57 @@
+<svg viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg" font-family="Fira Sans" role="img" aria-label="Plan schématique du campus de l'ENSEEIHT">
+  <!-- Redrawn for print from the plan on capitoledulibre.org/lieu/: the
+       same geometry and building colours, without the shadows and sheen
+       the PDF renderer cannot draw, and with numbered pins instead of
+       icons, so the legend still reads in a greyscale run. -->
+  <rect x="12" y="12" width="736" height="456" rx="28" fill="#ece9e4" stroke="#ddd8d0" stroke-width="2"/>
+
+  <rect x="295" y="250" width="345" height="200" rx="46" fill="#d3e9b4"/>
+  <path d="M335 300 L600 425 M575 268 L360 440" stroke="#f4f7ee" stroke-width="13" stroke-linecap="round" fill="none"/>
+  <g fill="#82b94c">
+    <circle cx="322" cy="276" r="7"/>
+    <circle cx="470" cy="262" r="7"/>
+    <circle cx="612" cy="292" r="7"/>
+    <circle cx="335" cy="432" r="7"/>
+    <circle cx="608" cy="428" r="7"/>
+  </g>
+
+  <g font-size="21" font-weight="700" fill="#1a365d" text-anchor="middle">
+    <text x="300" y="40">Entrée</text>
+    <text x="396" y="40">Sortie</text>
+  </g>
+  <path d="M295 52h10v28h7l-12 16-12-16h7z" fill="#2f855a"/>
+  <path d="M391 96h10V68h7l-12-16-12 16h7z" fill="#c05621"/>
+
+  <path d="M71 100 L254 100 A16 16 0 0 1 270 116 L270 204 A16 16 0 0 1 254 220 L135 220 L135 274 A16 16 0 0 1 119 290 L71 290 A16 16 0 0 1 55 274 L55 116 A16 16 0 0 1 71 100 Z" fill="#6ca939"/>
+  <rect x="410" y="88" width="305" height="150" rx="16" fill="#d03d00"/>
+  <rect x="55" y="300" width="195" height="150" rx="16" fill="#957e7e"/>
+  <g font-size="64" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <text x="163" y="182">A</text>
+    <text x="562.5" y="185">B</text>
+    <text x="152.5" y="440">C</text>
+  </g>
+
+  <!-- Pins, numbered as in the legend printed under the plan. -->
+  <g font-size="22" font-weight="700" text-anchor="middle">
+    <g transform="translate(105 362)">
+      <path d="M0 0C-10-20-18-28-18-42A18 18 0 1 1 18-42C18-28 10-20 0 0Z" fill="#1f3f6b" stroke="#ffffff" stroke-width="2"/>
+      <text y="-34" fill="#ffffff">1</text>
+    </g>
+    <g transform="translate(200 362)">
+      <path d="M0 0C-10-20-18-28-18-42A18 18 0 1 1 18-42C18-28 10-20 0 0Z" fill="#1f3f6b" stroke="#ffffff" stroke-width="2"/>
+      <text y="-34" fill="#ffffff">2</text>
+    </g>
+    <g transform="translate(462 290)">
+      <path d="M0 0C-10-20-18-28-18-42A18 18 0 1 1 18-42C18-28 10-20 0 0Z" fill="#1f3f6b" stroke="#ffffff" stroke-width="2"/>
+      <text y="-34" fill="#ffffff">3</text>
+    </g>
+    <g transform="translate(490 150)">
+      <path d="M0 0C-10-20-18-28-18-42A18 18 0 1 1 18-42C18-28 10-20 0 0Z" fill="#1f3f6b" stroke="#ffffff" stroke-width="2"/>
+      <text y="-34" fill="#ffffff">4</text>
+    </g>
+    <g transform="translate(650 195)">
+      <path d="M0 0C-10-20-18-28-18-42A18 18 0 1 1 18-42C18-28 10-20 0 0Z" fill="#1f3f6b" stroke="#ffffff" stroke-width="2"/>
+      <text y="-34" fill="#ffffff">5</text>
+    </g>
+  </g>
+</svg>

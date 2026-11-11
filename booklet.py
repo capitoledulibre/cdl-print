@@ -11,7 +11,8 @@ import sys
 import unicodedata
 
 import content
-from render import clean, event_classes, partner_logo, qr_code
+from render import (campus_plan, clean, event_classes, partner_logo, qr_code,
+                    rooms_by_floor)
 from schedule import Conference, Day, EXCLUDED_ROOMS
 
 STYLESHEET = 'styles/booklet.css'
@@ -104,21 +105,43 @@ def render_contents(chapters: list) -> str:
     </section>'''
 
 
-def render_map_page(section: dict) -> str:
+def render_plan() -> str:
+    legend = ''.join(f'<li><b>{number}</b>{clean(label)}</li>'
+                     for number, label in enumerate(content.PLAN_LEGEND, 1))
+    return f'''
+        <figure class="plan">
+            {campus_plan()}
+            <ol class="legend">{legend}</ol>
+        </figure>'''
+
+
+def render_floors(conference: Conference) -> str:
+    names = [name for name in conference._rooms if name not in EXCLUDED_ROOMS]
+    rows = ''
+    for building, floors in rooms_by_floor(names):
+        detail = ' · '.join(f'{floor} : {", ".join(rooms)}'
+                            for floor, rooms in floors)
+        rows += (f'<dt>Bâtiment {clean(building)}</dt>'
+                 f'<dd>{clean(detail)}</dd>')
+    return f'<dl class="floors">{rows}</dl>'
+
+
+def render_map_page(section: dict, conference: Conference) -> str:
     body = ''.join(f'<p>{clean(paragraph)}</p>' for paragraph in section['body'])
-    floors = ''
-    if section.get('floors'):
-        floors = '<dl class="floors">' + ''.join(
-            f'<dt>{clean(name)}</dt><dd>{clean(detail)}</dd>'
-            for name, detail in section['floors']) + '</dl>'
+    floors = render_floors(conference) if section.get('floors') else ''
+    plan = render_plan() if section.get('plan') else ''
+    where = ''
+    if section.get('map_url'):
+        where = (f'<div class="where"><div class="qr">'
+                 f'{qr_code(section["map_url"])}</div>'
+                 f'<p>{clean(section["map_label"])}</p></div>')
     return f'''
     <section class="page">
         <h1>{clean(section['title'])}</h1>
         {body}
         {floors}
-        <figure class="placeholder">
-            <p>{clean(section['map_caption'])}</p>
-        </figure>
+        {plan}
+        {where}
     </section>'''
 
 
@@ -444,8 +467,8 @@ def build_html(conference: Conference, show_qr: bool = True,
         render_editorial(),
         render_contents(chapters),
         render_first_time(),
-        render_map_page(content.VENUE),
-        render_map_page(content.BUILDINGS),
+        render_map_page(content.VENUE, conference),
+        render_map_page(content.BUILDINGS, conference),
         render_stands(),
         render_highlights(conference),
     ]
