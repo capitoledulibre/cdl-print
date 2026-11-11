@@ -53,23 +53,28 @@ body {
 
 /* --- header ------------------------------------------------------------ */
 
+/* The logo on its own line at the top, then the room and the day on one
+   line, sharing a baseline: the room at the left where the eye lands first,
+   the day at the right. */
 header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     padding-bottom: 6mm;
     margin-bottom: 6mm;
     border-bottom: 4px solid var(--brand);
 }
 
+/* Smaller than when it shared a line with the room name: on a line of its
+   own, every millimetre it takes comes off the timeline. */
 .brand {
-    width: 52mm;
-    height: 23mm;
+    width: 40mm;
+    height: 17.6mm;
+    margin-bottom: 6mm;
     background: url('../cdl.svg') left top / contain no-repeat;
 }
 
 .ident {
-    text-align: right;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
 /* The room name is what someone in the corridor is looking for. */
@@ -82,7 +87,7 @@ header {
 }
 
 .ident p {
-    margin: 3mm 0 0;
+    margin: 0;
     font-size: 34px;
     text-transform: capitalize;
     color: #444444;
