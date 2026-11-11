@@ -135,8 +135,20 @@ def build_booklet(conference, fonts, output, show_qr) -> int:
 
 
 def build_roomsheets(conference, fonts, output) -> int:
+    """Laid out twice: once to count each sheet's pages, once to number them."""
     css = CSS(filename=roomsheets.STYLESHEET, font_config=fonts)
-    write_pdf(roomsheets.build_html(conference), css, fonts, output)
+    markup = roomsheets.build_html(conference)
+    document = HTML(string=markup).render(stylesheets=[css],
+                                          font_config=fonts)
+    numbers = CSS(string=roomsheets.page_numbers(document),
+                  font_config=fonts)
+    try:
+        os.remove(output)
+    except FileNotFoundError:
+        pass
+    HTML(string=markup).write_pdf(output, stylesheets=[css, numbers],
+                                  font_config=fonts)
+    print(f'wrote {output}')
     return 0
 
 

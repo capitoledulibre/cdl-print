@@ -119,6 +119,23 @@ def test_a_workshop_is_flagged_as_not_filmed(conference):
     assert 'les ateliers ne sont pas filmés' in roomsheets.render_row(workshop)
 
 
+def test_a_sheet_over_several_pages_is_numbered_per_room_and_day():
+    """A sheet running onto a second page is numbered; a short one is not."""
+    rows = '<tr><td style="height: 10mm">Ligne</td></tr>' * 40
+    markup = ('<section class="page" data-label="B00 · samedi">'
+              f'<table><tbody>{rows}</tbody></table></section>'
+              '<section class="page" data-label="A001 · samedi">'
+              '<p>Court</p></section>')
+    document = lay_out(markup, roomsheets.STYLESHEET)
+    total = len(document.pages) - 1
+    assert total > 1, 'the long sheet should run over several pages'
+    rules = roomsheets.page_numbers(document)
+    for page in range(1, total + 1):
+        assert (f'@page :nth({page}) {{ @bottom-right {{ '
+                f'content: "B00 · samedi · page {page}/{total}"') in rules
+    assert 'A001' not in rules
+
+
 # --- the room signs ---------------------------------------------------------
 
 def signs(conference) -> str:

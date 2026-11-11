@@ -63,6 +63,41 @@ def render_row(event) -> str:
             </tr>'''
 
 
+def page_numbers(document) -> str:
+    """CSS numbering the pages of every sheet that runs over several.
+
+    A busy room runs onto a second page, and pages handed out loose must be
+    told apart: 'B00 · samedi · page 1/2', counted per room and per day. CSS
+    has no counter that restarts with each sheet, so the pages are counted
+    on a first layout, by the sheet each one belongs to, and numbered by
+    page index.
+    """
+    owners = [sheet_of(page) for page in document.pages]
+    rules = ''
+    for index, owner in enumerate(owners):
+        total = owners.count(owner)
+        if owner is None or total == 1:
+            continue
+        position = owners[:index + 1].count(owner)
+        label = f'{owner.get("data-label")} · page {position}/{total}'
+        label = label.replace('\\', '\\\\').replace('"', '\\"')
+        rules += (f'@page :nth({index + 1}) {{ @bottom-right {{ '
+                  f'content: "{label}" }} }}\n')
+    return rules
+
+
+def sheet_of(page):
+    """The sheet element a laid out page belongs to."""
+    boxes = [page._page_box]
+    while boxes:
+        box = boxes.pop(0)
+        element = getattr(box, 'element', None)
+        if element is not None and element.get('data-label'):
+            return element
+        boxes.extend(getattr(box, 'children', ()))
+    return None
+
+
 def render_sheet(conference: Conference, day: Day, room: Room) -> str:
     talks = room.sorted_events()
     if not talks:
@@ -84,7 +119,7 @@ def render_sheet(conference: Conference, day: Day, room: Room) -> str:
                   'signalées.</p>')
 
     return f'''
-    <section class="page">
+    <section class="page" data-label="{clean(room._name)} · {day._date:%A}">
         <header>
             <div class="ident">
                 <p class="kicker">Feuille de salle &middot; bénévoles</p>

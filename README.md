@@ -214,6 +214,12 @@ Not a programme: the working document of whoever holds a room. Each talk with
 its length, three boxes to tick -- speaker arrived, sound and video tested,
 timing started -- and a ruled space for incidents.
 
+A busy room runs onto a second page. Its pages are then numbered per room
+and per day, `B00 · samedi · page 1/2`, in the bottom margin, so that loose
+pages can be put back together. CSS has no page counter that restarts with
+each sheet, so `gen.py` lays the sheets out once to count each one's pages,
+then numbers them with `@page :nth()` rules on the second pass.
+
 It is also the only thing in the whole run that says what must **not be
 filmed**: every workshop, and any talk whose speaker refused. Both are
 flagged on their line and counted in a notice at the top of the sheet. A

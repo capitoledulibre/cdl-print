@@ -15,9 +15,20 @@
     src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
 }
 
+/* The bottom margin holds 'Page 1/2' on a sheet that runs over several
+   pages; see roomsheets.page_numbers. */
 @page {
     size: a4 portrait;
-    margin: 0;
+    margin: 0 0 7mm;
+
+    @bottom-right {
+        padding-right: 14mm;
+        vertical-align: top;
+        font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #111111;
+    }
 }
 
 :root {
@@ -37,8 +48,8 @@ body {
 .page {
     box-sizing: border-box;
     width: 210mm;
-    min-height: 297mm;
-    padding: 14mm 14mm 10mm;
+    min-height: 290mm;
+    padding: 14mm 14mm 3mm;
     display: flex;
     flex-direction: column;
     page-break-after: always;
