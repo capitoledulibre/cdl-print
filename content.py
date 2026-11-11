@@ -103,19 +103,25 @@ STANDS = [
 PRACTICAL_TITLE = 'Infos pratiques'
 
 PRACTICAL = [
-    ('Restauration', "Food trucks sur site le midi et buvette associative "
-                     "dans le Hall C. Le cocktail du samedi soir est offert "
-                     "et ouvert à toutes et tous."),
+    ('Horaires', "Accueil dès 9h30, premières conférences à 10h. Le samedi "
+                 "à 19h30, cocktail offert à toutes et tous dans le hall "
+                 "principal, sans inscription."),
+    ('Restauration', "Deux food trucks le midi (10 à 15 €) et buvette "
+                     "associative dans le Hall C."),
     ('Wifi', "Il n'y a pas de réseau ouvert au public : le wifi du site est "
              "réservé aux stands et aux ateliers. Prévoyez votre connexion "
              "si vous en avez besoin."),
-    ('Accessibilité', "Les bâtiments A et C sont accessibles en fauteuil. "
-                      "Pour le bâtiment B, demandez à un bénévole : un "
-                      "itinéraire par l'arrière existe."),
-    ('Enfants', "Un espace calme est disponible au Hall C. Les ateliers "
-                "d'initiation sont ouverts dès 8 ans accompagnés."),
+    ('Accessibilité', "Tous les bâtiments sont accessibles aux personnes à "
+                      "mobilité réduite, avec ascenseurs."),
+    ('Enfants', "L'initiation au code, au bâtiment B, accueille les 8-14 "
+                "ans avec Scratch, le samedi seulement, de 10h à 12h et de "
+                "14h à 17h."),
     ('Objets trouvés', "À l'accueil, Hall C, pendant toute la durée de "
                        "l'événement."),
+    ('Bienveillance', "L'événement applique un code de conduite. Un "
+                      "problème sur place : adressez-vous à l'équipe en "
+                      "t-shirt rouge « STAFF », ou écrivez à "
+                      "conduite@capitoledulibre.org."),
 ]
 
 EMERGENCY_TITLE = 'En cas de pépin'
@@ -220,8 +226,7 @@ FIRST_TIME = [
     ('On entre et on sort quand on veut',
      "Aucune conférence ne se réserve : on s'assoit dans la salle, et on "
      "repart si le sujet n'est pas celui qu'on croyait. Personne ne le "
-     "prendra mal. Les ateliers, eux, demandent parfois une inscription sur "
-     "place et commencent à l'heure."),
+     "prendra mal."),
 
     ('Commencez par le village associatif',
      "Plus de trente stands dans le Hall C : distributions, outils de "
@@ -263,11 +268,15 @@ HIGHLIGHTS_TITLE = 'À ne pas manquer'
 
 HIGHLIGHTS_LEDE = (
     "Le programme est dense et tout s'y vaut. Si vous ne savez pas par où "
-    "commencer, voilà quatre rendez-vous."
+    "commencer, voilà quelques rendez-vous."
 )
 
 HIGHLIGHTS = [
     ('Bienvenue au', "L'ouverture : ce qui vous attend, en vingt minutes."),
+    ('Concevoir un réseau informatique mondial',
+     "La keynote du samedi, par Stéphane Bortzmeyer."),
+    ('Dépendances numériques',
+     "La dernière conférence du samedi dans le grand amphi."),
     ('Linux Tracing Escape Game',
      "Un escape game pour démasquer les anomalies d'un système."),
     ('Sauvegarder librement',

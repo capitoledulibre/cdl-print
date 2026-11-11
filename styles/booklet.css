@@ -729,9 +729,10 @@ ul.daily b {
     opacity: 0.85;
 }
 
+/* Spaced for six picks on the one page. */
 .highlight {
-    margin-top: 6mm;
-    padding-top: 4mm;
+    margin-top: 3.5mm;
+    padding-top: 3mm;
     border-top: 1px solid rgba(242, 231, 207, 0.25);
 }
 
