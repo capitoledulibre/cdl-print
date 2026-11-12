@@ -1,6 +1,6 @@
 """Generate the Capitole du Libre printed matter from the schedule export.
 
-Seven outputs come out of the same parsed schedule:
+Eight outputs come out of the same parsed schedule:
 
   * the door posters, one A3 sheet per room and per day;
   * the room signs, one A3 landscape sheet per room, the name read from afar;
@@ -8,7 +8,8 @@ Seven outputs come out of the same parsed schedule:
   * the pocket booklet, A5, the programme by the hour plus the annexes;
   * the room sheets, one A4 per room and per day, for the volunteer on duty;
   * the tri-fold leaflet, one A4 landscape sheet folded in three;
-  * the stand briefing, one A4 for each stand of the village associatif.
+  * the stand briefing, one A4 for each stand of the village associatif;
+  * the stand signs, one A4 landscape sheet per stand, its name from afar.
 
 On request only, the video covers: one 1920x1080 PNG per filmed talk, for
 YouTube and PeerTube, written to a folder of their own.
@@ -35,6 +36,7 @@ import posters
 import roomsheets
 import signage
 import standbrief
+import standsigns
 from schedule import Conference
 
 # --- Configuration ---------------------------------------------------------
@@ -49,7 +51,7 @@ DEFAULT_LOCALE = 'fr_FR.UTF-8'
 
 # What `--only` accepts, in the order the outputs are built.
 OUTPUTS = ('salles', 'panneaux', 'global', 'livret', 'feuilles',
-           'depliant', 'stands')
+           'depliant', 'stands', 'panneaux-stands')
 
 # Built only when asked for by name: not printed matter, and not needed until
 # the recordings go online after the event.
@@ -206,6 +208,20 @@ def build_standbrief(conference, fonts, output) -> int:
     return 0
 
 
+def build_standsigns(conference, fonts, output) -> int:
+    css = CSS(filename=standsigns.STYLESHEET, font_config=fonts)
+    sizes, too_long = standsigns.fit_signs(conference, css, fonts)
+    if too_long:
+        print('error: these stand names do not fit their sheet even at the '
+              f'smallest type size ({standsigns.MIN_NAME_SIZE}px):',
+              file=sys.stderr)
+        for name in too_long:
+            print(f'  {name}', file=sys.stderr)
+        return 1
+    write_pdf(standsigns.build_html(conference, sizes), css, fonts, output)
+    return 0
+
+
 def build_covers(conference, fonts, directory, cache) -> int:
     """One PNG per filmed talk; refuse a title that will not fit at all."""
     found = avatars.gather(conference, conference.year, cache)
@@ -343,6 +359,9 @@ def main(argv=None) -> int:
             return 1
     if 'stands' in args.only:
         if build_standbrief(conference, fonts, path(standbrief.OUTPUT)):
+            return 1
+    if 'panneaux-stands' in args.only:
+        if build_standsigns(conference, fonts, path(standsigns.OUTPUT)):
             return 1
     if 'couvertures' in args.only:
         cache = os.path.join(args.output_dir, '.cache',

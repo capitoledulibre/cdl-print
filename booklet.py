@@ -153,7 +153,7 @@ def render_stands() -> str:
     <section class="page">
         <h1>{clean(content.STANDS_TITLE)}</h1>
         <p class="intro">{clean(content.STANDS_INTRO)}</p>
-        <dl class="stands">{rows}</dl>
+        <dl class="stands village">{rows}</dl>
     </section>'''
 
 

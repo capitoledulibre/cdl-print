@@ -21,6 +21,7 @@ import roomsheets
 import schedule
 import signage
 import standbrief
+import standsigns
 
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
@@ -315,3 +316,49 @@ def test_the_weekend_runs_in_time_order(conference):
         moments = standbrief.day_moments(conference, day)
         times = [when for when, _what in moments]
         assert times == sorted(times)
+
+
+# --- the stand signs --------------------------------------------------------
+
+def stand_signs(conference):
+    """The signs as gen.py builds them: fitted, so each holds one sheet."""
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, standsigns.STYLESHEET),
+              font_config=fonts)
+    sizes, too_long = standsigns.fit_signs(conference, css, fonts)
+    assert too_long == []
+    return HTML(string=standsigns.build_html(conference, sizes)).render(
+        stylesheets=[css], font_config=fonts)
+
+
+def test_one_a4_landscape_sign_per_stand(conference):
+    document = stand_signs(conference)
+    assert len(document.pages) == len(standsigns.content.STANDS)
+    for page in document.pages:
+        assert page.width == pytest.approx(297 * MM, abs=2)
+        assert page.height == pytest.approx(210 * MM, abs=2)
+
+
+def test_a_long_single_word_is_stepped_down_not_run_off_the_sheet(
+        conference):
+    """A flex box widens to hold an unbreakable word: no page is added, so
+    only measuring the line catches it running past the edge."""
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, standsigns.STYLESHEET),
+              font_config=fonts)
+
+    def fits(name, size):
+        document = HTML(string=standsigns.render_sign(
+            conference, name, '', size)).render(stylesheets=[css],
+                                                font_config=fonts)
+        return standsigns.name_fits(document)
+
+    assert not fits('RxLaboratorio', standsigns.BASE_NAME_SIZE)
+    assert fits('RxLaboratorio', 150)
+    assert fits('GNOME', standsigns.BASE_NAME_SIZE)
+
+
+def test_a_hyphenated_name_is_not_broken_at_its_hyphen():
+    assert '<span class="whole">Borsalinux-fr</span>' \
+        in standsigns.name_markup('Borsalinux-fr')
+    assert standsigns.name_markup('GNU Guix') == 'GNU Guix'

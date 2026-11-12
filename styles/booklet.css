@@ -275,6 +275,23 @@ dl.floors dd {
     margin: 0.6mm 0 0;
 }
 
+/* Thirty-odd stands, most with a name alone: two columns keep them on the
+   one page, each name with its line under it. */
+dl.village {
+    column-count: 2;
+    column-gap: 8mm;
+    font-size: 8.5pt;
+}
+
+dl.village dt {
+    margin-top: 2.2mm;
+    break-after: avoid;
+}
+
+dl.village dd {
+    break-before: avoid;
+}
+
 ul.logos {
     margin: 0;
     padding: 0;

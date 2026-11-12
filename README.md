@@ -1,7 +1,7 @@
 # cdl-print
 
 Generates the Capitole du Libre printed matter from the conference's Pretalx
-FRAB export. One command, seven PDFs:
+FRAB export. One command, eight PDFs:
 
 | File | Format | What it is |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ FRAB export. One command, seven PDFs:
 | `conference-feuilles-salles-<year>.pdf` | A4 portrait, one per room and day | The room sheets: the working document of the volunteer on duty |
 | `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
 | `conference-briefing-stands-<year>.pdf` | A4 portrait, one sheet | The stand briefing: the weekend, the wifi, who to call |
+| `conference-panneaux-stands-<year>.pdf` | A4 landscape, one sheet per stand | The stand signs: each stand's name, read from down the hall |
 
 On request, the same command also makes the video covers: one 1920x1080
 PNG per filmed talk, for YouTube and PeerTube, in `couvertures-<year>/`.
@@ -50,7 +51,7 @@ uv sync
 uv run python gen.py
 ```
 
-This fetches the schedule for the current year and writes the seven PDFs into
+This fetches the schedule for the current year and writes the eight PDFs into
 the working directory. Set `CDL_YEAR` to build another edition:
 
 ```shell
@@ -87,7 +88,7 @@ uv run python gen.py --only livret --output-dir build
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
-| `--only` | all the printed matter | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`, or `couvertures` for the video covers, which are only built when named); repeatable |
+| `--only` | all the printed matter | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`, `panneaux-stands`, or `couvertures` for the video covers, which are only built when named); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
 | `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
 | `--no-audience` | shown | Leave out who each talk is for |
@@ -109,10 +110,11 @@ uv run python gen.py --only livret --output-dir build
 | `roomsheets.py` + `styles/roomsheets.css` | The room sheets |
 | `leaflet.py` + `styles/leaflet.css` | The leaflet |
 | `standbrief.py` + `styles/standbrief.css` | The stand briefing |
+| `standsigns.py` + `styles/standsigns.css` | The stand signs |
 | `covers.py` + `styles/covers.css` | The video covers, on request |
 | `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
 | `avatars.py` | The speakers' photos for the video covers, fetched from the Pretalx speakers API |
-| `content.py` | Copy that does not come from the export, for the booklet, the leaflet and the stand briefing: first-timer guide, practical information, opening hours, the curated highlights, partners and their logos, the campus plan legend, the wifi network. The editorial, the stands of the village, the Toulibre page and the emergency page are **still placeholder text**. |
+| `content.py` | Copy that does not come from the export, for the booklet, the leaflet and the stand briefing: first-timer guide, practical information, opening hours, the curated highlights, the stands of the village, partners and their logos, the campus plan legend, the wifi network. The editorial, the Toulibre page and the emergency page are **still placeholder text**. |
 | `assets/` | The edition poster, the campus plan, the partners' logos, the Toulibre logo and the Occitan cross |
 
 ## Who each talk is for
@@ -341,6 +343,26 @@ repository, so the password is read from the environment instead:
 ```shell
 CDL_WIFI_PASSWORD=... uv run python gen.py --only stands
 ```
+
+### The stand signs
+
+One A4 landscape sheet per stand of the village associatif, taped to the
+front of its table: the stand's name as large as the sheet allows, and the
+line the site gives it when there is one.
+
+The stands are not in the schedule export, and the public Pretalx API does
+not serve them since they are not scheduled, so they are listed in `STANDS`
+in `content.py`, as capitoledulibre.org/village-associatif/ publishes them.
+The booklet's village page reads the same list, in two columns.
+
+Each name is sized like a room sign, a step down at a time from
+`BASE_NAME_SIZE`, but measured rather than counted in pages: a single long
+word such as `RxLaboratorio` cannot break, and at too large a size it runs
+past the edge of the sheet without adding a page, because its flex box
+widens to hold it. So a name must keep to `MAX_NAME_LINES`, each line within
+the text area less `SIDE_MARGIN`, and the name and its line inside the room
+the sheet leaves them. A hyphenated word is kept whole, so `Borsalinux-fr`
+never breaks after its hyphen.
 
 ### The video covers
 

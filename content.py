@@ -90,28 +90,51 @@ ACCESS_HOURS = [
 STANDS_TITLE = 'Le village associatif'
 
 STANDS_INTRO = (
-    "Le village associatif occupe le Hall C pendant les deux journées. "
-    "C'est l'endroit où poser les questions qu'on n'ose pas poser en "
-    "conférence."
+    "Le village associatif occupe le Hall C pendant les deux journées, "
+    "samedi de 9h30 à 18h et dimanche de 9h30 à 17h. C'est l'endroit où "
+    "poser les questions qu'on n'ose pas poser en conférence."
 )
 
+# The confirmed stands, as capitoledulibre.org/village-associatif/ lists them,
+# in alphabetical order: the name, and the line the site gives some of them.
+# The public Pretalx API does not serve them, since they are not scheduled.
 STANDS = [
-    ('Toulibre', "L'association qui organise le Capitole du Libre, et anime "
-                 "des permanences toute l'année à Toulouse."),
-    ('April', "Promotion et défense du logiciel libre depuis 1996."),
-    ('Framasoft', "Éducation populaire aux enjeux du numérique et services "
-                  "libres en ligne."),
-    ('Debian France', "La distribution universelle et sa communauté "
-                      "francophone."),
-    ('Mozilla', "Firefox, Thunderbird et un web qui reste ouvert."),
-    ('OpenStreetMap France', "La carte du monde libre, contribuée par ses "
-                             "usagers."),
-    ('Wikimédia France', "Wikipédia et les projets frères."),
-    ('LinuxFr.org', "L'actualité du logiciel libre en français."),
-    ('Emmabuntüs', "Reconditionnement de matériel et lutte contre "
-                   "l'obsolescence programmée."),
-    ('Chatons', "Le collectif des hébergeurs alternatifs, transparents, "
-                "ouverts, neutres et solidaires."),
+    ('April', ''),
+    ('Bareos', "100 % logiciel libre : l'écosystème et les nouveautés 2026"),
+    ('Borsalinux-fr', "L'association de la communauté francophone de Fedora"),
+    ('Coopérative Code Commun', "TiBillet, la billetterie libre et "
+                                "coopérative"),
+    ('Debian France', ''),
+    ('Ergo-L', "Ergonomique avant tout"),
+    ('FDN / FFDN', ''),
+    ('Framasoft', ''),
+    ('GNOME', ''),
+    ('GNU Guix', ''),
+    ('Haiku', ''),
+    ('JabberFR', ''),
+    ('Les sans pagEs', ''),
+    ('Libre en Communs', ''),
+    ('Linux et la musique', ''),
+    ('Linuxedu', "Le libre dans l'éducation, la démarche Nird"),
+    ('Mageia', ''),
+    ('Modernisation du clavier français', "L'association pour un clavier "
+                                          "français adapté à tous les "
+                                          "usages"),
+    ('Mozilla', ''),
+    ('OpenStreetMap', ''),
+    ('PURR', ''),
+    ('QuackMatrix', ''),
+    ('RoseLab', "L'espace du faire de la Cité"),
+    ('RxLaboratorio', ''),
+    ('Silex Labs', "Silex, éditeur de sites web libre"),
+    ('Skeptikon', ''),
+    ('tetaneutral.net', ''),
+    ('Vikidia', "L'encyclopédie libre des 8-13 ans"),
+    ('Wikilibriste', ''),
+    ('WOCSA', ''),
+    ('WordPress Toulouse', "Partage, accessibilité et web ouvert"),
+    ('XWiki / CryptPad', ''),
+    ('Zeste de Savoir', "La connaissance pour tous et sans pépins !"),
 ]
 
 PRACTICAL_TITLE = 'Infos pratiques'
