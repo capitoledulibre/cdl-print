@@ -72,7 +72,8 @@ def boxes_by_class(page) -> dict:
         box = boxes.pop()
         element = getattr(box, 'element', None)
         if element is not None:
-            found.setdefault(element.get('class') or '', box)
+            for name in (element.get('class') or '').split():
+                found.setdefault(name, box)
         boxes.extend(reversed(getattr(box, 'children', ())))
     return found
 

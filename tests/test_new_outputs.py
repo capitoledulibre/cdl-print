@@ -21,6 +21,7 @@ import roomsheets
 import schedule
 import signage
 import standbrief
+import sponsorsigns
 import standsigns
 
 locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
@@ -362,3 +363,36 @@ def test_a_hyphenated_name_is_not_broken_at_its_hyphen():
     assert '<span class="whole">Borsalinux-fr</span>' \
         in standsigns.name_markup('Borsalinux-fr')
     assert standsigns.name_markup('GNU Guix') == 'GNU Guix'
+
+
+# --- the sponsor signs ------------------------------------------------------
+
+def test_one_sign_per_platine_and_or_sponsor(conference):
+    fonts = FontConfiguration()
+    css = CSS(filename=os.path.join(ROOT, sponsorsigns.STYLESHEET),
+              font_config=fonts)
+    sizes, too_long = sponsorsigns.fit_signs(conference, css, fonts)
+    assert too_long == []
+    document = HTML(string=sponsorsigns.build_html(conference, sizes)).render(
+        stylesheets=[css], font_config=fonts)
+    groups = dict(sponsorsigns.content.PARTNER_GROUPS)
+    assert len(document.pages) == len(groups['Platine']) + len(groups['Or'])
+
+
+def test_a_logo_too_small_to_print_gives_way_to_the_name(tmp_path,
+                                                         monkeypatch):
+    """A 240px web logo blown up to a sign would print blurred."""
+    from PIL import Image
+    Image.new('RGB', (240, 70), 'white').save(tmp_path / 'small.png')
+    Image.new('RGB', (2400, 700), 'white').save(tmp_path / 'large.png')
+    (tmp_path / 'vector.svg').write_text('<svg/>')
+    monkeypatch.setattr(sponsorsigns, 'LOGOS', str(tmp_path))
+    monkeypatch.setattr(sponsorsigns.content, 'PARTNER_LOGOS', {
+        'Small': 'small.png', 'Large': 'large.png', 'Vector': 'vector.svg'})
+
+    assert sponsorsigns.logo_size('Small') is None
+    assert sponsorsigns.logo_size('Nobody') is None
+    width, height = sponsorsigns.logo_size('Large')
+    assert width == pytest.approx(sponsorsigns.LOGO_WIDTH_MM)
+    assert sponsorsigns.logo_size('Vector') == (
+        sponsorsigns.LOGO_WIDTH_MM, sponsorsigns.LOGO_HEIGHT_MM)

@@ -1,0 +1,123 @@
+/* The sponsor signs: one A4 landscape sheet per Platine and Or sponsor,
+   the stand signs' formula with the sponsor's logo in place of a name. */
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/FiraSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/FiraSans-Bold.woff2') format('woff2');
+}
+
+@page {
+    size: a4 landscape;
+    margin: 0;
+}
+
+:root {
+    --brand: #d03d00;
+    --ink: #111111;
+    --quiet: #8a8a8a;
+    --rule: #dddddd;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.page {
+    box-sizing: border-box;
+    width: 297mm;
+    height: 210mm;
+    padding: 12mm 16mm 9mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+}
+
+/* --- header ------------------------------------------------------------ */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 4mm;
+    border-bottom: 3px solid var(--brand);
+}
+
+.brand {
+    width: 42mm;
+    height: 18.5mm;
+    background: url('../cdl.svg') left center / contain no-repeat;
+}
+
+.kicker {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--quiet);
+}
+
+/* --- the stand ---------------------------------------------------------- */
+
+/* The logo, or the name when the logo is too small to print, takes all the
+   room the sheet has; see sponsorsigns.py. */
+.stand {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* An explicit width: left to size itself as a flex item, the name was
+   given the height of two lines while drawn on one, and sat high. */
+.name {
+    width: 100%;
+    font-size: 240px;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--brand);
+}
+
+/* A hyphenated word stays whole; see standsigns.name_markup. */
+.whole {
+    white-space: nowrap;
+}
+
+/* Fitted inside the size sponsorsigns.logo_size gives it. */
+.logo {
+    align-self: center;
+    object-fit: contain;
+}
+
+/* Platine is told from Or by more than its label: a heavier rule. */
+.platine header {
+    border-bottom-width: 6px;
+}
+
+.platine .kicker {
+    color: var(--brand);
+    font-weight: 700;
+}
+
+/* --- footer ------------------------------------------------------------ */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2.5mm;
+    border-top: 1px solid var(--rule);
+    font-size: 16px;
+    color: var(--quiet);
+}

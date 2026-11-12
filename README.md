@@ -1,7 +1,7 @@
 # cdl-print
 
 Generates the Capitole du Libre printed matter from the conference's Pretalx
-FRAB export. One command, eight PDFs:
+FRAB export. One command, nine PDFs:
 
 | File | Format | What it is |
 | --- | --- | --- |
@@ -13,6 +13,7 @@ FRAB export. One command, eight PDFs:
 | `conference-depliant-<year>.pdf` | A4 landscape, folded in three | The leaflet, for whoever will not carry a booklet |
 | `conference-briefing-stands-<year>.pdf` | A4 portrait, one sheet | The stand briefing: the weekend, the wifi, who to call |
 | `conference-panneaux-stands-<year>.pdf` | A4 landscape, one sheet per stand | The stand signs: each stand's name, read from down the hall |
+| `conference-panneaux-sponsors-<year>.pdf` | A4 landscape, one sheet per Platine and Or sponsor | The sponsor signs: the stand signs' formula, with the logo |
 
 On request, the same command also makes the video covers: one 1920x1080
 PNG per filmed talk, for YouTube and PeerTube, in `couvertures-<year>/`.
@@ -51,7 +52,7 @@ uv sync
 uv run python gen.py
 ```
 
-This fetches the schedule for the current year and writes the eight PDFs into
+This fetches the schedule for the current year and writes the nine PDFs into
 the working directory. Set `CDL_YEAR` to build another edition:
 
 ```shell
@@ -88,7 +89,7 @@ uv run python gen.py --only livret --output-dir build
 | `--year` | `$CDL_YEAR`, else the current year | Conference edition to fetch |
 | `--url` | derived from `--year` | Schedule XML URL, overriding `--year` |
 | `--schedule-file` | fetch over the network | Read a local XML export instead, ignoring `--year` and `--url` |
-| `--only` | all the printed matter | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`, `panneaux-stands`, or `couvertures` for the video covers, which are only built when named); repeatable |
+| `--only` | all the printed matter | Build only this output (`salles`, `panneaux`, `global`, `livret`, `feuilles`, `depliant`, `stands`, `panneaux-stands`, `panneaux-sponsors`, or `couvertures` for the video covers, which are only built when named); repeatable |
 | `--output-dir` | the working directory | Where to write the PDFs |
 | `--audience-file` | fetch over the network | Read the "public visé" answers from a local API dump |
 | `--no-audience` | shown | Leave out who each talk is for |
@@ -111,6 +112,7 @@ uv run python gen.py --only livret --output-dir build
 | `leaflet.py` + `styles/leaflet.css` | The leaflet |
 | `standbrief.py` + `styles/standbrief.css` | The stand briefing |
 | `standsigns.py` + `styles/standsigns.css` | The stand signs |
+| `sponsorsigns.py` + `styles/sponsorsigns.css` | The sponsor signs |
 | `covers.py` + `styles/covers.css` | The video covers, on request |
 | `audience.py` | Who each talk is for, fetched from the Pretalx submissions API |
 | `avatars.py` | The speakers' photos for the video covers, fetched from the Pretalx speakers API |
@@ -363,6 +365,19 @@ widens to hold it. So a name must keep to `MAX_NAME_LINES`, each line within
 the text area less `SIDE_MARGIN`, and the name and its line inside the room
 the sheet leaves them. A hyphenated word is kept whole, so `Borsalinux-fr`
 never breaks after its hyphen.
+
+### The sponsor signs
+
+The stand signs' formula for the Platine and Or sponsors' stands: the tier
+in the header, Platine with a heavier rule, and the sponsor's logo as large
+as the sheet allows, from `PARTNER_GROUPS` and `PARTNER_LOGOS`.
+
+A raster logo is never printed below `MIN_LOGO_DPI`. One too small to make
+a sign at that resolution -- a 240px PNG taken off a website -- would come
+out blurred, so that sponsor's name is set in type instead, fitted like a
+stand name, and the build warns which logo to replace. Dropping a vector
+logo into `assets/partners/` and pointing `PARTNER_LOGOS` at it is all it
+takes to print the logo.
 
 ### The video covers
 
