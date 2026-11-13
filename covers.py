@@ -98,6 +98,11 @@ def slug(text: str) -> str:
     return re.sub(r'[^a-z0-9]+', '-', ascii_text).strip('-')[:60].strip('-')
 
 
+# What filename() writes, and so all that remove_stale() may delete.
+COVER_NAME = re.compile(r'^\d{4}-\d{2}-\d{2}_\d{2}h\d{2}_[a-z0-9-]+_'
+                        r'[a-z0-9-]+\.png$')
+
+
 def filename(event: Event) -> str:
     """Sorted by when the talk was given, so the folder reads in order."""
     room = slug(getattr(event, '_room', '')) or 'salle'
@@ -258,3 +263,20 @@ def write_pngs(document, events: list, directory: str) -> list:
         image.save(path)
         written.append(path)
     return written
+
+
+def remove_stale(directory: str, written: list) -> list:
+    """Delete the covers no talk produced on this run.
+
+    A talk renamed in Pretalx gets a cover under its new name, and the old
+    one would otherwise stay in the folder, ready to be uploaded by mistake.
+    Only files named the way filename() names them are touched, so anything
+    else kept in the folder, such as an archive for the upload, is left be.
+    """
+    kept = {os.path.basename(path) for path in written}
+    removed = []
+    for name in sorted(os.listdir(directory)):
+        if COVER_NAME.match(name) and name not in kept:
+            os.remove(os.path.join(directory, name))
+            removed.append(name)
+    return removed

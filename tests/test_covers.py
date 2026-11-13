@@ -102,3 +102,25 @@ def test_no_photos_is_no_failure(conference, monkeypatch, capsys):
     monkeypatch.setattr(avatars, 'fetch', offline)
     assert avatars.gather(conference, 2025, '/nonexistent') == 0
     assert 'go without them' in capsys.readouterr().err
+
+
+def test_a_cover_no_talk_produced_is_removed(conference, tmp_path):
+    """A talk renamed in Pretalx must not leave its old cover behind."""
+    event = covers.filmed_events(conference)[0]
+    current = tmp_path / covers.filename(event)
+    stale = tmp_path / '2026-11-14_12h00_a304_an-old-title.png'
+    archive = tmp_path / 'cdl-2026-videos-miniatures.zip'
+    other = tmp_path / 'notes.png'
+    for path in (current, stale, archive, other):
+        path.write_bytes(b'')
+
+    removed = covers.remove_stale(str(tmp_path), [str(current)])
+    assert removed == [stale.name]
+    assert current.exists() and archive.exists() and other.exists()
+    assert not stale.exists()
+
+
+def test_every_cover_name_is_one_remove_stale_recognises(conference):
+    for event in covers.filmed_events(conference):
+        assert covers.COVER_NAME.match(covers.filename(event)), \
+            covers.filename(event)

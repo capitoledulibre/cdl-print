@@ -392,7 +392,10 @@ uv run python gen.py --only couvertures
 That writes `couvertures-<year>/`, one file per talk named so the folder
 reads in programme order: `2026-11-14_10h00_b00_bienvenue-au-capitole-du-libre-2026.png`.
 Workshops get no cover, since they are not filmed, nor does a talk whose
-speaker refused to be.
+speaker refused to be. A cover no talk produced on the run -- the old name of
+a talk renamed in Pretalx -- is deleted, so it cannot be uploaded by
+mistake; only files named like covers are touched, so an archive kept in the
+folder stays.
 
 The talk leads: its format and day, its title set as large as its box
 allows, then who gives it. The partners are thanked along a white band at

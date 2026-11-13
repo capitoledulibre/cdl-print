@@ -254,6 +254,8 @@ def build_covers(conference, fonts, directory, cache) -> int:
         return 1
     written = covers.write_pngs(document, events, directory)
     print(f'wrote {len(written)} covers into {directory}')
+    for name in covers.remove_stale(directory, written):
+        print(f'removed {name}: no filmed talk has this cover any more')
     return 0
 
 
